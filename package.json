@@ -1,0 +1,35 @@
+{
+  "name": "infographic-stock",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hakabot stock infographic videos: Remotion motion graphics + ElevenLabs Bahasa voiceover",
+  "scripts": {
+    "studio": "remotion studio",
+    "typecheck": "tsc -p .",
+    "vo": "python -I scripts/voiceover.py",
+    "vo:estimate": "python -I scripts/voiceover.py --estimate",
+    "vo:check": "python -I scripts/vo_check.py",
+    "review": "python -I scripts/script_review.py",
+    "render": "node scripts/render.mjs",
+    "srt": "python -I scripts/export_srt.py",
+    "sheet": "python -I scripts/contact_sheet.py",
+    "brand:assets": "python -I scripts/brand_assets.py",
+    "brand:outro": "python -I scripts/outro_clips.py",
+    "sfx": "python -I scripts/sfx_synth.py"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.534",
+    "@remotion/cli": "4.0.534",
+    "@remotion/google-fonts": "4.0.534",
+    "@remotion/paths": "4.0.534",
+    "@remotion/renderer": "4.0.534",
+    "@remotion/shapes": "4.0.534",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}

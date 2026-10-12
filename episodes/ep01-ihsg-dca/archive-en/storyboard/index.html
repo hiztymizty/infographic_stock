@@ -1,0 +1,270 @@
+<title>IHSG DCA Storyboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  /* Layout: a production storyboard sheet. Brief up top, then one row per scene: timecode rail, frame strip, motion + caption notes. Single dark look on purpose, matching the video. */
+  :root {
+    color-scheme: dark;
+    --bg: #0B1019;
+    --panel: #121A28;
+    --line: #223047;
+    --fg: #F4F6FA;
+    --dim: #A6AFBF;
+    --mute: #6B7586;
+    --gold: #F2B33D;
+    --invested: #3987E5;
+    --value: #18A06F;
+    --loss: #E5534F;
+    --display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--display);
+    font-size: 16px;
+    line-height: 1.55;
+    padding-inline: 20px;
+    padding-block: 40px 80px;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 56px; }
+  .eyebrow {
+    font-family: var(--mono); font-weight: 700; font-size: 12px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+  }
+  h1 { font-size: clamp(34px, 6vw, 60px); font-weight: 800; letter-spacing: -0.035em; line-height: 1.02; margin: 10px 0 14px; text-wrap: balance; }
+  h2 { font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+  h3 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); margin: 0 0 8px; font-weight: 700; }
+  p { margin: 0; }
+  .lede { color: var(--dim); max-width: 64ch; font-size: 18px; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* Brief */
+  .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 28px; }
+  .fact { background: var(--panel); padding: 16px 18px; display: grid; gap: 2px; min-width: 0; }
+  .fact .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mute); }
+  .fact .v { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+  .fact .s { color: var(--dim); font-size: 13px; }
+  .up { color: var(--value); }
+  .down { color: var(--loss); }
+
+  /* Style system */
+  .style-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin-top: 20px; }
+  .swatches { display: grid; gap: 10px; }
+  .sw { display: flex; align-items: center; gap: 12px; font-size: 14px; color: var(--dim); }
+  .chip { width: 40px; height: 22px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.12); flex: none; }
+  .sw b { color: var(--fg); font-weight: 700; }
+  ul.moves { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  ul.moves li { display: grid; grid-template-columns: 150px 1fr; gap: 12px; font-size: 14px; color: var(--dim); }
+  ul.moves li b { color: var(--fg); font-weight: 700; }
+  .type-specimen { display: grid; gap: 6px; }
+  .type-specimen .big { font-size: 40px; font-weight: 800; letter-spacing: -0.035em; color: var(--gold); line-height: 1; }
+  .type-specimen .mono { font-family: var(--mono); font-size: 13px; letter-spacing: 0.18em; color: var(--dim); }
+
+  /* Scenes */
+  .scenes { display: grid; gap: 22px; margin-top: 20px; }
+  .scene { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 24px; padding: 24px; background: var(--panel); border: 1px solid var(--line); border-radius: 18px; }
+  .rail { display: grid; align-content: start; gap: 4px; }
+  .rail .n { font-family: var(--mono); font-weight: 700; color: var(--gold); font-size: 14px; }
+  .rail .tc { font-family: var(--mono); font-size: 13px; color: var(--dim); }
+  .rail .dur { font-family: var(--mono); font-size: 12px; color: var(--mute); }
+  .body { display: grid; gap: 18px; min-width: 0; }
+  .strip { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 6px; }
+  .frame { flex: none; width: 168px; display: grid; gap: 6px; background: none; border: 0; padding: 0; cursor: zoom-in; color: inherit; font: inherit; text-align: left; }
+  .frame img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); display: block; max-width: 100%; }
+  .frame span { font-family: var(--mono); font-size: 11px; color: var(--mute); letter-spacing: 0.06em; }
+  .frame:focus-visible img { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .notes { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 24px; }
+  .notes p, .notes li { color: var(--dim); font-size: 15px; }
+  .notes ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+  .caps { display: grid; gap: 6px; }
+  .cap { font-size: 14px; color: var(--fg); background: rgba(5,8,14,0.6); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+  .cap .t { font-family: var(--mono); font-size: 11px; color: var(--mute); margin-right: 8px; }
+
+  /* Decisions */
+  .decisions { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 20px; }
+  .q { border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+  .q .pick { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .q b { font-size: 17px; }
+  .q p { color: var(--dim); font-size: 14px; }
+  .fine { color: var(--mute); font-size: 13px; max-width: 80ch; }
+
+  /* Lightbox */
+  .lb { position: fixed; inset: 0; background: rgba(3,5,9,0.92); display: grid; place-items: center; padding: 20px; z-index: 10; cursor: zoom-out; }
+  .lb img { max-height: 92vh; max-width: 100%; border-radius: 12px; }
+
+  @media (max-width: 720px) {
+    .scene { grid-template-columns: 1fr; padding: 18px; gap: 14px; }
+    .rail { grid-auto-flow: column; justify-content: start; gap: 14px; align-items: baseline; }
+    .notes { grid-template-columns: 1fr; }
+    .frame { width: 132px; }
+    ul.moves li { grid-template-columns: 1fr; gap: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Storyboard v1 · for approval</div>
+    <h1>Rp 5 juta a month into IHSG, since 2010</h1>
+    <p class="lede">A 66-second vertical motion-graphics infographic, built in code (Remotion: keyframes, easing and springs, rendered to MP4). Every frame below is a real render from the project, not a mock-up. The story follows the real data: steady gains, a COVID scare, a Rp 1.6 billion peak, then the 2026 sell-off.</p>
+
+    <div class="facts num">
+      <div class="fact"><span class="k">Invested</span><span class="v">Rp 1.01 B</span><span class="s">202 months × Rp 5,000,000</span></div>
+      <div class="fact"><span class="k">Peak · Dec 2025</span><span class="v up">Rp 1.61 B</span><span class="s">+67.5% · 6.1% a year</span></div>
+      <div class="fact"><span class="k">Low · Jun 2026</span><span class="v">Rp 1.07 B</span><span class="s">−Rp 536 M in 6 months</span></div>
+      <div class="fact"><span class="k">Today · 9 Oct 2026</span><span class="v">Rp 1.17 B</span><span class="s">+15.6% total · 1.7% a year</span></div>
+      <div class="fact"><span class="k">Format</span><span class="v">1080 × 1920</span><span class="s">9:16 · 30 fps · 66 s</span></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="eyebrow">Look &amp; motion</div>
+    <h2 style="margin-top:8px">Dark editorial finance, one accent, honest charts</h2>
+    <div class="style-grid">
+      <div class="swatches">
+        <h3>Palette</h3>
+        <div class="sw"><span class="chip" style="background:#0B1019"></span><span><b>Night navy</b> background, drifting glows, dot grid, film grain</span></div>
+        <div class="sw"><span class="chip" style="background:var(--gold)"></span><span><b>Rupiah gold</b> headline amounts and the active caption word only</span></div>
+        <div class="sw"><span class="chip" style="background:var(--invested)"></span><span><b>Blue</b> what you put in</span></div>
+        <div class="sw"><span class="chip" style="background:var(--value)"></span><span><b>Green</b> what it's worth, gains</span></div>
+        <div class="sw"><span class="chip" style="background:var(--loss)"></span><span><b>Red</b> losses, crashes (always paired with ▼ and −)</span></div>
+      </div>
+      <div class="type-specimen">
+        <h3>Type</h3>
+        <div class="big num">Rp 1,168,051,283</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-0.02em">Plus Jakarta Sans for headlines and numbers</div>
+        <div class="mono">JETBRAINS MONO · LABELS &amp; AXES</div>
+        <p class="fine" style="margin-top:6px">Plus Jakarta Sans was made for the city of Jakarta's own branding, a quiet nod to the index it's about.</p>
+      </div>
+      <div>
+        <h3>Motion vocabulary</h3>
+        <ul class="moves">
+          <li><b>Mask reveals</b>Headlines slide up out of a hidden edge, staggered per line</li>
+          <li><b>Spring pops</b>Chips, cards and callouts land with a slight overshoot</li>
+          <li><b>Line draw</b>Charts draw on with a glowing head dot and a live value tag</li>
+          <li><b>Camera zoom</b>The y-axis widens as new highs arrive; gridlines fade instead of popping</li>
+          <li><b>Time-warp</b>Months fly by, then the clock eases to a stop on each event</li>
+          <li><b>Impact</b>Red screen pulse (COVID), camera shake (2026), a bar slice that breaks off</li>
+          <li><b>Transitions</b>Each scene rises in from a blur and pushes out upward</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Scene by scene</div>
+    <h2 style="margin-top:8px">Seven scenes, one continuous backdrop</h2>
+    <div class="scenes" id="scenes"></div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Your call before the final render</div>
+    <h2 style="margin-top:8px">Defaults I picked, easy to change now</h2>
+    <div class="decisions">
+      <div class="q"><span class="pick">Picked · 9:16 vertical</span><b>Format</b><p>Built for TikTok, Reels and Shorts, with captions kept above the apps' bottom controls. A 16:9 YouTube cut is possible but needs its own layout pass.</p></div>
+      <div class="q"><span class="pick">Picked · English</span><b>Language</b><p>All on-screen text and captions live in one copy file. A Bahasa Indonesia version (Rp 5 juta, Rp 1,17 miliar) is a single-file swap.</p></div>
+      <div class="q"><span class="pick">Picked · silent</span><b>Sound</b><p>No music or voice yet. I can add a track you supply plus whooshes, ticks and impacts timed to the motion, or sync captions to a voiceover you record.</p></div>
+      <div class="q"><span class="pick">Picked · honest ending</span><b>Tone</b><p>The story lands on 1.7% a year, because that is what the price data says. Dividends are excluded and flagged on screen rather than estimated.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Method</div>
+    <p class="fine" style="margin-top:8px">Data: Yahoo Finance ^JKSE monthly bars, Jan 2010 to 9 Oct 2026. Each month buys Rp 5,000,000 of the index at that month's opening level; the portfolio is valued at each month's close and at the latest print (6,043) for today. Price index only: dividends, fees and taxes are not included, and you can't buy the index directly (an IHSG index fund is the real-world equivalent). The per-year figure is a money-weighted (XIRR) return. Deliverables after approval: the MP4 with burned-in captions, a clean MP4 without captions, an .srt subtitle file, and the editable Remotion project.</p>
+  </section>
+</div>
+
+<div class="lb" id="lb" hidden><img alt=""></div>
+
+<script>
+  const SCENES = [
+    {
+      n: '01', name: 'Hook', tc: '0:00 – 0:05', dur: '5 s',
+      frames: [['01-hook', '0:03.7']],
+      motion: ['Gold kicker line wipes in, then "Rp 5,000,000 every month into IHSG since 2010." rises out of a mask line by line.',
+               'Twelve stylised red Rp 100,000 notes drop in on springs and settle into a loose pile.',
+               'The question pill pops in with overshoot: "What would you have today?"'],
+      caps: [['0:00', 'What if you put Rp 5 million into IHSG'], ['0:02', 'every single month, starting in 2010?']],
+    },
+    {
+      n: '02', name: 'The rules', tc: '0:05 – 0:11', dur: '6 s',
+      frames: [['02-rules', '0:08.5']],
+      motion: ['Two rule chips pop in: Rp 5,000,000 on the first trading day, and Never sell.',
+               'A contribution grid of 202 cells (one per month, one row per year) fills with a glowing leading edge. Nov and Dec 2026 stay dashed because they haven\'t happened yet.',
+               'The total ticks up in sync to Rp 1,010,000,000.'],
+      caps: [['0:05', 'One rule: buy on the first trading day of every month.'], ['0:08', 'No timing. No selling. 202 months in a row.']],
+    },
+    {
+      n: '03', name: 'Meet IHSG', tc: '0:11 – 0:18', dur: '7 s',
+      frames: [['03-meet-ihsg', '0:17.3']],
+      motion: ['The index line draws from 2010 to today in about 4 seconds, with a live value tag riding the head.',
+               'After the Dec 2025 peak the line turns red.',
+               'Start, peak (+231%) and today (−30%) labels pop in as the head passes each one.'],
+      caps: [['0:11', 'IHSG opened 2010 at about 2,600 points.'], ['0:14', 'It more than tripled by late 2025… then 2026 happened.']],
+    },
+    {
+      n: '04', name: 'The journey', tc: '0:18 – 0:45', dur: '27 s',
+      frames: [['04-journey-2015', '0:24.7'], ['05-journey-covid', '0:29.7'], ['05b-journey-2021', '0:33.7'], ['06-journey-peak', '0:39.2'], ['07-journey-crash', '0:44.3']],
+      motion: ['The main chart: blue line for invested, green line for portfolio value, with the gain band between them (red where value dips below).',
+               'The year rolls like an odometer and both counters tick every frame. The y-axis zooms out as new highs arrive.',
+               'The clock slows and holds on five events: the 2015 rupiah slump, COVID (red screen pulse, return chip flips to ▼ −1.6%), crossing Rp 1 billion, the Dec 2025 peak, and the 2026 sell-off (camera shake).',
+               'Ends with the label switching to TODAY.'],
+      caps: [['0:18', 'Blue is what you put in. Green is what it\'s worth.'], ['0:21', 'The early years? Mostly smooth sailing.'],
+             ['0:23', '2015: the rupiah slides and your gains nearly vanish.'], ['0:26', 'You keep buying anyway.'],
+             ['0:29', 'March 2020. COVID. Your portfolio dips into the red.'], ['0:31', 'You hold, and by December 2021 you cross Rp 1 billion.'],
+             ['0:34', 'Then comes a long, slow climb.'], ['0:38', 'December 2025: Rp 1.61 billion. Up 67%.'],
+             ['0:40', 'Then IHSG falls 35% in six months.'], ['0:42', 'And the green line sinks back toward the blue.']],
+    },
+    {
+      n: '05', name: 'Plot twist', tc: '0:45 – 0:52', dur: '7 s',
+      frames: [['08-twist', '0:49.1']],
+      motion: ['The peak card lands, then a red arrow draws downward.',
+               'The second card counts down from Rp 1,608,337,863 to Rp 1,072,301,810, and its bar shrinks.',
+               'The lost slice breaks off in red and falls away, with a short shake on impact.'],
+      caps: [['0:45', 'At the peak you had Rp 1.61 billion. By June 2026: Rp 1.07 billion.'], ['0:48', 'Over half a billion rupiah, gone on paper in six months.']],
+    },
+    {
+      n: '06', name: 'The result', tc: '0:52 – 1:00', dur: '8 s',
+      frames: [['09-result', '0:58.0']],
+      motion: ['Two bars grow side by side (you put in vs it\'s worth), and a bracket marks the +Rp 158 million slice.',
+               'A giant "1.7% per year" counts up, set against 6.1% a year at the peak.',
+               'Tiles compare your average buy price (5,225) with IHSG today (6,043).'],
+      caps: [['0:52', 'Today, after Rp 1.01 billion invested, you have Rp 1.17 billion.'], ['0:55', 'That\'s +15.6% in total, or just 1.7% a year.']],
+    },
+    {
+      n: '07', name: 'The lesson', tc: '1:00 – 1:06', dur: '6 s',
+      frames: [['10-outro', '1:04.0']],
+      motion: ['A four-line statement masks in, with the second half in gold.',
+               'The comment prompt pops in: "Would you have kept buying in 2020?"',
+               'The method and disclaimer fade in underneath.'],
+      caps: [['1:00', 'DCA protects how you get in. It can\'t choose when you get out.'], ['1:03', 'Tell me in the comments.']],
+    },
+  ];
+
+  const esc = (s) => s.replace(/[&<>"]/g, (c) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+  document.getElementById('scenes').innerHTML = SCENES.map((s) => `
+    <article class="scene">
+      <div class="rail"><span class="n">${s.n}</span><span class="tc">${s.tc}</span><span class="dur">${s.dur}</span></div>
+      <div class="body">
+        <h2>${esc(s.name)}</h2>
+        <div class="strip">
+          ${s.frames.map(([f, t]) => `<button class="frame" type="button" data-src="frames/${f}.jpg" aria-label="Enlarge frame at ${t}"><img src="frames/${f}.jpg" alt="${esc(s.name)} frame at ${t}" loading="lazy"><span>${t}</span></button>`).join('')}
+        </div>
+        <div class="notes">
+          <div><h3>What moves</h3><ul>${s.motion.map((m) => `<li>${esc(m)}</li>`).join('')}</ul></div>
+          <div><h3>Captions</h3><div class="caps">${s.caps.map(([t, c]) => `<div class="cap"><span class="t">${t}</span>${esc(c)}</div>`).join('')}</div></div>
+        </div>
+      </div>
+    </article>`).join('');
+
+  const lb = document.getElementById('lb');
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.frame');
+    if (btn) { lb.querySelector('img').src = btn.dataset.src; lb.hidden = false; return; }
+    if (e.target.closest('#lb')) lb.hidden = true;
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lb.hidden = true; });
+</script>

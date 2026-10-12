@@ -1,0 +1,175 @@
+{
+  "id": "ep01-ihsg-dca",
+  "title": "DCA Rp 5 juta/bulan ke IHSG sejak 2010",
+  "fps": 30,
+  "voice": {
+    "settings": {
+      "speed": 1.05
+    }
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "minSec": 4.5,
+      "lines": [
+        {
+          "id": "hook-1",
+          "text": "Kalau dari {2010|dua ribu sepuluh}, kamu nabung saham {Rp 5 juta|lima juta rupiah} tiap bulan,"
+        },
+        {
+          "id": "hook-2",
+          "text": "sekarang jadi berapa?"
+        }
+      ],
+      "visual": "Headline Rp 5.000.000 tiap bulan ke IHSG sejak 2010 (mask reveal), uang Rp 100.000 jatuh menumpuk, pill pertanyaan."
+    },
+    {
+      "id": "rules",
+      "minSec": 5.5,
+      "lines": [
+        {
+          "id": "rules-1",
+          "text": "Ini namanya DCA, singkatan dari Dollar Cost Averaging, artinya beli rutin dengan jumlah yang sama."
+        },
+        {
+          "id": "rules-2",
+          "text": "Satu lagi, nggak pernah jual. Total modal kamu jadi {Rp 1 miliar|satu miliar} lebih."
+        }
+      ],
+      "visual": "Dua chip aturan + grid 202 kotak (1 kotak = 1 bulan) yang terisi, total modal naik ke Rp 1.010.000.000."
+    },
+    {
+      "id": "ihsg",
+      "minSec": 6.5,
+      "lines": [
+        {
+          "id": "ihsg-1",
+          "text": "{IHSG|I-Ha-Es-Ge}, indeks saham Indonesia, mulai dari {2.600-an|dua ribu enam ratusan}."
+        },
+        {
+          "id": "ihsg-2",
+          "text": "Lalu naik tiga kali lipat lebih, sampai {8.600|delapan ribu enam ratus}."
+        },
+        {
+          "id": "ihsg-3",
+          "pauseBefore": 0.4,
+          "text": "Terus… {2026|dua ribu dua puluh enam} datang."
+        }
+      ],
+      "visual": "Grafik IHSG 2010–hari ini digambar; setelah puncak Des 2025 garis jadi merah; label 2.611 / 8.647 (+231%) / 6.043 (−30%)."
+    },
+    {
+      "id": "journey",
+      "minSec": 20,
+      "lines": [
+        {
+          "id": "j-intro",
+          "text": "Garis biru itu modal kamu, dan selama hijau di atasnya, kamu untung."
+        },
+        {
+          "id": "j-2015",
+          "text": "Tahun {2015|dua ribu lima belas}, untungmu tinggal tipis."
+        },
+        {
+          "id": "j-keep",
+          "text": "Tapi kamu tetap beli."
+        },
+        {
+          "id": "j-covid",
+          "text": "Maret {2020|dua ribu dua puluh}, COVID datang dan kamu sempat rugi."
+        },
+        {
+          "id": "j-1b",
+          "text": "Kamu nggak jual, dan nilainya tembus {Rp 1 miliar|satu miliar}."
+        },
+        {
+          "id": "j-climb",
+          "text": "Habis itu naik pelan-pelan."
+        },
+        {
+          "id": "j-peak",
+          "text": "Di puncaknya, kamu untung {67%|enam puluh tujuh persen}!"
+        }
+      ],
+      "tailSec": 3.0,
+      "visual": "Grafik utama: biru = modal, hijau = nilai portofolio. Tahun berputar, counter jalan, berhenti di 5 momen: 2015, COVID, Rp 1 miliar, puncak, sell-off 2026."
+    },
+    {
+      "id": "twist",
+      "minSec": 6,
+      "lines": [
+        {
+          "id": "twist-1",
+          "text": "Uangmu yang tadinya {Rp 1,6 miliar|satu koma enam miliar}, Juni tinggal {Rp 1 miliar|satu miliar} lebih dikit."
+        },
+        {
+          "id": "twist-2",
+          "text": "Lebih dari setengah miliar hilang, cuma dalam enam bulan."
+        }
+      ],
+      "visual": "Kartu puncak Rp 1,61 miliar → panah merah → kartu Jun 2026 menghitung turun ke Rp 1,07 miliar, potongan bar merah patah dan jatuh."
+    },
+    {
+      "id": "result",
+      "minSec": 7,
+      "lines": [
+        {
+          "id": "result-1",
+          "text": "Hari ini, modal {Rp 1 miliar|satu miliar} jadi hampir {Rp 1,2 miliar|satu koma dua miliar}."
+        },
+        {
+          "id": "result-2",
+          "text": "Untungnya {15%|lima belas persen} lebih, atau cuma {1,7%|satu koma tujuh persen} setahun."
+        }
+      ],
+      "visual": "Bar modal vs nilai sekarang, bracket +Rp 158 juta, angka besar 1,7% per tahun (vs 6,1% di puncak), tile harga rata-rata vs IHSG hari ini."
+    },
+    {
+      "id": "lesson",
+      "minSec": 5.5,
+      "lines": [
+        {
+          "id": "lesson-1",
+          "text": "DCA bikin kamu nggak pusing kapan beli, tapi hasilnya tergantung kapan kamu jual."
+        },
+        {
+          "id": "lesson-2",
+          "text": "Kalau kamu, tetap beli nggak waktu COVID? Tulis di komen!"
+        }
+      ],
+      "visual": "Kalimat pelajaran 4 baris, pill pertanyaan untuk komen, disclaimer."
+    },
+    {
+      "id": "hakabot-outro",
+      "minSec": 12,
+      "leadSec": 0.3,
+      "tailSec": 1.8,
+      "lines": [
+        {
+          "id": "outro-1",
+          "text": "Di chart Hakabot, tinggal klik dan garis aliran dana investor asing langsung muncul."
+        },
+        {
+          "id": "outro-2",
+          "pauseBefore": 0.3,
+          "text": "Broker activity nunjukin broker mana yang lagi banyak beli atau jual."
+        },
+        {
+          "id": "outro-3",
+          "pauseBefore": 0.3,
+          "text": "Screener otomatis nyaring saham, misalnya yang lagi naik, lengkap sama chart."
+        },
+        {
+          "id": "outro-4",
+          "pauseBefore": 0.3,
+          "text": "Cek di {hakabot.com|hakabot dot com}."
+        }
+      ],
+      "visual": "Outro standar Hakabot: Chart & Indikator, Broker Activity, Screener (ticker & nama akun di-blur), lalu end card hakabot.com."
+    }
+  ],
+  "sources": [
+    "Yahoo Finance chart API, ^JKSE, interval 1mo, Jan 2010 – 9 Okt 2026 (episodes/ep01-ihsg-dca/data/jkse_raw.json)",
+    "Perhitungan DCA & XIRR: episodes/ep01-ihsg-dca/analysis/build_data.py → src/episodes/ep01-ihsg-dca/data/dca.json"
+  ]
+}
