@@ -2,20 +2,31 @@ import React from 'react';
 import {Audio, Sequence, interpolate, staticFile} from 'remotion';
 import {useTiming} from './timing';
 
-/** Names of the synthesized library in public/sfx (scripts/sfx_synth.py). */
+/**
+ * The live SFX library in public/sfx (scripts/sfx_synth.py): palette B "Premium UI" as the base, with
+ * palette C "Terminal" for numbers locking in, the decline, the 2026 crash, the shock beep and grid fills.
+ * Uses and volumes: docs/style-guide.md → Sound. Older sounds (whoosh, pop, tick, ding…) and the other
+ * palettes are still on disk but deliberately not in this type, so a scene can't pick them by accident.
+ */
 export type SfxName =
-  | 'whoosh'
-  | 'whoosh-soft'
-  | 'swoosh-down'
-  | 'pop'
-  | 'tick'
-  | 'impact'
-  | 'riser'
-  | 'ding'
-  | 'drop'
-  | 'coin'
-  | 'glitch'
-  | 'shimmer';
+  | 'b-air' // scene change (shell), soft transition
+  | 'b-rise' // big entrance, bar growing, outro feature change
+  | 'b-tap' // chip, label, callout, pill
+  | 'b-click' // UI click ripple in the outro
+  | 'b-confirm' // success / peak reached
+  | 'b-pay' // money landing
+  | 'b-build' // build-up before a reveal or fall
+  | 'b-dip' // small downward move (an arrow pointing down)
+  | 'b-hit' // impact (≤ 3 per video, shared with c-crash)
+  | 'b-mark' // logo / end card
+  | 'c-lock' // a number or milestone locking in
+  | 'c-fall' // a decline starting
+  | 'c-crash' // the big crash landing (tape-stop)
+  | 'c-alarm' // shock accent, paired with an impact
+  | 'c-chatter-1'
+  | 'c-chatter-2'
+  | 'c-chatter-3'
+  | 'c-chatter-4'; // grid / counter fill steps: cycle through 1-4
 
 /** One sound effect at a frame relative to the enclosing Sequence (usually the scene). */
 export const Sfx: React.FC<{name: SfxName; at?: number; volume?: number}> = ({name, at = 0, volume = 0.5}) => (

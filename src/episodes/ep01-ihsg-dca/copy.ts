@@ -5,6 +5,8 @@ import {DCA, MONTHS, idx} from './data';
 
 const first = MONTHS[0];
 const low = MONTHS[idx('2026-06')];
+/** Months from the Dec 2025 peak to the Jun 2026 low (6). */
+const fallMonths = idx(low.ym) - idx(DCA.peak.ym);
 
 export const T = {
   hook: {
@@ -42,14 +44,14 @@ export const T = {
       '2020-03': {title: 'MAR 2020 · COVID-19', sub: 'sempat rugi'},
       '2021-12': {title: 'DES 2021', sub: 'tembus Rp 1 miliar'},
       '2025-12': {title: 'DES 2025 · PUNCAK', sub: fmt.words(DCA.peak.value)},
-      '2026-06': {title: 'JUN 2026 · ANJLOK', sub: `IHSG ${fmt.signedPct(low.close / DCA.indexPeak.close - 1, 0)} dalam 6 bulan`},
+      '2026-06': {title: 'JUN 2026 · ANJLOK', sub: `IHSG ${fmt.signedPct(low.close / DCA.indexPeak.close - 1, 0)} dalam ${fallMonths} bulan`},
     } as Record<string, {title: string; sub: string}>,
   },
   twist: {
     kicker: 'PLOT TWIST',
     peakLabel: `PUNCAK · ${monthLabel(DCA.peak.ym)}`,
     lowLabel: `TITIK TERENDAH · ${monthLabel(low.ym)}`,
-    drop: (n: number) => `−${fmt.words(n)} dalam 6 bulan`,
+    drop: (n: number) => `−${fmt.words(n)} dalam ${fallMonths} bulan`,
   },
   result: {
     kicker: `HARI INI · ${dateLabel(DCA.asOf)}`,
@@ -65,7 +67,6 @@ export const T = {
   lesson: {
     kicker: 'PELAJARANNYA',
     lines: ['DCA bikin kamu', 'nggak pusing kapan beli,', 'tapi hasilnya tergantung', 'kapan kamu jual.'],
-    question: 'Kamu tetap beli nggak waktu COVID?',
     disclaimer:
       `Cuma harga indeks: belum termasuk dividen, biaya & pajak. Beli di harga pembukaan tiap bulan. ` +
       `Data: Yahoo Finance (^JKSE), ${monthLabel(first.ym)} – ${dateLabel(DCA.asOf)}. Bukan rekomendasi investasi.`,

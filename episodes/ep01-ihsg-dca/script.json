@@ -89,9 +89,14 @@
         {
           "id": "j-peak",
           "text": "Di puncaknya, kamu untung {67%|enam puluh tujuh persen}!"
+        },
+        {
+          "id": "j-crash",
+          "pauseBefore": 0.5,
+          "text": "Tapi masuk {2026|dua ribu dua puluh enam}, {IHSG|I-Ha-Es-Ge} anjlok {35%|tiga puluh lima persen}."
         }
       ],
-      "tailSec": 3.0,
+      "tailSec": 1.2,
       "visual": "Grafik utama: biru = modal, hijau = nilai portofolio. Tahun berputar, counter jalan, berhenti di 5 momen: 2015, COVID, Rp 1 miliar, puncak, sell-off 2026."
     },
     {
@@ -131,41 +136,42 @@
         {
           "id": "lesson-1",
           "text": "DCA bikin kamu nggak pusing kapan beli, tapi hasilnya tergantung kapan kamu jual."
-        },
-        {
-          "id": "lesson-2",
-          "text": "Kalau kamu, tetap beli nggak waktu COVID? Tulis di komen!"
         }
       ],
-      "visual": "Kalimat pelajaran 4 baris, pill pertanyaan untuk komen, disclaimer."
+      "visual": "Kalimat pelajaran + disclaimer (pill pertanyaan komen dihapus 13 Okt, langsung ke outro)."
     },
     {
       "id": "hakabot-outro",
       "minSec": 12,
       "leadSec": 0.3,
-      "tailSec": 1.8,
+      "tailSec": 1.6,
       "lines": [
         {
           "id": "outro-1",
-          "text": "Di chart Hakabot, tinggal klik dan garis aliran dana investor asing langsung muncul."
+          "text": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart."
         },
         {
           "id": "outro-2",
-          "pauseBefore": 0.3,
-          "text": "Broker activity nunjukin broker mana yang lagi banyak beli atau jual."
+          "pauseBefore": 0.35,
+          "text": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya."
         },
         {
           "id": "outro-3",
-          "pauseBefore": 0.3,
-          "text": "Screener otomatis nyaring saham, misalnya yang lagi naik, lengkap sama chart."
+          "pauseBefore": 0.35,
+          "text": "Pemilik saham tiap perusahaan, tampil rapi."
         },
         {
           "id": "outro-4",
-          "pauseBefore": 0.3,
+          "pauseBefore": 0.35,
+          "text": "Screener siap pakai, bantu nyaring saham yang jelek."
+        },
+        {
+          "id": "outro-5",
+          "pauseBefore": 0.35,
           "text": "Cek di {hakabot.com|hakabot dot com}."
         }
       ],
-      "visual": "Outro standar Hakabot: Chart & Indikator, Broker Activity, Screener (ticker & nama akun di-blur), lalu end card hakabot.com."
+      "visual": "Outro standar Hakabot v3.3: Indikator, Bandarmology (POSITION), Komposisi, Screener (ticker & nama di-blur), lalu end card hakabot.com."
     }
   ],
   "sources": [

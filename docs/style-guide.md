@@ -89,28 +89,69 @@ the voice. If an anchor still looks off, re-run `npm run vo -- <id>` (free for c
 
 ## Sound (`public/sfx`, made by `scripts/sfx_synth.py`)
 
-| Name | Use | Volume |
-|---|---|---|
-| `whoosh-soft` | scene changes (added automatically by the shell) | 0.3 |
-| `whoosh` | big entrances, bars growing, clip changes | 0.35–0.45 |
-| `pop` | chips, labels, callouts, pills | 0.3–0.5 |
-| `tick` | counters and grids filling (sparse, ≤ 12 per fill) | 0.15–0.2 |
-| `ding` | a milestone reached | 0.3–0.4 (0.3 when it lands on the spoken amount) |
-| `coin` | money landing | 0.2–0.25 |
-| `riser` | build-up before a reveal | 0.25 |
-| `drop`, `swoosh-down` | a fall / decline starting | 0.35–0.5 |
-| `impact` | the crash lands (≤ 3 per video) | 0.45–0.55 |
-| `glitch` | shock / error accent, paired with impact | 0.3 |
-| `shimmer` | logo or peak reveal | 0.4–0.45 |
+One premium fintech app: palette **B · Premium UI** (short crisp taps, haptic low thumps, soft sine pings, one air
+puff) is the base; palette **C · Terminal** (square-wave blips, relay click, low lock-in, tape-stop) comes in where the
+story is about data and numbers moving. Chosen by the user 2026-10-13 (`episodes/ep01-ihsg-dca/qa/sfx-compare.md`).
+`SfxName` in `src/core/audio.tsx` lists exactly these names.
 
-Volumes assume the voice at −16 LUFS per line (`voiceover.py` normalizes every line to that). The voice always wins: SFX stay at 0.15–0.55, no more than 2 cues within 6 frames.
-Where a cue runs under a word, its spectrum decides how far to lower it. `shimmer`, `whoosh`, `swoosh-down`, `glitch` and
-`coin` sit in the 1–4 kHz speech band, so go 0.05–0.15 under the table. `impact` and `drop` are mostly below 500 Hz and
-can keep their level. `ding` is narrow (1–2 kHz), so 0.3 is fine on an amount. A `whoosh` peaks ~6–8 frames after it starts
-(`whoosh-soft` ~4–6), so a transition whoosh starts that much before its cut, not on the word. A `pop` that would land on a
-word's first frame goes 1 frame early. Music
-(optional, `public/music/`) sits at a level around 0.16 and ducks under the voice automatically
-(`MusicBed`). Final mix target: about −14 LUFS integrated, true peak ≤ −1 dBTP.
+| Name | Pack | Use | Volume | Peak | 1–4 kHz |
+|---|---|---|---|---|---|
+| `b-air` | B | scene changes (added automatically by the shell); a soft turn inside a scene | 0.3 (0.24 under words) | ~4 f | 48% |
+| `b-rise` | B | big entrances, bars growing, outro feature changes (start 7 f before the cut) | 0.3–0.4 | ~7 f | 10% |
+| `b-tap` | B | chips, labels, callouts, pills; soft landings (notes on a pile) | 0.3–0.38 (0.22 for small landings) | 0 f | 11% |
+| `b-click` | B | UI click ripples in screen recordings | 0.24 under words | 0 f | 72% |
+| `c-chatter-1`…`-4` | C | counters and grids filling: rotate 1→3→2→4, ≤ 8 per fill, level wobble 0.14–0.17 | 0.14–0.18 | 0–1 f | 26–43% |
+| `c-lock` | C | a number or milestone locking in (lands on the spoken amount) | 0.3–0.4 | ~2 f (start 2 f early) | 6% |
+| `b-confirm` | B | success / a peak reached (two soft pings) | 0.3 (0.22 under words) | ~3 f | 51% |
+| `b-pay` | B | money landing (three quick pings) | 0.2–0.25 (0.17–0.18 under words) | 0 f | 76% |
+| `b-build` | B | build-up before a reveal or fall (accelerating haptic pulses, top at 1.5 s) | 0.25 | ~44 f | 7% |
+| `b-dip` | B | a small downward move (an arrow pointing down) | 0.25–0.3 | 0 f | 0% |
+| `c-fall` | C | a decline starting (descending blips, ~1 s) | 0.25–0.3 | 0 f | 12% |
+| `c-crash` | C | the story's big crash landing (low hit + static + tape-stop drone) | 0.45–0.55 | 0 f | 0% |
+| `b-hit` | B | other impacts (haptic sub thump). `b-hit` + `c-crash` together ≤ 3 per video | 0.45–0.55 | 0 f | 0% |
+| `c-alarm` | C | shock accent (two terminal beeps), paired with an impact | 0.22–0.3 | ~1 f | 8% (91% at 0.5–1 kHz) |
+| `b-mark` | B | logo / end card (low thump + two pings) | 0.36–0.4 | 0 f | 50% |
+
+Peaks are in frames at 30 fps from the cue's start; put the peak, not the start, on the visual it belongs to.
+`b-build` is the exception: start it 45 frames before the moment it leads into.
+
+Volumes assume the voice at −16 LUFS per take (`voiceover.py` normalizes every take to that). The voice always wins:
+SFX stay at 0.15–0.55 (the chatter steps may go to 0.14), no more than 2 cues within 6 frames, impacts ≤ 3 per video.
+Where a cue runs under a word, the 1–4 kHz column decides how far to lower it: above ~40% (`b-air`, `b-click`,
+`b-confirm`, `b-pay`, `b-mark`, the chatter) go 0.05–0.15 under the table; below ~15% (`b-rise`, `b-tap`, `b-build`,
+`b-dip`, `b-hit`, `c-lock`, `c-fall`, `c-crash`) can keep their level. `c-alarm` sits just under the band (0.5–1 kHz)
+but is two beeps that cut through, so keep it at the low end. Final mix target: about −14 LUFS integrated, true peak
+≤ −1 dBTP. Watch stacked low hits: a sub thump (`b-hit`, `c-crash`) whose first cycle lands on a loud syllable sets
+the video's true peak and caps the loudness gain; nudging it 1–2 frames off the syllable fixes that (ep01 Covid).
+
+### Music
+
+Every episode gets an **original score composed in code** (`scripts/music_synth.py`, `npm run music -- <id>` →
+`public/music/<epNN>-score.wav`). Nothing is downloaded, so there's nothing to license. The style is a curious,
+cinematic explainer underscore (think Veritasium): felt piano, warm analog-style pads, a soft pulsing bass and
+plucked 8ths that build momentum, light kick/shaker only at the builds, a spacious synthetic hall. It's never melodic
+enough to compete with the words. Key D major / B minor, which agrees with the SFX (b-confirm G5 → D6).
+
+- **Scored to the story.** The script reads the real `timing.json`: every section starts on a scene cut and is a whole
+  number of bars (tempo flexes ~87–106 BPM so the bar lines land on the cuts). The big crash gets a tape-stop + closing
+  filter into silence so the crash SFX and the voice hit alone. Re-run it after every re-voice.
+- **Exact length.** The file is exactly the video's length, so `MusicBed` never loops it.
+- **Mix rules baked in:** 1–4 kHz dipped ~8 dB while the voice speaks; dips under impacts; fader automation for the
+  arc (quiet hook → crescendo → peak → silence → dark twist → reflective lesson → forward outro → resolve on the end card).
+- **Level.** The score is mastered to −16 LUFS (same as the voice), and `music: {src, level: 0.3}` in the episode
+  puts it ~16–19 dB under the voice once `MusicBed` ducks it (×0.35 under speech), and ~21–38 dB under in 1–4 kHz.
+  (0.16 is the right level for a commercial track mastered around −10 LUFS; ours is quieter, hence 0.3.)
+- A new episode copies `score()` in `music_synth.py` and rewrites its sections for that story; the instruments,
+  anchors, mix and mastering are shared. Any other track in `public/music/` must be licensed by the user.
+
+**Not used (files kept on disk; the user decides whether to delete them):** the legacy set `whoosh`, `whoosh-soft`,
+`swoosh-down`, `pop`, `tick`, `ding`, `coin`, `riser`, `drop`, `impact`, `glitch`, `shimmer` (rejected: "sounds like
+every AI video"); the round-1 musical palette (`bloom`, `swell`, `pluck*`, `step-1`…`-8`, `chime`, `glint`, `ascend`,
+`descend`, `sink`, `thud`, `sour`, `bell-bloom`, `signature`); palettes A (`a-*`) and D (`d-*`); and the unpicked
+B/C slots `b-tick`, `b-buzz`, `c-scan`, `c-boot`, `c-blip`, `c-click`, `c-cash`, `c-charge`, `c-logo`, `c-chatter`
+(the single burst, replaced by the four step variants).
+
+Rebuild: `npm run sfx` regenerates everything and reproduces the B/C files bit for bit.
 
 ## Checking your work
 

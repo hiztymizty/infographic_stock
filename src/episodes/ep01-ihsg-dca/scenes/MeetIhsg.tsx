@@ -100,12 +100,14 @@ export const MeetIhsg: React.FC = () => {
       </div>
 
       {/* The riser (45 frames long) builds to the fall and cuts into the drop, which sits under "Terus…". */}
-      <Sfx name="riser" at={FALL[0] - 45} volume={0.25} />
-      <Sfx name="pop" at={startAt} volume={0.3} />
-      <Sfx name="whoosh" at={RISE[0]} volume={0.3} />
-      <Sfx name="pop" at={RISE[1] + 4} volume={0.35} />
-      <Sfx name="drop" at={FALL[0] + 2} volume={0.3} />
-      <Sfx name="pop" at={FALL[1] + 8} volume={0.35} />
+      {/* b-build is 1.5 s of accelerating haptic pulses whose top lands on the fall start (low band, fine under words). */}
+      <Sfx name="b-build" at={FALL[0] - 45} volume={0.25} />
+      <Sfx name="b-tap" at={startAt} volume={0.3} />
+      <Sfx name="b-rise" at={RISE[0]} volume={0.3} />
+      <Sfx name="b-tap" at={RISE[1] + 4} volume={0.35} />
+      {/* Descending terminal blips as the line turns down; mostly below 1 kHz, a notch under the table under ihsg-3. */}
+      <Sfx name="c-fall" at={FALL[0] + 2} volume={0.28} />
+      <Sfx name="b-tap" at={FALL[1] + 8} volume={0.35} />
       <svg width={1080} height={1920} style={{position: 'absolute', inset: 0}}>
         <defs>
           <linearGradient id="idxFill" x1="0" y1="0" x2="0" y2="1">

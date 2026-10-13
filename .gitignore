@@ -10,8 +10,11 @@ episodes/*/out/*.mp4
 episodes/*/qa/*.jpg
 episodes/*/qa/*.png
 episodes/*/qa/*.mp4
+episodes/*/qa/*.wav
+episodes/*/qa/*.mp3
 episodes/*/archive-en/*.mp4
 episodes/_outro/*.mp4
+episodes/_outro/*/
 episodes/_outro/*.jpg
 
 # Temp files from the audio tools
@@ -21,3 +24,9 @@ episodes/_outro/*.jpg
 *.src.wav
 *.env.wav
 *.log
+
+# Synthesized episode scores (rebuild: npm run music -- <id>)
+public/music/*-score.wav
+
+# Python bytecode
+__pycache__/

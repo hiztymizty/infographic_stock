@@ -28,7 +28,7 @@ export const OutroPreview: React.FC = () => {
           </SceneWrap>
         </SceneProvider>
         {/* In an episode the shell plays this on every scene change. */}
-        <Sfx name="whoosh-soft" at={0} volume={0.3} />
+        <Sfx name="b-air" at={0} volume={0.3} />
         <Captions />
         <div
           style={{

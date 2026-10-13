@@ -1,26 +1,31 @@
 import React from 'react';
-import {AbsoluteFill} from 'remotion';
+import {AbsoluteFill, Easing, interpolate, useCurrentFrame} from 'remotion';
 import {Sfx} from '../../../core/audio';
-import {Kicker, Reveal, useIn} from '../../../core/components/ui';
+import {CLAMP, Kicker, Reveal, useIn} from '../../../core/components/ui';
 import {C, MONO, SANS} from '../../../core/theme';
-import {useLine, useWordAt} from '../../../core/timing';
+import {useWordAt} from '../../../core/timing';
 import {T} from '../copy';
 
 /** One size for the whole statement, set so its widest line fits the 900 px content width. */
 const LINE_SIZE = 78;
 
+/**
+ * The closing statement, then straight to the outro (no comment prompt since 13 Okt).
+ * The disclaimer is in from frame 20, so it reads for the whole scene (≥ 5 s at minSec 5,5).
+ */
 export const Lesson: React.FC = () => {
-  const ask = useLine('lesson-2').from;
+  const frame = useCurrentFrame();
   // The gold half of the statement ("tapi hasilnya tergantung kapan kamu jual.") lands as it's spoken.
   const tapi = Math.max(30, useWordAt('lesson-1', 'tapi') - 4);
-  const q = useIn(ask, true);
   const fine = useIn(20);
+  // A short gold rule draws under the statement as the gold half lands, closing the block.
+  const rule = interpolate(frame, [tapi + 14, tapi + 34], [0, 1], {...CLAMP, easing: Easing.out(Easing.cubic)});
   return (
     <AbsoluteFill>
-      <Sfx name="pop" at={ask} volume={0.45} />
       {/* Starts 2 frames before the reveal so its peak lands as the gold lines move, just ahead of "tapi". */}
-      <Sfx name="whoosh-soft" at={tapi - 2} volume={0.3} />
-      <div style={{position: 'absolute', left: 90, right: 90, top: 300}}>
+      {/* Soft air puff into the turn; ~50% speech band and under lesson-1, so below the 0.3 transition level. */}
+      <Sfx name="b-air" at={tapi - 2} volume={0.24} />
+      <div style={{position: 'absolute', left: 90, right: 90, top: 400}}>
         <Kicker>{T.lesson.kicker}</Kicker>
         <div style={{height: 30}} />
         {T.lesson.lines.map((line, i) => (
@@ -41,15 +46,10 @@ export const Lesson: React.FC = () => {
             {line}
           </Reveal>
         ))}
+        <div style={{marginTop: 44, height: 8, width: 160 * rule, borderRadius: 4, background: C.gold}} />
       </div>
 
-      <div style={{position: 'absolute', left: 90, right: 90, top: 940, display: 'flex', opacity: Math.min(1, q * 2), transform: `scale(${0.8 + 0.2 * q})`, transformOrigin: 'left center'}}>
-        <div style={{padding: '24px 36px', borderRadius: 28, background: C.text, color: C.bg, fontFamily: SANS, fontWeight: 800, fontSize: 44, lineHeight: 1.2}}>
-          {T.lesson.question}
-        </div>
-      </div>
-
-      <div style={{position: 'absolute', left: 90, right: 90, top: 1200, fontFamily: MONO, fontWeight: 500, fontSize: 22, lineHeight: 1.55, color: C.dim, opacity: fine}}>
+      <div style={{position: 'absolute', left: 90, right: 90, top: 1040, fontFamily: MONO, fontWeight: 500, fontSize: 24, lineHeight: 1.55, color: C.dim, opacity: fine}}>
         {T.lesson.disclaimer}
       </div>
     </AbsoluteFill>

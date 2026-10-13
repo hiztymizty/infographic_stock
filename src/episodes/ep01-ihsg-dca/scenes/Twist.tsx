@@ -38,10 +38,13 @@ export const Twist: React.FC = () => {
     <AbsoluteFill style={{transform: `translateX(${sx}px)`}}>
       {/* swoosh-down and drop run under "Rp 1,6 miliar" and "Juni", so they sit below their table range. The impact
           is low-frequency and clips only the end of "dikit." before decaying into the pause, so it keeps its level. */}
-      <Sfx name="pop" at={6} volume={0.35} />
-      <Sfx name="swoosh-down" at={juni - 26} volume={0.25} />
-      <Sfx name="drop" at={DROP[0]} volume={0.25} />
-      <Sfx name="impact" at={DROP[1]} volume={0.45} />
+      <Sfx name="b-tap" at={6} volume={0.35} />
+      {/* The arrow draws down to the June card: a soft sine dip, no speech-band energy. */}
+      <Sfx name="b-dip" at={juni - 26} volume={0.28} />
+      <Sfx name="c-fall" at={DROP[0]} volume={0.25} />
+      {/* Third and last impact of the video. A haptic hit, not the tape-stop again: Journey just used that for
+          the same crash a few seconds earlier. */}
+      <Sfx name="b-hit" at={DROP[1]} volume={0.45} />
       <div style={{position: 'absolute', left: 90, top: 200}}>
         <Kicker color={C.loss}>{T.twist.kicker}</Kicker>
       </div>
@@ -59,7 +62,7 @@ export const Twist: React.FC = () => {
 
       {/* Drop arrow */}
       <svg width={1080} height={1920} style={{position: 'absolute', inset: 0}}>
-        <line x1={190} y1={700} x2={190} y2={700 + 150 * arrow} stroke={C.loss} strokeWidth={8} strokeLinecap="round" />
+        {arrow > 0 && <line x1={190} y1={700} x2={190} y2={700 + 150 * arrow} stroke={C.loss} strokeWidth={8} strokeLinecap="round" />}
         {arrow > 0.95 && <path d="M168,842 L190,876 L212,842 Z" fill={C.loss} />}
       </svg>
       <div

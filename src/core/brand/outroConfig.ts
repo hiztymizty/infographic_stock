@@ -1,20 +1,21 @@
 // Hakabot outro: the edit. Which clip plays in each shot, which parts of it (jump cuts), where
 // the "camera" looks, what gets highlighted and what gets blurred.
 //
-// Units: positions are recording pixels (1280×720 raw recordings), times are seconds in the RAW
-// recording (the same numbers as docs/outro-recordings.md), camera keys are seconds on the shot's
-// own edited timeline (its segments laid end to end). zoom 1 = the recording's full width fills the
-// window. The shot log, the EDL and every identifier box are documented in docs/outro-recordings.md.
+// Units: positions are recording pixels (Recording C is 1920×1080), times are seconds in the RAW
+// recording (the same numbers as docs/outro-recordings.md), camera keys are seconds on screen since the
+// shot appeared (so a slow move carries on through holds). zoom 1 = the recording's full width fills the
+// window (960 px), so zoom 2 = 1 recording px per screen px. The shot log, the EDL (v3.3) and every
+// identifier box are documented in docs/outro-recordings.md.
 // When re-cutting: re-check every blur box against full-resolution frames.
 
 import clipsJson from './outroClips.json';
 
-export const SRC_W = 1280;
-export const SRC_H = 720;
+export const SRC_W = 1920;
+export const SRC_H = 1080;
 export const SRC_FPS = 30;
 
 export type Rect = {x: number; y: number; w: number; h: number};
-export type RecId = 'a' | 'b';
+export type RecId = keyof typeof clipsJson.recordings;
 export type ClipName = keyof typeof clipsJson.clips;
 
 /**
@@ -30,7 +31,7 @@ export type BlurBox = Rect & {
   track?: {t: number; dx: number; dy: number}[];
 };
 
-/** Camera key: centre (recording px) and zoom, at `t` seconds of the shot's edited timeline. */
+/** Camera key: centre (recording px) and zoom, at `t` seconds since the shot appeared on screen. */
 export type CamKey = {t: number; x: number; y: number; zoom: number};
 
 /**
@@ -48,22 +49,48 @@ export type Side = 'above' | 'below' | 'left' | 'right';
 export type Shot = {
   /** Short id for logs and the EDL. */
   name: string;
-  clip: ClipName;
-  /** Pieces of the recording to play, in order (recording seconds). Gaps between them are jump cuts. */
-  segs: [number, number][];
+  /** The clip the segments play from (omit for a `still` shot). */
+  clip?: ClipName;
+  /**
+   * A still image instead of footage (e.g. a crisp screenshot for a close-up). `src` is under public/,
+   * `w`×`h` its size in the same px as camera keys and marks. `segs` then only set the shot's length
+   * ([[0, seconds]]); blur boxes are not applied, so a still must contain no identifiers.
+   */
+  still?: {src: string; w: number; h: number};
+  /**
+   * Pieces of the recording to play, in order (recording seconds). Gaps between them are jump cuts.
+   * A third element plays that segment from another clip of the same recording (see `segClip`).
+   */
+  segs: [number, number, ClipName?][];
   /** Designed length in seconds (scaled with the voice line it plays under). */
   dur: number;
-  /** Browser-window content height in px (width is always 960). */
+  /** Browser-window content height in px (width is always 960). Keep it the same within a group. */
   h: number;
   cam: CamKey[];
   marks?: Mark[];
   blur?: BlurBox[];
+  /** Crossfade frames into this shot (default XF in HakabotOutro.tsx). */
+  xf?: number;
   /** Dropped first when the voice gives its group much less time than designed. */
   optional?: boolean;
 };
 
-/** A beat group: one voice line (outro-1…outro-N−1), one headline, a few chips, 1–3 shots. */
+/**
+ * A beat group: one voice line (outro-1…outro-N−1), one headline, optional chips, 1–3 shots.
+ * Shots inside a group hard-cut; groups crossfade.
+ */
 export type Group = {line: string; title: string; chips: string[]; shots: Shot[]};
+
+/**
+ * The clip a segment plays from: its own (third element) or the shot's. Keep clips ≤ ~16 s: Remotion's
+ * OffthreadVideo returned stale frames past ~24 s into a 31 s 1080p clip (found 12 Okt), so long
+ * stretches are split into several clips.
+ */
+export const segClip = (shot: Shot, seg: number): ClipName => {
+  const c = shot.segs[seg]?.[2] ?? shot.clip;
+  if (!c) throw new Error(`outro shot ${shot.name} has no clip`);
+  return c;
+};
 
 export type Clip = {rec: RecId; start: number; end: number; frames: number};
 export const CLIPS = Object.fromEntries(
@@ -77,148 +104,193 @@ export const CLIPS = Object.fromEntries(
 // Recordings: the part of the frame that is app (the camera never shows outside it) and the
 // identifiers that are on screen in every frame.
 
-/** Recording A (2026-10-09 18-35-30): account name + avatar in the sticky nav bar. */
-const ACCOUNT_A: BlurBox = {x: 1118, y: 16, w: 150, h: 46};
-/** Recording A, stock page at the top of its scroll: company logo, ticker, company name. */
-const STOCK_ID_A: BlurBox = {x: 108, y: 56, w: 176, h: 66};
-/** Recording B (2026-10-10 11-54-43): account name + avatar in the sticky nav bar. */
-const ACCOUNT_B: BlurBox = {x: 1114, y: 89, w: 152, h: 40};
+/**
+ * Recording C (2026-10-12 11-56-49): account name "poppyzagamer" + avatar in the nav bar. One box covers
+ * both browser-zoom states (100 % until 61,233 s, 90 % after).
+ */
+const ACCOUNT_C: BlurBox = {x: 1764, y: 10, w: 154, h: 46};
 
 export const RECORDINGS: Record<RecId, {bounds: Rect; blur: BlurBox[]}> = {
-  // A: the app window fills the frame inside a 12 px border.
-  a: {bounds: {x: 14, y: 14, w: 1252, h: 692}, blur: [ACCOUNT_A]},
-  // B: browser tab strip + URL bar (y 0–70) and a black strip (y > 667) are never shown.
-  b: {bounds: {x: 14, y: 84, w: 1252, h: 582}, blur: [ACCOUNT_B]},
+  // C: app full-screen, no browser chrome; y ≥ 986 is a dark/black strip.
+  c: {bounds: {x: 0, y: 4, w: 1920, h: 982}, blur: [ACCOUNT_C]},
+  // D (2026-10-13 12-16-36): same app, same layout and 100 % zoom as C; the account sits in the same box.
+  d: {bounds: {x: 0, y: 4, w: 1920, h: 982}, blur: [ACCOUNT_C]},
 };
 
-// Flow-line colours sampled from the app's own axis tags (used only for the label dots).
-const FOREIGN = '#8AA2E2';
-const SM_LOCAL = '#2CD2B8';
+// ---------------------------------------------------------------------------------------------
+// Identifier boxes used by several shots (Recording C, see docs/outro-recordings.md → Identifiers).
+
+/** Composition page top: search-box ticker badge, then the header (logo, ticker, "IDX · Composition"). */
+const COMP_BADGE: BlurBox = {x: 616, y: 106, w: 58, h: 34, to: 93.4};
+const COMP_HEADER: BlurBox = {x: 424, y: 198, w: 160, h: 62, to: 93.4};
+/** Holder network: every node carries a ticker or a holder name. Soft blur: bubbles and lines stay. */
+const COMP_NETWORK: BlurBox = {x: 434, y: 324, w: 510, h: 340, from: 89.3, to: 92.1, sigma: 4, tint: 0.08};
+// (v3 also used: the network strip after the scroll `432, 50, 516, 76` 93,3–98,8 and the holders table
+// below the float card; boxes in docs/outro-recordings.md if those shots come back.)
+
+/** Screener result table: stock logos + tickers (until the results turn into cards). */
+const SCR_TABLE: BlurBox = {x: 432, y: 498, w: 92, h: 446, to: 130.8};
+/** Chart cards: the ticker label of each of the 9 cards (rows 1–2 × 4 columns, then 1 card). */
+const SCR_CARDS: BlurBox[] = [
+  ...[488, 660].flatMap((y) => [444, 703, 961, 1220].map((x) => ({x, y}))),
+  {x: 444, y: 832},
+].map(({x, y}) => ({x: x - 4, y: y - 2, w: 84, h: 30, from: 130.75}));
+/** Preset cards the edit doesn't use: name, description and count (the column shifts 4 px at 126,83). */
+const SCR_PRESET = (x: number, y: number): BlurBox => ({x, y, w: 262, h: 74, sigma: 7, tint: 0.25});
+const SCR_DEKAT = SCR_PRESET(429, 179);
+const SCR_VCP = SCR_PRESET(693, 179);
+const SCR_HTF = SCR_PRESET(957, 179);
+const SCR_BREAKOUT = SCR_PRESET(1221, 179);
+const SCR_RETAIL = SCR_PRESET(429, 383);
+const SCR_LSF = SCR_PRESET(693, 383);
+const SCR_BANDAR = SCR_PRESET(957, 383);
 
 // ---------------------------------------------------------------------------------------------
-// The EDL. Group i plays under voice line outro-(i+1); the last line (the URL) brings the end card.
-// Pacing rules (user feedback, 10 Okt): few shots (avg ≥ 3 s), footage near real time (≈ 0,9–1,3×),
-// at most one jump cut per shot, slow eased camera moves, one highlight at a time, labels ≥ 1,2 s,
-// and each group's first shot holds still ~1 s so the headline can be read.
+// The EDL (v3.3, 13 Okt 2026: the v3.2 edit at ≈ 1,5×; shot lengths and camera times are v3.2's ÷ 1,5). Group i plays under voice line outro-(i+1); the last line (the URL) brings
+// the end card. Pacing rules (user, 13 Okt, after v1 and v3 were both "too fast"; kept for v3.2): at most
+// 2 shots per beat (Indikator may have 3), each ≥ 2,5 s on screen with one thing happening; footage in
+// ≈ 1,5× since v3.3 (1,4–1,6×, user request; spare time becomes a hold); at most one jump cut per shot and only over dead
+// time; no punch-ins or zoom bounces, at most one slow eased camera move per shot (zoom change ≤ ~10 %);
+// crossfades between shots; one highlight per shot.
+
+/** POSITION close-up: a crisp screenshot (outro_raw/POSITION.png, 3278×1286) drawn 1920 wide. */
+const POSITION_STILL = {src: 'outro/position.png', w: 1920, h: 753};
 
 export const OUTRO_GROUPS: Group[] = [
   {
     line: 'outro-1',
-    title: 'Chart & Indikator',
-    chips: ['Indikator', 'Aliran Dana'],
+    title: 'Indikator',
+    chips: [],
     shots: [
       {
-        // The toggle, close up: the Flow menu is open, the user clicks Foreign and it switches on.
-        name: 'flow-menu',
-        clip: 'flow-toggles',
-        segs: [[10.9, 12.52]],
-        dur: 2.77,
-        h: 780,
+        // The Tech menu opens, the cursor goes down its nine indicators, Trend is switched on and its
+        // support/resistance lines appear on the chart. One continuous take.
+        name: 'tech-trend',
+        clip: 'chart-a',
+        segs: [[2.03, 5.4]],
+        dur: 2.53,
+        h: 660,
         cam: [
-          {t: 0, x: 335, y: 262, zoom: 2.9},
-          {t: 1.62, x: 350, y: 278, zoom: 3.25},
+          {t: 0.0, x: 660, y: 395, zoom: 2.3},
+          {t: 2.53, x: 675, y: 400, zoom: 2.42},
         ],
-        marks: [
-          {kind: 'click', x: 345, y: 284, at: 11.3},
-          {kind: 'ring', rect: {x: 291, y: 271, w: 118, h: 22}, from: 11.3, to: 12.52, spot: true},
-        ],
-        blur: [STOCK_ID_A],
+        marks: [{kind: 'click', x: 463, y: 420, at: 4.2}],
       },
       {
-        // The same click replayed on the chart: the Foreign line appears; one jump cut (dead time
-        // while both lines are off) to SM Local switching on.
-        name: 'flow-chart',
-        clip: 'flow-toggles',
-        segs: [
-          [11.08, 12.52],
-          [13.45, 14.98],
-        ],
-        dur: 3.13,
-        h: 780,
+        // Flow menu: Bandar's line appears and goes, then Retail is switched on and its line appears.
+        name: 'flow-retail',
+        clip: 'chart-a',
+        segs: [[10.85, 13.38]],
+        dur: 1.73,
+        h: 660,
         cam: [
-          {t: 0, x: 690, y: 410, zoom: 1.95},
-          {t: 2.97, x: 712, y: 398, zoom: 2.3},
+          {t: 0.0, x: 720, y: 400, zoom: 2.3},
+          {t: 1.73, x: 735, y: 405, zoom: 2.4},
         ],
-        marks: [
-          {kind: 'ring', rect: {x: 819, y: 379, w: 48, h: 21}, from: 11.3, to: 12.52, label: 'Investor asing', dot: FOREIGN, side: 'left'},
-          {kind: 'ring', rect: {x: 818, y: 389, w: 50, h: 21}, from: 13.733, to: 14.98, label: 'Pemain besar lokal', dot: SM_LOCAL, side: 'left'},
+        marks: [{kind: 'click', x: 585, y: 245, at: 12.567}],
+      },
+      {
+        // Stats menu → Drivers: a shaded range and the broker panel (who drove the move) appear.
+        name: 'drivers',
+        clip: 'chart-b',
+        segs: [[19.0, 21.65]],
+        dur: 1.8,
+        h: 660,
+        cam: [
+          {t: 0.0, x: 720, y: 400, zoom: 2.1},
+          {t: 1.8, x: 730, y: 405, zoom: 2.2},
         ],
-        blur: [STOCK_ID_A],
+        marks: [{kind: 'click', x: 660, y: 255, at: 19.533}],
       },
     ],
   },
   {
     line: 'outro-2',
-    title: 'Broker Activity',
-    chips: ['Beli / jual per broker'],
+    title: 'Bandarmology',
+    chips: [],
     shots: [
       {
-        // Broker activity chart (below the broker summary): one line per broker over the price.
-        // Static footage; a slow push from the whole chart to where the lines climb.
-        name: 'broker-activity',
-        clip: 'broker-activity',
-        segs: [[114.2, 118.2]],
-        dur: 5.0,
-        h: 780,
+        // Recording D: the filled START/END tables, then the page scrolls (1,2–2,4) and POSITION comes
+        // fully into frame: per broker, adding or exiting, with the P/L of those exiting.
+        name: 'tables-position',
+        clip: 'position-d',
+        segs: [[0.3, 3.6]],
+        dur: 2.47,
+        h: 460,
         cam: [
-          {t: 0, x: 800, y: 440, zoom: 1.75},
-          {t: 4.0, x: 905, y: 455, zoom: 2.1},
+          {t: 0.0, x: 955, y: 430, zoom: 1.44},
+          {t: 2.47, x: 955, y: 430, zoom: 1.5},
         ],
-        marks: [{kind: 'ring', rect: {x: 1090, y: 336, w: 38, h: 226}, from: 115.3, to: 118.2, label: 'Tiap garis = 1 broker', side: 'left'}],
+        // No highlight here: the page's own scroll is the motion; the close-up that follows rings P/L.
+      },
+      {
+        // POSITION close up from the crisp screenshot: one slow pan from the broker codes and lots to
+        // EXIT/ADD and P/L (RX −74,3 % −6,58 % (81,2b); BK +60,1 % adding; AK −78,5 % …).
+        name: 'position-still',
+        still: POSITION_STILL,
+        segs: [[0, 2.8]],
+        dur: 1.87,
+        h: 460,
+        // Short crossfade: the screenshot is drawn ~1,36× larger than the D footage, so a long dissolve
+        // double-exposes two table scales.
+        xf: 4,
+        // One calm eased pan (1,2 s of screen time, zoom 1,4): broker codes at the start (column at screen
+        // x ≈ 70), P/L at the end with its ring's right edge at x ≈ 968 (≤ 980, clear of the app buttons).
+        // Peak speed ≈ 25 screen px/frame, under the motion-blur threshold (≈ 32); no overshoot.
+        cam: [
+          {t: 0.0, x: 787, y: 425, zoom: 1.4},
+          {t: 0.1, x: 787, y: 425, zoom: 1.4},
+          {t: 1.3, x: 1215, y: 425, zoom: 1.4},
+        ],
+        // No ring: at ≈ 1,5× it could only show ≈ 0,45 s after the pan (QA round 5: reads as a blink, under the
+        // 1,2 s highlight minimum). The pan itself ends on the P/L column.
+        marks: [],
       },
     ],
   },
   {
     line: 'outro-3',
-    title: 'Screener',
-    chips: ['Saring otomatis', 'Mode Chart'],
+    title: 'Komposisi',
+    chips: [],
     shots: [
       {
-        // Pattern presets: the user picks Uptrend Fase 2 and the result table refills.
-        name: 'screener-presets',
-        clip: 'screener',
-        segs: [[5.3, 6.95]],
-        dur: 2.6,
-        h: 780,
+        // The holder network springs open and the ownership donut lands; then it rests.
+        name: 'holder-network',
+        clip: 'composition',
+        segs: [[89.6, 92.0]],
+        dur: 2.93,
+        h: 600,
         cam: [
-          {t: 0, x: 430, y: 380, zoom: 1.9},
-          {t: 1.65, x: 395, y: 400, zoom: 2.12},
+          {t: 0.0, x: 955, y: 462, zoom: 1.72},
+          {t: 2.93, x: 955, y: 470, zoom: 1.82},
         ],
-        marks: [
-          {kind: 'ring', rect: {x: 180, y: 313, w: 224, h: 88}, from: 5.55, to: 6.95, label: 'Uptrend = lagi naik', side: 'right'},
-          {kind: 'click', x: 333, y: 357, at: 5.967},
-        ],
-        blur: [{x: 182, y: 526, w: 98, h: 146, from: 5.2, to: 8.93}],
+        blur: [COMP_BADGE, COMP_HEADER, COMP_NETWORK],
       },
+    ],
+  },
+  {
+    line: 'outro-4',
+    title: 'Screener',
+    chips: [],
+    shots: [
       {
-        // Chart mode: the results turn into cards whose charts load; one jump cut past the scroll
-        // to the full card grid.
-        name: 'screener-charts',
+        // Pick the Uptrend Fase 2 pattern; one jump cut over idle hovering to the results turning into
+        // chart cards, while the camera eases down from the patterns to the card grid.
+        name: 'screener',
         clip: 'screener',
         segs: [
-          [8.55, 9.85],
-          [10.15, 11.55],
+          [126.35, 127.8],
+          [130.55, 133.6],
         ],
-        dur: 2.6,
-        h: 780,
+        dur: 3.47,
+        h: 600,
         cam: [
-          {t: 0, x: 750, y: 340, zoom: 2.05},
-          {t: 1.3, x: 760, y: 350, zoom: 2.15},
-          {t: 1.3, x: 630, y: 390, zoom: 1.85},
-          {t: 2.7, x: 650, y: 400, zoom: 2.02},
+          {t: 0.0, x: 760, y: 360, zoom: 1.9},
+          {t: 1.07, x: 760, y: 360, zoom: 1.9},
+          {t: 2.27, x: 955, y: 700, zoom: 1.74},
         ],
-        marks: [
-          {kind: 'click', x: 962, y: 191, at: 8.9},
-          {kind: 'ring', rect: {x: 930, y: 178, w: 72, h: 30}, from: 8.6, to: 9.85, label: 'Tampilkan chart', side: 'left'},
-        ],
-        blur: [
-          // Results table rows (stock logos + tickers) until the cards replace them.
-          {x: 182, y: 526, w: 98, h: 146, from: 5.2, to: 8.93},
-          // Result cards before the scroll: ticker label of each card in row 1.
-          ...[186, 414, 643, 871].map((x) => ({x, y: 512, w: 68, h: 26, from: 8.88, to: 9.9})),
-          // Result cards after the scroll: rows 1–3 × columns 1–4.
-          ...[199, 355, 504].flatMap((y) => [186, 414, 643, 871].map((x) => ({x, y, w: 68, h: 27, from: 10.05, to: 11.8}))),
-        ],
+        marks: [{kind: 'click', x: 605, y: 327, at: 126.867}],
+        blur: [SCR_DEKAT, SCR_VCP, SCR_HTF, SCR_BREAKOUT, SCR_RETAIL, SCR_LSF, SCR_BANDAR, SCR_TABLE, ...SCR_CARDS],
       },
     ],
   },
@@ -228,7 +300,7 @@ export const HAKABOT = {
   url: 'hakabot.com',
   tagline: 'Tools analisis saham',
   kicker: 'ANALISA SENDIRI DI',
-  features: ['Bandarmology', 'Fundamental', 'Technical', 'Analisa Kepentingan', 'Screener', 'Signals', 'Custom Indicators'],
+  features: ['Bandarmology', 'Fundamental', 'Technical', 'Analisa Kepentingan', 'Komposisi', 'Screener', 'Signals', 'Custom Indicators'],
 };
 
 /** Scene id the shell treats as the Hakabot outro (every script.json ends with it). */

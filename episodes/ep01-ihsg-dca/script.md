@@ -1,6 +1,6 @@
 # DCA Rp 5 juta/bulan ke IHSG sejak 2010
 
-Durasi: **101 detik**, estimated (no voiceover yet).
+Durasi: **111 detik**, estimated (no voiceover yet).
 
 ## hook · 0.0s–6.8s
 
@@ -10,7 +10,7 @@ _Visual: Headline Rp 5.000.000 tiap bulan ke IHSG sejak 2010 (mask reveal), uang
   - dibaca: _Kalau dari dua ribu sepuluh, kamu nabung saham lima juta rupiah tiap bulan,_
 - **sekarang jadi berapa?**
 
-## rules · 6.8s–17.9s
+## rules · 6.8s–21.3s
 
 _Visual: Dua chip aturan + grid 202 kotak (1 kotak = 1 bulan) yang terisi, total modal naik ke Rp 1.010.000.000._
 
@@ -18,7 +18,7 @@ _Visual: Dua chip aturan + grid 202 kotak (1 kotak = 1 bulan) yang terisi, total
 - **Satu lagi, nggak pernah jual. Total modal kamu jadi Rp 1 miliar lebih.**
   - dibaca: _Satu lagi, nggak pernah jual. Total modal kamu jadi satu miliar lebih._
 
-## ihsg · 17.9s–30.0s
+## ihsg · 21.3s–34.8s
 
 _Visual: Grafik IHSG 2010–hari ini digambar; setelah puncak Des 2025 garis jadi merah; label 2.611 / 8.647 (+231%) / 6.043 (−30%)._
 
@@ -29,7 +29,7 @@ _Visual: Grafik IHSG 2010–hari ini digambar; setelah puncak Des 2025 garis jad
 - **Terus… 2026 datang.**
   - dibaca: _Terus… dua ribu dua puluh enam datang._
 
-## journey · 30.0s–53.7s
+## journey · 34.8s–66.8s
 
 _Visual: Grafik utama: biru = modal, hijau = nilai portofolio. Tahun berputar, counter jalan, berhenti di 5 momen: 2015, COVID, Rp 1 miliar, puncak, sell-off 2026._
 
@@ -44,8 +44,10 @@ _Visual: Grafik utama: biru = modal, hijau = nilai portofolio. Tahun berputar, c
 - **Habis itu naik pelan-pelan.**
 - **Di puncaknya, kamu untung 67%!**
   - dibaca: _Di puncaknya, kamu untung enam puluh tujuh persen!_
+- **Tapi masuk 2026, IHSG anjlok 35%.**
+  - dibaca: _Tapi masuk dua ribu dua puluh enam, I-Ha-Es-Ge anjlok tiga puluh lima persen._
 
-## twist · 53.7s–63.0s
+## twist · 66.8s–76.0s
 
 _Visual: Kartu puncak Rp 1,61 miliar → panah merah → kartu Jun 2026 menghitung turun ke Rp 1,07 miliar, potongan bar merah patah dan jatuh._
 
@@ -53,7 +55,7 @@ _Visual: Kartu puncak Rp 1,61 miliar → panah merah → kartu Jun 2026 menghitu
   - dibaca: _Uangmu yang tadinya satu koma enam miliar, Juni tinggal satu miliar lebih dikit._
 - **Lebih dari setengah miliar hilang, cuma dalam enam bulan.**
 
-## result · 63.0s–72.3s
+## result · 76.0s–85.9s
 
 _Visual: Bar modal vs nilai sekarang, bracket +Rp 158 juta, angka besar 1,7% per tahun (vs 6,1% di puncak), tile harga rata-rata vs IHSG hari ini._
 
@@ -62,20 +64,20 @@ _Visual: Bar modal vs nilai sekarang, bracket +Rp 158 juta, angka besar 1,7% per
 - **Untungnya 15% lebih, atau cuma 1,7% setahun.**
   - dibaca: _Untungnya lima belas persen lebih, atau cuma satu koma tujuh persen setahun._
 
-## lesson · 72.3s–81.6s
+## lesson · 85.9s–91.7s
 
-_Visual: Kalimat pelajaran 4 baris, pill pertanyaan untuk komen, disclaimer._
+_Visual: Kalimat pelajaran + disclaimer (pill pertanyaan komen dihapus 13 Okt, langsung ke outro)._
 
 - **DCA bikin kamu nggak pusing kapan beli, tapi hasilnya tergantung kapan kamu jual.**
-- **Kalau kamu, tetap beli nggak waktu COVID? Tulis di komen!**
 
-## hakabot-outro · 81.6s–101.0s
+## hakabot-outro · 91.7s–111.5s
 
-_Visual: Outro standar Hakabot: Chart & Indikator, Broker Activity, Screener (ticker & nama akun di-blur), lalu end card hakabot.com._
+_Visual: Outro standar Hakabot v3.3: Indikator, Bandarmology (POSITION), Komposisi, Screener (ticker & nama di-blur), lalu end card hakabot.com._
 
-- **Di chart Hakabot, tinggal klik dan garis aliran dana investor asing langsung muncul.**
-- **Broker activity nunjukin broker mana yang lagi banyak beli atau jual.**
-- **Screener otomatis nyaring saham, misalnya yang lagi naik, lengkap sama chart.**
+- **Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart.**
+- **Kelihatan broker mana yang nambah, keluar, sampai untung ruginya.**
+- **Pemilik saham tiap perusahaan, tampil rapi.**
+- **Screener siap pakai, bantu nyaring saham yang jelek.**
 - **Cek di hakabot.com.**
   - dibaca: _Cek di hakabot dot com._
 

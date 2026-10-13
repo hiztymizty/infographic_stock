@@ -6,20 +6,23 @@ import type {CaptionChunk, LineTiming, SceneTiming, Timing, Word} from '../timin
 import {OUTRO_SCENE_ID} from './outroConfig';
 
 /**
- * One line per beat group (outro-1…outro-3) and the URL line last: the end card lands on it.
- * Plain Bahasa for general viewers: every feature is said in words a non-investor understands.
- * The short pauses let each beat breathe before the next feature starts.
+ * One line per beat group (outro-1…outro-4: Indikator, Bandarmology, Komposisi, Screener) and the URL
+ * line last: the end card lands on it. Short 0,35 s pauses: the v3.3 edit plays the footage at ≈ 1,5×
+ * (user request, 13 Okt), so the lines are short instead of the voice being sped up. Plain Bahasa for general viewers; the lines say what each page is
+ * for, not how it works. The short pauses let each beat breathe before the next feature starts.
+ * v3.3 lines, 13 Okt 2026: short DRAFTS for the ≈ 1,5× edit, not approved for voicing yet.
  */
 export const OUTRO_SCRIPT: {leadSec: number; tailSec: number; minSec: number; lines: {id: string; text: string; pauseBefore?: number}[]} = {
   leadSec: 0.3,
   /** Hold after the URL line so the end card stays ≥ 3 s. */
-  tailSec: 1.8,
+  tailSec: 1.6,
   minSec: 12,
   lines: [
-    {id: 'outro-1', text: 'Di chart Hakabot, tinggal klik dan garis aliran dana investor asing langsung muncul.'},
-    {id: 'outro-2', text: 'Broker activity nunjukin broker mana yang lagi banyak beli atau jual.', pauseBefore: 0.3},
-    {id: 'outro-3', text: 'Screener otomatis nyaring saham, misalnya yang lagi naik, lengkap sama chart.', pauseBefore: 0.3},
-    {id: 'outro-4', text: 'Cek di {hakabot.com|hakabot dot com}.', pauseBefore: 0.3},
+    {id: 'outro-1', text: 'Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart.'},
+    {id: 'outro-2', text: 'Kelihatan broker mana yang nambah, keluar, sampai untung ruginya.', pauseBefore: 0.35},
+    {id: 'outro-3', text: 'Pemilik saham tiap perusahaan, tampil rapi.', pauseBefore: 0.35},
+    {id: 'outro-4', text: 'Screener siap pakai, bantu nyaring saham yang jelek.', pauseBefore: 0.35},
+    {id: 'outro-5', text: 'Cek di {hakabot.com|hakabot dot com}.', pauseBefore: 0.35},
   ],
 };
 

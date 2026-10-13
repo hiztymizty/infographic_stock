@@ -70,7 +70,7 @@ export const EpisodeShell: React.FC<{episode: EpisodeDef; captions?: boolean}> =
                   <Scene />
                 </SceneWrap>
               </SceneProvider>
-              {i > 0 && <Sfx name="whoosh-soft" at={0} volume={0.3} />}
+              {i > 0 && <Sfx name="b-air" at={0} volume={0.3} />}
             </Sequence>
           );
         })}

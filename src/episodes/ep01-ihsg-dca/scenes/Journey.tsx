@@ -16,8 +16,6 @@ const xs = (i: number) => P.x0 + (i / (N - 1)) * (P.x1 - P.x0);
 type Tone = 'gain' | 'loss' | 'neutral';
 type Ev = {ym: string; at: number; until: number; tone: Tone; box: 'right' | 'bottomRight' | {x: number; y: number}};
 
-/** Frames the peak holds after "…67%!" ends before the fall starts (0,6 s). */
-const PEAK_LAND = 18;
 /** The 2026-06 callout stays readable this long before the exit transition starts (1,5 s). */
 const CRASH_READ = 45;
 /** SceneWrap starts the exit blur this many frames before the scene's end. */
@@ -26,12 +24,16 @@ const EXIT_LEAD = 6;
 const POP = 4;
 /** The head lands and its callout pops this many frames before the line's first word, so it reads on the word. */
 const LEAD = 3;
+/** The fall from the Dec 2025 peak to Jun 2026 takes 0,5–2 s, whatever the gap between "2026" and "anjlok". */
+const FALL_MIN = 15;
+const FALL_MAX = 60;
 
 /**
  * The chart's "time-warp", locked to the voiceover: the head arrives at each event as its
  * line starts, holds while it's spoken, and travels during the lines in between.
- * The 2026 crash has no line: it plays in the scene's tail after "…67%!", sized from the
- * tail that's actually there (peak hold ≥ PEAK_LAND, callout readable ≥ CRASH_READ before the exit).
+ * The 2026 crash plays under j-crash ("Tapi masuk 2026, IHSG anjlok 35%."): the head leaves the
+ * peak on "2026" (the year rolls over on the word), falls, and hits Jun 2026 with its −35% callout
+ * just before "anjlok". Everything is clamped so the callout still reads ≥ CRASH_READ before the exit.
  */
 const usePlan = () => {
   const {dur} = useScene();
@@ -43,16 +45,17 @@ const usePlan = () => {
   const oneB = useWordAt('j-1b', 'Rp');
   const climb = useLine('j-climb');
   const peak = useLine('j-peak');
+  const y2026 = useWordAt('j-crash', '2026');
+  const anjlok = useWordAt('j-crash', 'anjlok');
+  const crashEnd = useLine('j-crash').end;
 
-  // Tail budget: 3,0 s → 0,6 s peak hold, ~0,6 s fall, 1,5 s of readable callout before the exit.
-  // A longer tail stretches the fall (to 1,2 s) and then the peak hold (to +0,5 s).
-  const landed = peak.end + PEAK_LAND;
+  // Impact lands on "anjlok" (never so late that the callout can't be read before the exit).
   const latest = dur - EXIT_LEAD - CRASH_READ - POP;
-  const fallDur = Math.max(15, Math.min(36, latest - landed));
-  const fallFrom = Math.max(landed, Math.min(landed + 15, latest - fallDur));
-  const crashAt = fallFrom + fallDur;
-  // After the impact settles, the head runs the last 4 months to today.
-  const todayFrom = crashAt + 10;
+  const crashAt = Math.max(peak.end + 6 + FALL_MIN, Math.min(anjlok - LEAD, latest));
+  // The fall starts on "2026" (a few frames early so the year rolls on the word), within FALL_MIN–FALL_MAX.
+  const fallFrom = Math.max(peak.end + 6, Math.min(crashAt - FALL_MIN, Math.max(y2026 - 6, crashAt - FALL_MAX)));
+  // The head holds on Jun 2026 until "…35%." ends, then runs the last 4 months to today in the tail.
+  const todayFrom = Math.max(crashAt + 10, Math.min(crashEnd, dur - 24));
   const todayAt = Math.max(todayFrom + 12, Math.min(dur - 12, todayFrom + 22));
   const crash = {from: fallFrom, at: crashAt};
 
@@ -293,17 +296,23 @@ export const Journey: React.FC = () => {
         })}
       </svg>
 
-      {/* One cue per callout: only 2015 gets a plain pop, and the others are carried by their own accent. */}
-      <Sfx name="pop" at={events[0].at} volume={0.35} />
-      {/* Impact and glitch hit together, 3 frames before "Maret", so the glitch's crack is done before the word starts. */}
-      <Sfx name="impact" at={covidAt} volume={0.45} />
-      <Sfx name="glitch" at={covidAt} volume={0.3} />
-      <Sfx name="ding" at={events[2].at} volume={0.3} />
-      {/* The shimmer sits in the speech band and runs under "Di puncaknya", so it goes below its table level. */}
-      <Sfx name="shimmer" at={events[3].at} volume={0.3} />
-      {/* Wordless crash in the tail: the drop starts the fall, the impact lands with the Jun 2026 callout. */}
-      <Sfx name="drop" at={crash.from + 2} volume={0.4} />
-      <Sfx name="impact" at={crash.at} volume={0.55} />
+      {/* One cue per callout: only 2015 gets a plain tap, and the others are carried by their own accent. */}
+      <Sfx name="b-tap" at={events[0].at} volume={0.35} />
+      {/* Covid: haptic hit + the terminal alarm, together 3 frames before "Maret". The alarm (two short beeps,
+          ~0.5-1 kHz, 8 frames) overlaps the start of the word, so it sits under its table level. The hit is at 0.40 and
+          2 frames early: at covidAt its first sub cycle stacked on the "Maret" peak (+1.25 dB, the video's highest true
+          peak, which capped the final loudness gain); 2 frames earlier it adds only ~0.4 dB. */}
+      <Sfx name="b-hit" at={covidAt - 2} volume={0.4} />
+      <Sfx name="c-alarm" at={covidAt} volume={0.22} />
+      {/* Rp 1 miliar locks in on the spoken "Rp"; c-lock peaks ~2 frames in and is mostly below 500 Hz. */}
+      <Sfx name="c-lock" at={events[2].at - 2} volume={0.32} />
+      {/* The peak: two soft sine pings. ~50% speech band under "Di puncaknya", so below the table level. */}
+      <Sfx name="b-confirm" at={events[3].at} volume={0.22} />
+      {/* The 2026 crash, under j-crash: the descending blips run under "2026", the tape-stop crash lands with the
+          Jun 2026 callout just before "anjlok". The crash is mostly below 500 Hz, but its static and the top of the
+          tape-stop drone sat ~4 dB over "anjlok" in 1-4 kHz (QA round 3), so it plays at 0.38. The music is silent here. */}
+      <Sfx name="c-fall" at={crash.from + 2} volume={0.28} />
+      <Sfx name="c-crash" at={crash.at} volume={0.38} />
 
       <AbsoluteFill
         style={{

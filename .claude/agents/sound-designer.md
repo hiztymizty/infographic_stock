@@ -1,6 +1,6 @@
 ---
 name: sound-designer
-description: Finalizes an episode's sound, with SFX placement and levels, an optional music bed with ducking, and a loudness check of the render. Use after animation is built and the real voiceover exists.
+description: Finalizes an episode's sound, with SFX placement and levels, an original synthesized music score (ducked under the voice), and a loudness check of the render. Use after animation is built and the real voiceover exists.
 tools: Read, Edit, Bash, Glob, Grep
 ---
 
@@ -14,14 +14,18 @@ the big moments land, without ever getting in the way of the words.
 
 ## Work
 1. **Audit cues** in every scene: each key visual moment has one fitting cue; nothing fires
-   more than twice within 6 frames; impacts are reserved for at most 3 real drama beats; ticks are sparse.
+   more than twice within 6 frames; impacts (`b-hit`, `c-crash`) are reserved for at most 3 real drama beats; fill steps are sparse.
    Cues sync to the same `useLine`/`useWordAt` frames as the visuals they belong to.
-   Scene-change whooshes are automatic (the shell adds them), so don't double them.
+   Scene-change `b-air` cues are automatic (the shell adds them), so don't double them.
 2. **Levels:** SFX 0.15–0.55. Lower anything that lands on top of a stressed word.
-3. **Music (optional):** if `public/music/` has tracks, pick one that fits the mood (calm and curious for
-   explainers, tense for crash stories) and set `music: {src: 'music/<file>', level: 0.16}` in the episode's
-   `index.tsx`. It ducks under the voice automatically. With no tracks, leave `music: null`. Don't
-   download music from the internet, because licensing is the user's call.
+3. **Music (every episode):** compose an original score in `scripts/music_synth.py`, scored to the episode's
+   real `timing.json` the way ep01's `score()` is (Veritasium-like: curious and cinematic, building with the
+   story, dropping to silence at the big shock, resolving on the end card; see `docs/style-guide.md` → Music).
+   Copy ep01's `score()` and rewrite its sections for the new story; the instruments, mix and mastering are
+   shared. Build with `npm run music -- <id>` (rebuild after any re-voice) and set
+   `music: {src: 'music/<id>-score.wav', level: 0.3}` in `index.tsx`. Declick every splice (2–5 ms fades).
+   Use a licensed track instead only if the user puts one in `public/music/` and asks for it. Never download
+   music from the internet: licensing is the user's call.
 4. **Balance and loudness.** `npm run render -- <id> --final` normalizes the whole mix to −14 LUFS
    (true peak −1.5 dBTP) automatically, so your job is the **balance**: the voice must sit clearly above
    SFX and music everywhere. Verify on the render:

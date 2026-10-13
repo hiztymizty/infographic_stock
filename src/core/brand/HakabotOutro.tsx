@@ -31,21 +31,31 @@ import {
   SRC_W,
   Shot,
   Side,
+  segClip,
 } from './outroConfig';
 
 // Layout (px). Content stays between y 190 and 1400; the caption box starts at 1460.
 const WIN = {x: 60, y: 440, w: 960, bar: 52};
 const MAX_H = 1392 - WIN.y - WIN.bar;
-/** Base scale: zoom 1 fits the recording's 1280 px width into the 960 px window. */
+/** Base scale: zoom 1 fits the recording's full width (1920 px) into the 960 px window. */
 const FIT = WIN.w / SRC_W;
-/** Frames each shot overlaps the next (crossfade). */
-const XF = 12;
+/** Frames each shot crossfades over the previous one (between beats and inside a beat alike). */
+const XF = 9;
 /** Frames the end card is guaranteed, whatever the voice timing. */
 const END_MIN_SEC = 3;
 /** Picture changes this many frames before the voice line that goes with it. */
 const LEAD_IN = 4;
-/** Each group's first shot holds its first frame this long, so the headline can be read first. */
-const HEADLINE_HOLD = 30;
+/** Each group's first shot holds its first frame at least this long while the headline lands… */
+const HEADLINE_HOLD = 8;
+/** …and up to this long when the voice gives the beat more time than its footage needs. */
+const MAX_START_HOLD = 20;
+/**
+ * Footage speed limits. v3.3 (user, 13 Okt): the approved v3.2 edit at about 1,5×, "still watchable".
+ * (v3.1/v3.2 played real time, 0,95–1,15×.) Spare time becomes a hold at the start of the beat, then a
+ * hold on the last frame; too little time trims the start.
+ */
+const MIN_RATE = 1.4;
+const MAX_RATE = 1.6;
 
 const ease = Easing.inOut(Easing.cubic);
 const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
@@ -118,10 +128,12 @@ const planOutro = (dur: number, lines: LineTiming[], sceneId: string, sceneFrom:
       const end = si === kept.length - 1 ? to : from + Math.round((span * sum(kept.slice(0, si + 1).map((s) => s.dur))) / designed);
       const d = Math.max(1, end - at);
       const first = shots.length === 0;
-      const hold = si === 0 ? Math.min(HEADLINE_HOLD, Math.floor(d * 0.45)) : 0;
+      let hold = si === 0 ? Math.min(HEADLINE_HOLD, Math.floor(d * 0.3)) : 0;
       const len = segLen(shot);
       const raw = len / ((d - hold) / fps);
-      const rate = Math.min(2.5, Math.max(0.5, raw));
+      const rate = Math.min(MAX_RATE, Math.max(MIN_RATE, raw));
+      // Spare time: a longer opening hold on a beat's first shot (the rest holds the last frame).
+      if (si === 0 && raw < MIN_RATE) hold = Math.min(MAX_START_HOLD, Math.max(hold, Math.floor(d - hold - (len / rate) * fps) + hold));
       const skip = Math.max(0, len - ((d - hold) / fps) * rate);
       const p: PlannedShot = {shot, from: at, dur: d, hold, rate, skip, len, first, groupStart: si === 0};
       shots.push(p);
@@ -390,23 +402,21 @@ const ShotView: React.FC<{ps: PlannedShot; h: number}> = ({ps, h}) => {
   const f = useCurrentFrame();
   const {fps} = useVideoConfig();
   const {shot} = ps;
-  const clip = CLIPS[shot.clip];
-  const rec = RECORDINGS[clip.rec];
+  const {still} = shot;
+  const rec = still ? {bounds: {x: 0, y: 0, w: still.w, h: still.h}, blur: [] as BlurBox[]} : RECORDINGS[CLIPS[segClip(shot, 0)].rec];
   const w = WIN.w;
 
   const at = (ff: number) => {
     const pos = posAt(ps, ff, fps);
-    // Jump cut: a small push-in settling over 8 frames hides the jump.
-    const since = ((pos.tl - pos.segStartTl) / ps.rate) * fps;
-    const punch = pos.seg > 0 ? 1 + 0.03 * (1 - Easing.out(Easing.cubic)(Math.min(1, since / 12))) : 1;
-    // Slow drift so held frames (a shot stretched past its footage) never look frozen.
-    const drift = 1 + 0.02 * (ff / ps.dur);
-    // Incoming shot settles from slightly larger.
-    const enter = ps.first ? 1 : 1 + 0.025 * (1 - Easing.out(Easing.cubic)(Math.min(1, ff / XF)));
-    return {pos, view: viewOf(camAt(shot.cam, pos.tl), w, h, rec.bounds, punch * drift * enter)};
+    // Camera keys are timed in seconds on screen (so a slow move carries on through holds). No punch-ins,
+    // drift or settle zooms: the only camera motion is the shot's own eased keys (user rule, 13 Okt).
+    return {pos, view: viewOf(camAt(shot.cam, Math.max(0, ff) / fps), w, h, rec.bounds)};
   };
   const now = at(f);
   const {pos, view} = now;
+  // Each segment may come from its own clip (long clips are split: see outroConfig → segClip).
+  const clipName = still ? null : segClip(shot, pos.seg);
+  const clip = clipName ? CLIPS[clipName] : null;
   // Motion blur only on whip-pans (they hide the cuts), measured as how fast the picture under the
   // window centre travels plus how fast it scales, in screen px per frame. On the first frame of a
   // jump-cut segment the camera may jump on purpose: measure against the next frame instead.
@@ -423,9 +433,10 @@ const ShotView: React.FC<{ps: PlannedShot; h: number}> = ({ps, h}) => {
   }
   const mblur = Math.min(8, Math.max(0, (speed - 30) * 0.12));
 
-  const srcFrame = Math.max(0, Math.min(clip.frames - 1, Math.round((pos.rec - clip.start) * SRC_FPS)));
-  const fade = ps.first ? 1 : interpolate(f, [0, XF], [0, 1], {...CLAMP, easing: ease});
-  const blurs = [...rec.blur, ...(shot.blur ?? [])];
+  const srcFrame = clip ? Math.max(0, Math.min(clip.frames - 1, Math.round((pos.rec - clip.start) * SRC_FPS))) : 0;
+  // Every shot after the first crossfades in over the previous one.
+  const fade = ps.first ? 1 : interpolate(f, [0, ps.shot.xf ?? XF], [0, 1], {...CLAMP, easing: ease});
+  const blurs = clipName ? [...rec.blur, ...(shot.blur ?? [])] : [];
 
   return (
     <AbsoluteFill style={{opacity: fade}}>
@@ -439,11 +450,15 @@ const ShotView: React.FC<{ps: PlannedShot; h: number}> = ({ps, h}) => {
           filter: mblur > 0.3 ? `blur(${mblur / view.s}px)` : undefined,
         }}
       >
-        <ClipFrame clip={shot.clip} frame={srcFrame} />
+        {still ? (
+          <Img src={staticFile(still.src)} style={{position: 'absolute', left: 0, top: 0, width: still.w, height: still.h}} />
+        ) : (
+          <ClipFrame clip={clipName!} frame={srcFrame} />
+        )}
         {blurs.map((b, i) => {
           const r = blurRect(b, pos.rec);
           if (!r) return null;
-          return <BlurPatch key={i} r={r} sigma={b.sigma ?? 9} tint={b.tint ?? 0.3} clip={shot.clip} frame={srcFrame} round={b.sigma ? 4 : 8} />;
+          return <BlurPatch key={i} r={r} sigma={b.sigma ?? 9} tint={b.tint ?? 0.3} clip={clipName!} frame={srcFrame} round={b.sigma ? 4 : 8} />;
         })}
       </div>
       {/* Highlights leave as the next shot crossfades in: one highlight on screen at a time. */}
@@ -548,24 +563,25 @@ export const HakabotOutro: React.FC = () => {
   const cues = useMemo(() => {
     const cs: Cue[] = [];
     for (const ps of plan.shots) {
-      // New feature: whoosh, started as the old headline fades (8 frames early) so it peaks on the cut and is
-      // past its peak when the feature name is spoken (LEAD_IN frames after the cut).
-      // Second angle on the same feature: the softer whoosh on the crossfade, quieter (it is always mid-sentence).
-      if (!ps.first) {
-        cs.push(
-          ps.groupStart
-            ? {at: Math.max(0, ps.from - 8), name: 'whoosh', volume: 0.35, prio: 3}
-            : {at: ps.from, name: 'whoosh-soft', volume: 0.25, prio: 3},
-        );
-      }
+      // New feature: b-rise, started as the old headline fades (7 frames early: its air peaks ~7 frames in and its
+      // low tap lands on the cut), so it's past its peak when the feature name is spoken (LEAD_IN frames after the
+      // cut). Hard cuts inside a group get no transition sound: the click that lands on them is the sound.
+      if (!ps.first && ps.groupStart) cs.push({at: Math.max(0, ps.from - 7), name: 'b-rise', volume: 0.35, prio: 3});
+      // A second shot inside a beat crossfades in silently.
       for (const m of ps.shot.marks ?? []) {
         const rec = m.kind === 'click' ? m.at : m.label ? m.from : null;
         if (rec === null) continue;
         const f = frameOfRec(ps, rec, fps);
-        if (f !== null) cs.push({at: ps.from + f, name: 'pop', volume: m.kind === 'click' ? 0.32 : 0.28, prio: m.kind === 'click' ? 2 : 1});
+        // Clicks get the crisp UI click (~70% speech band, under the voice, so low); labels get the softer tap.
+        if (f !== null)
+          cs.push(
+            m.kind === 'click'
+              ? {at: ps.from + f, name: 'b-click', volume: 0.24, prio: 2}
+              : {at: ps.from + f, name: 'b-tap', volume: 0.24, prio: 1},
+          );
       }
     }
-    for (const g of plan.groups) cs.push({at: g.from + 9, name: 'pop', volume: 0.3, prio: 0});
+    for (const g of plan.groups) if (g.group.chips.length > 0) cs.push({at: g.from + 9, name: 'b-tap', volume: 0.28, prio: 0});
     return thinCues(cs.filter((c) => c.at < endAt - 2));
   }, [plan, fps, endAt]);
 
@@ -611,7 +627,9 @@ export const HakabotOutro: React.FC = () => {
             </div>
             <div style={{position: 'relative', width: WIN.w, height: h, overflow: 'hidden'}}>
               {plan.shots.map((ps, i) => (
-                <Sequence key={i} from={ps.from} durationInFrames={ps.dur + XF} name={`outro:${ps.shot.name}`}>
+                // A shot stays on under the next one while it crossfades in (the last one stays through the
+                // tour's fade into the end card).
+                <Sequence key={i} from={ps.from} durationInFrames={ps.dur + (i + 1 === plan.shots.length ? 16 : (plan.shots[i + 1].shot.xf ?? XF))} name={`outro:${ps.shot.name}`}>
                   <ShotView ps={ps} h={h} />
                 </Sequence>
               ))}
@@ -622,10 +640,11 @@ export const HakabotOutro: React.FC = () => {
       {cues.map((c, i) => (
         <Sfx key={i} name={c.name} at={c.at} volume={c.volume} />
       ))}
-      {/* End card: the shimmer starts with the tour's fade-out (endAt − 4), so its bright body is over before
-          "Cek…" begins; the pop goes with the URL pill. Kept outside the end-card block, which mounts at endAt − 2. */}
-      <Sfx name="shimmer" at={endAt - 4} volume={0.4} />
-      <Sfx name="pop" at={end(14)} volume={0.35} />
+      {/* End card: b-mark (low haptic thump + two sine pings) starts with the tour's fade-out (endAt − 4); its body
+          is ~10 frames, so it's over as "Cek…" begins (endAt + 6). Its pings are ~50% speech band, hence a notch under
+          0.4. The tap goes with the URL pill. Kept outside the end-card block, which mounts at endAt − 2. */}
+      <Sfx name="b-mark" at={endAt - 4} volume={0.36} />
+      <Sfx name="b-tap" at={end(14)} volume={0.35} />
 
       {/* End card */}
       {frame >= endAt - 2 && (

@@ -40,12 +40,13 @@ export const Result: React.FC = () => {
 
   return (
     <AbsoluteFill>
-      <Sfx name="whoosh" at={r1 + 4} volume={0.35} />
-      {/* The second bar's whoosh peaks just before the spoken "Rp 1,2 miliar", so it goes a notch lower. */}
-      <Sfx name="whoosh" at={worth - 10} volume={0.3} />
-      <Sfx name="pop" at={worth + 30} volume={0.35} />
-      {/* Sits in the breath between "lebih," and "atau". */}
-      <Sfx name="pop" at={atau - 6} volume={0.45} />
+      <Sfx name="b-rise" at={r1 + 4} volume={0.35} />
+      {/* The second bar's rise peaks ~7 frames in, just before the spoken "Rp 1,2 miliar", so it goes a notch lower. */}
+      <Sfx name="b-rise" at={worth - 10} volume={0.3} />
+      {/* The profit bracket: money landing. b-pay is ~75% speech band and runs under result-1, so it sits low. */}
+      <Sfx name="b-pay" at={worth + 30} volume={0.18} />
+      {/* The yearly return locks in, in the breath between "lebih," and "atau" (peak ~2 frames in, so 2 early). */}
+      <Sfx name="c-lock" at={atau - 8} volume={0.38} />
       <div style={{position: 'absolute', left: 90, top: 200}}>
         <Kicker>{T.result.kicker}</Kicker>
       </div>

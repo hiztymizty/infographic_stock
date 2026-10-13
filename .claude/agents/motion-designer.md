@@ -22,8 +22,8 @@ well to new stories.
 3. On-screen numbers are **computed from the data** in `copy.ts`/scenes with `src/core/format.ts`, never typed.
 4. Sync every spoken beat with `useLine(id)` / `useWordAt(lineId, word)`. Use fixed frames only for
    entrances in a scene's first ~20 frames. Scenes must work at any duration (real timing will differ from estimates).
-5. Put an `<Sfx>` on each key moment as you build (the sound designer fine-tunes later): pops on
-   reveals, whoosh on big entrances, impact on the shock.
+5. Put an `<Sfx>` on each key moment as you build (the sound designer fine-tunes later), using the names in
+   `docs/style-guide.md` → Sound (e.g. `b-tap` on reveals, `b-rise` on big entrances, `b-hit`/`c-crash` on the shock).
 6. Reuse `src/core` components. If something is genuinely reusable across episodes (a new chart
    type, a comparison card), add it to `src/core/components/` and note it in `docs/style-guide.md`.
    Don't edit `src/core/brand/` or `EpisodeShell` without the producer's go-ahead.

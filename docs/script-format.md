@@ -21,9 +21,10 @@ and `scripts/voiceover.py` turns it into audio plus `src/episodes/<id>/timing.js
         {"id": "hook-2", "text": "Sekarang dividennya udah balikin modal berapa persen?"}
       ]
     },
-    {"id": "hakabot-outro", "minSec": 12, "leadSec": 0.3, "tailSec": 1.8, "visual": "Standard Hakabot outro.", "lines": [
-      {"id": "outro-1", "text": "…"}, {"id": "outro-2", "text": "…", "pauseBefore": 0.3}, {"id": "outro-3", "text": "…", "pauseBefore": 0.3},
-      {"id": "outro-4", "text": "Cek di {hakabot.com|hakabot dot com}.", "pauseBefore": 0.3}
+    {"id": "hakabot-outro", "minSec": 12, "leadSec": 0.3, "tailSec": 1.6, "visual": "Standard Hakabot outro.", "lines": [
+      {"id": "outro-1", "text": "…"}, {"id": "outro-2", "text": "…", "pauseBefore": 0.35}, {"id": "outro-3", "text": "…", "pauseBefore": 0.35},
+      {"id": "outro-4", "text": "…", "pauseBefore": 0.35},
+      {"id": "outro-5", "text": "Cek di {hakabot.com|hakabot dot com}.", "pauseBefore": 0.35}
     ]}
   ]
 }
@@ -68,14 +69,15 @@ same chunks feed the burned-in captions and `captions.srt`.
 
 ## Length
 
-Aim for 60–90 s in total, including the ~19,5 s outro. Spelled-out numbers are long, so round them in
+Aim for 60–90 s in total, including the ~20 s outro. Spelled-out numbers are long, so round them in
 speech when precision doesn't matter (the screen can still show the exact figure).
 `npm run vo:estimate -- <id>` gives the estimated length before any voice is bought.
 
 ## The outro scene
 
-Every script ends with scene `hakabot-outro` (`minSec` 12, `leadSec` 0.3, `tailSec` 1.8) with the four
-standard lines `outro-1…outro-4` from `docs/hakabot.md` (`pauseBefore` 0.3 on lines 2–4). `outro-1…outro-3`
-each start one beat of the app tour (Chart & Indikator, Broker Activity, Screener); the **last** line must
-be the "cek di hakabot.com" line, because the end card (logo + hakabot.com) appears when it starts and
-holds ≥ 3 s. Keep the standard lines' lengths: they set the tour's calm pacing. The outro runs about 19,5 s.
+Every script ends with scene `hakabot-outro` (`minSec` 12, `leadSec` 0.3, `tailSec` 1.6) with the five standard
+lines `outro-1…outro-5` from `docs/hakabot.md`, copied as-is (`pauseBefore` 0.35 on lines 2–5). `outro-1…outro-4`
+each start one beat of the app tour (Indikator, Bandarmology, Komposisi, Screener); the **last** line must be the
+"Cek di hakabot.com" line, because the end card (logo + hakabot.com) appears when it starts and holds ≥ 3 s. The
+outro plays its footage at ≈ 1,5×, so keep each line inside its character range (`docs/hakabot.md`); a line that's
+too long or too short changes the footage speed. The outro runs about 20 s.

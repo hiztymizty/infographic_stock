@@ -15,7 +15,8 @@
     "sheet": "python -I scripts/contact_sheet.py",
     "brand:assets": "python -I scripts/brand_assets.py",
     "brand:outro": "python -I scripts/outro_clips.py",
-    "sfx": "python -I scripts/sfx_synth.py"
+    "sfx": "python -I scripts/sfx_synth.py",
+    "music": "python -I scripts/music_synth.py"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.534",

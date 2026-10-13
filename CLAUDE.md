@@ -3,7 +3,7 @@
 This folder produces short vertical **infographic videos about the Indonesian stock market** for
 **Hakabot** (hakabot.com, a stock analysis tool for IDX). Every video is motion graphics made in
 code (Remotion → MP4, After Effects-style: keyframes, easing, springs). No AI-generated visuals.
-Audio is an ElevenLabs Bahasa voiceover plus synthesized SFX. Every video carries the Hakabot
+Audio is an ElevenLabs Bahasa voiceover, synthesized SFX and an original synthesized music score. Every video carries the Hakabot
 watermark and ends with the Hakabot outro.
 
 ## Your role: Producer
@@ -71,7 +71,7 @@ every number the video may use, its value, unit, source and how it was computed.
 
 **3 · Script** (`scriptwriter`). Writes `script.json` from `facts.md` only, then runs
 `npm run review -- <id>` to produce `script.md`, and `npm run vo:estimate -- <id>` for the
-estimated length. Target **60–90 s** including the ~18 s outro.
+estimated length. Target **60–90 s** including the ~20 s outro.
 ⛔ **Gate 2:** show the user the script (each scene's caption text, plus the estimated length) and
 wait for an explicit approval. Apply their edits and re-show if they change anything. No
 voiceover, animation or rendering of the episode before this approval.
@@ -85,7 +85,8 @@ Produces the real `timing.json`, which all animation syncs to.
 use `useLine`/`useWordAt`, so they re-sync automatically when real timing lands). Renders stills
 of every scene and reviews them itself.
 
-**6 · Sound** (`sound-designer`). After animation is in place and real timing exists.
+**6 · Sound** (`sound-designer`). After animation is in place and real timing exists: SFX cues from the house
+palette, plus an original score composed for the episode (`npm run music -- <id>`, scored to `timing.json`).
 
 **7 · QA** (`qa-reviewer`). Full audit of a fresh render. The agent returns its report as text; you save it to
 `episodes/<id>/qa/report.md` and append a fix log for each round. Route each failure to the agent that owns
@@ -171,6 +172,7 @@ All take the episode id as their last argument, e.g. `npm run vo -- ep02-bbca-di
 | `npm run srt -- <id>` | `out/captions.srt`, same chunks as the burned-in captions |
 | `npm run sheet -- <video> <out.jpg> [--every 3]` | contact sheet of a rendered video |
 | `python -I scripts/voices.py` | voices on the account; `--library` Indonesian library voices + free previews; `--add <id>` add one; `<id>` audition sample |
+| `npm run music -- <id>` | build the episode's synthesized score `public/music/<id>-score.wav` from `scripts/music_synth.py` (rebuild after any re-voice) |
 | `npm run sfx`, `npm run brand:assets`, `npm run brand:outro` | rebuild SFX library, logo files, outro clips |
 
 ## Gotchas
@@ -191,6 +193,62 @@ All take the episode id as their last argument, e.g. `npm run vo -- ep02-bbca-di
 - Usage limits can stop subagents mid-task. Their files stay; their unreported findings don't. Re-run the step
   (or resume the agent) and check state on disk first, e.g. what `vo-cache.json` already holds before re-voicing.
 - QA subagents can't always write files, so they return the report as text and you save it to `qa/report.md`.
+- `ELEVENLABS_API_KEY` must be the **secret** that starts with `sk_`, not the key ID shown in the dashboard list
+  (ElevenLabs answers `api_key_id_used_as_api_key`). Check the prefix only, never print the key.
+- Without a key in `.env`, `voiceover.py --estimate-new` silently falls back to a fully estimated timing (all audio
+  null). Set up `.env` before previewing a revised script.
+- Remotion mis-seeks long 1080p clips (every frame past ~24 s of a 31 s clip returned the same picture). Keep outro
+  clips ≤ ~16 s; split longer footage (`outroClips.json`).
+- Render loudness is capped by the single highest true peak. Stacked sub hits on a spoken peak (a `b-hit` on "Maret")
+  held ep01 at −14,8 LUFS; moving the hit 2 frames earlier fixed it. If a render lands under −14, find that peak.
+
+## What the user has decided (house rules from ep01, Okt 2026)
+
+These came from the user's feedback while making ep01. Treat them as rules for every episode; the details live in
+the docs named.
+
+**Pacing (the most repeated feedback).** "Rushed" means many short shots, jump cuts and zoom punches. It does not
+mean fast footage. Few shots, one slow eased camera move per shot at most, soft crossfades, at most one highlight per
+shot held ≥ 1,2 s (if it can't be held that long, leave it out). No punch-ins, zoom bounces or whip-pans. Once an
+edit is calm the user is happy to speed footage up (the outro runs at ≈ 1,5×), but then the voice lines get
+**shorter**; the voice is never time-stretched. "Compact" or "more interactive" means fewer moments, never more cuts.
+Rules in full: `docs/hakabot.md` → Pacing rules and `docs/outro-recordings.md` → v3.1/v3.3.
+
+**Outro.** The standard outro is v3.3 (≈ 20 s): Indikator (Trend, Retail, Drivers), Bandarmology (broker tables →
+POSITION, with a still close-up of `public/outro/position.png`), Komposisi (holder network), Screener (Uptrend Fase 2 →
+chart cards), then the end card. Five voice lines, approved 13 Okt, copied into every script as-is
+(`docs/hakabot.md`). The lines say in plain words what each page is for, not how it works; no explanatory labels
+on screen. Every ticker, logo, company/holder name, unused screener preset and the account name is blurred.
+
+**Sound.** The SFX palette is **B (premium app) with C (terminal) where data moves**: `b-*` for anything touched
+(taps, clicks, transitions, thumps), `c-*` only for numbers locking in, fills, declines, the big crash and the alarm.
+The old whoosh/pop/tick/ding library and the musical, desk and tape palettes were rejected ("sounds like every AI
+video"); their files stay in `public/sfx/` but are not used. Table: `docs/style-guide.md` → Sound.
+
+**Music.** Every episode gets an original score composed in code, scored to its own timing, in the spirit of
+Veritasium: curious and cinematic, building with the story, dropping to silence at the big shock, resolving on the end
+card. Level 0.3 (it's mastered at −16 LUFS). Don't download music; licensing is the user's call (they may supply
+licensed tracks into `public/music/`). Details: `docs/style-guide.md` → Music.
+
+**Script.**
+- Captions show the rounded numbers the voice says; exact figures stay in the graphics (`facts.md` → Rounded forms).
+- No wordless gaps: if the picture tells a beat (a crash), give it a short voice line.
+- ep01 dropped the end-of-video comment question ("Tulis di komen") and goes straight to the outro. Don't add a
+  comment prompt to the video unless the user asks; put it in the post caption instead.
+- Length: 60–90 s is the target, but the user accepted ep01 at 112 s. Flag the length, don't cut approved story
+  beats to hit it.
+
+**Post copy.** Algorithm-friendly: a question hook in line 1, the search words beginners type (nabung saham, DCA,
+IHSG, saham untuk pemula) in the first two lines, the result held back ("tonton sampai akhir"), an easy comment vote
+("komen 1 / komen 2"), a save prompt, then hakabot.com and the disclaimer, 5–6 focused hashtags (no #fyp/#viral).
+Example: `episodes/ep01-ihsg-dca/out/post.md`.
+
+**How the user works.**
+- They review by watching renders and listening, and answer in short messages.
+- When taste is involved (sound, music, voice), build 3–4 options they can compare side by side, not one guess.
+- They approve every spoken line before it's voiced, and decide on spend.
+- Minor calls (blur style, framing, small wording) are yours: make them, say what you chose, move on.
+- Own your mistakes plainly. A brief of yours that caused a problem gets named as the cause.
 
 ## Definition of done (Gate 3 checklist)
 

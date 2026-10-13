@@ -123,14 +123,16 @@ export const Hook: React.FC = () => {
         ))}
       </div>
 
-      {/* The whoosh rides the headline rise from frame 0 and peaks before "Gimana". */}
-      <Sfx name="whoosh" at={0} volume={0.45} />
-      {/* Coins on four of the landing notes; note 7, not 6, so no coin hits the "k" of "kamu". */}
-      {[0, 3, 7, 9].map((i) => (
-        <Sfx key={i} name="coin" at={30 + i * 4 + 8} volume={0.25} />
+      {/* The rise rides the headline from frame 0; its air peaks ~7 frames in, its low tap lands as the text settles. */}
+      <Sfx name="b-rise" at={0} volume={0.4} />
+      {/* Soft haptic taps on three landing notes, then one pay chime as the pile completes. The taps are below
+          the speech band; the chime is mostly 1-4 kHz and runs under hook-1, so it sits low. */}
+      {[0, 3, 7].map((i) => (
+        <Sfx key={i} name="b-tap" at={30 + i * 4 + 8} volume={0.22} />
       ))}
-      {/* One frame ahead of the pill, so the click clears the "s" of "sekarang". */}
-      <Sfx name="pop" at={ask.from - 1} volume={0.4} />
+      <Sfx name="b-pay" at={30 + 9 * 4 + 8} volume={0.17} />
+      {/* One frame ahead of the pill (b-tap peaks on its first frame). */}
+      <Sfx name="b-tap" at={ask.from - 1} volume={0.38} />
       <div
         style={{
           position: 'absolute',

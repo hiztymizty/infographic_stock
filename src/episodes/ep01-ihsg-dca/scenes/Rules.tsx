@@ -41,13 +41,22 @@ export const Rules: React.FC = () => {
 
   return (
     <AbsoluteFill>
-      <Sfx name="pop" at={8} volume={0.35} />
-      <Sfx name="pop" at={second + 2} volume={0.35} />
-      {Array.from({length: 12}, (_, k) => (
-        <Sfx key={k} name="tick" at={FILL_FROM + ((FILL_TO - FILL_FROM) * k) / 12} volume={0.18} />
+      <Sfx name="b-tap" at={8} volume={0.35} />
+      <Sfx name="b-tap" at={second + 2} volume={0.35} />
+      {/* Data chatter on 8 steps of the fill (sparse: ~1 per second). The four bursts rotate in an order that never
+          repeats back to back, and the level wobbles a little, so it reads as live data, not a machine gun.
+          They run under rules-1/rules-2 and are ~30-40% speech band, so they stay at the bottom of the range. */}
+      {Array.from({length: 8}, (_, k) => (
+        <Sfx
+          key={k}
+          name={(['c-chatter-1', 'c-chatter-3', 'c-chatter-2', 'c-chatter-4'] as const)[k % 4]}
+          at={FILL_FROM + ((FILL_TO - FILL_FROM) * k) / 8 - 1}
+          volume={[0.16, 0.14, 0.17, 0.15][k % 4]}
+        />
       ))}
-      {/* Lands on the stressed "Rp 1,01 miliar": the low end of the ding range. */}
-      <Sfx name="ding" at={FILL_TO} volume={0.3} />
+      {/* The total locks in on the stressed "Rp 1,01 miliar". c-lock peaks ~2 frames in and is mostly below
+          500 Hz, so it starts 2 frames early and can sit at its normal level on the word. */}
+      <Sfx name="c-lock" at={FILL_TO - 2} volume={0.32} />
       <div style={{position: 'absolute', left: 90, top: 200}}>
         <Kicker>{T.rules.kicker}</Kicker>
       </div>
