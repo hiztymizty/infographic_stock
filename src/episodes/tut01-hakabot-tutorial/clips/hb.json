@@ -1,0 +1,4 @@
+{
+  "_doc": "Clips of this chapter (owner: beats/hb.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
+  "clips": {}
+}

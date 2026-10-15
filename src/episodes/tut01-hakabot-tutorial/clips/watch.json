@@ -1,0 +1,9 @@
+{
+  "_doc": "Clips of chapter Watchlist (owner: beats/watch.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each.",
+  "clips": {
+    "watch-a": {"rec": "n", "start": 15.8, "end": 31.2, "note": "Watchlist nav click 17.0 (page 17.07, loaded in Acc/Dist view 17.5); Acc/Dist off 20.93; sort clicks LAST 25.43, delta% 27.20, VOLUME 29.07, VALUE 30.00"},
+    "watch-b": {"rec": "n", "start": 31.6, "end": 46.6, "note": "New list click 33.2, types 'Blue chip' 34.5-35.8, Enter 36.5; search click 39.2, types 'bbri' 40.9-41.5, BBRI picked 42.85; types 'bbca' 44.0-45.0, BBCA picked 45.55"},
+    "watch-c": {"rec": "n", "start": 48.6, "end": 60.6, "note": "x on BBCA 49.77, x on BBRI 50.93 (No stocks yet); group pencil 52.37 -> Rename dialog, 'Gorengan', Save 55.0; group x 58.47 -> Delete dialog; Delete 59.67 -> back to Saham pak PP 59.83"},
+    "watch-d": {"rec": "n", "start": 62.4, "end": 77.2, "note": "Charts on 63.93; Acc/Dist on 68.93 (Charts off); BREN tooltips 14 Okt 72.03-74.0, 13 Okt 75.13-76.93"}
+  }
+}

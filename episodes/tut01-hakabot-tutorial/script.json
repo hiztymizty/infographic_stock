@@ -1,0 +1,1118 @@
+{
+  "id": "tut01-hakabot-tutorial",
+  "title": "Tutorial lengkap Hakabot: cara pakai dari Dashboard sampai halaman Akun",
+  "fps": 30,
+  "sources": [
+    "Rekaman layar aplikasi Hakabot, 15 Okt 2026 (temp/New.mp4)"
+  ],
+  "scenes": [
+    {
+      "id": "intro-1",
+      "minSec": 22,
+      "visual": "Intro minimal code-made (producer mendesain ulang), tanpa footage. Satu elemen per baris: hook = judul \"Tutorial Hakabot\"; what = tagline; signal = chip HB Center; chapters = daftar bab muncul satu per satu saat disebut. Teks kecil tetap di bawah (tanpa voice): \"Semua saham di video ini cuma contoh · Bukan rekomendasi investasi\".",
+      "lines": [
+        {
+          "id": "intro-1-hook",
+          "text": "Mau analisa saham sendiri, tapi bingung mulai dari mana?"
+        },
+        {
+          "id": "intro-1-what",
+          "text": "Hakabot itu tools buat analisa saham Indonesia sendiri. Mulai dari chart dan gerak bandar alias pemain besar, sampai fundamental."
+        },
+        {
+          "id": "intro-1-signal",
+          "text": "Ada juga paket Signal yang opsional, isinya sinyal siap pakai di {HB Center|Ha-Be Center}."
+        },
+        {
+          "id": "intro-1-chapters",
+          "text": "Kita bahas urut. Dashboard dan Watchlist dulu, lalu halaman Stock, Index dan Composition. Terakhir Screener, {HB Center|Ha-Be Center} sama halaman Akun."
+        }
+      ],
+      "tailSec": 1.2
+    },
+    {
+      "id": "dash-1",
+      "minSec": 5,
+      "visual": "New.mp4 0:00–0:04 (hold boleh). Open: zoom ke nav bar atas, highlight baris menu. Plan: zoom ke badge kanan atas \"Signal · Renews 22 Oct 2026\", highlight badge. Blur nama akun di \"Welcome back\" dan avatar kanan atas.",
+      "lines": [
+        {
+          "id": "dash-1-open",
+          "pauseBefore": 0.6,
+          "text": "Kita mulai dari Dashboard. Semua halaman ada di menu atas ini."
+        },
+        {
+          "id": "dash-1-plan",
+          "text": "Kanan atas ada paket kamu dan kapan diperpanjang, di sini Signal sampai {22 Okt|dua puluh dua Oktober}."
+        }
+      ]
+    },
+    {
+      "id": "dash-2",
+      "minSec": 5,
+      "visual": "New.mp4 0:00–0:06, zoom ke panel Announcements. Ann: highlight panel. Next: click ripple di tombol Next (0:04), halaman 2/2 \"Grup Komunitas\" muncul.",
+      "lines": [
+        {
+          "id": "dash-2-ann",
+          "text": "Di tengah ada pengumuman dari admin."
+        },
+        {
+          "id": "dash-2-next",
+          "text": "Klik Next buat halaman berikutnya."
+        }
+      ]
+    },
+    {
+      "id": "dash-3",
+      "minSec": 5,
+      "visual": "New.mp4 0:05–0:09, zoom ke Quick View. Quick: highlight tiga kartu (HB Center, Screener · Tier S, Perubahan) sebagai satu elemen. More: highlight satu link \"Lihat Semua →\".",
+      "lines": [
+        {
+          "id": "dash-3-quick",
+          "text": "Di bawahnya ada Quick View, ringkasan sinyal, screener dan perubahan pemegang saham."
+        },
+        {
+          "id": "dash-3-more",
+          "text": "Klik Lihat Semua buat versi lengkapnya."
+        }
+      ]
+    },
+    {
+      "id": "dash-4",
+      "minSec": 5,
+      "visual": "New.mp4 0:08–0:16 (pangkas scroll), kartu Telegram / Discord; highlight kedua kartu sebagai satu elemen.",
+      "lines": [
+        {
+          "id": "dash-4-community",
+          "text": "Paling bawah ada grup Telegram dan Discord Hakabot, tempat diskusi dan tanya-tanya."
+        }
+      ]
+    },
+    {
+      "id": "watch-1",
+      "minSec": 6,
+      "visual": "New.mp4 0:17–0:24 (klik Watchlist; Acc/Dist sempat nyala lalu dimatikan 0:22, boleh di-trim ke tabel bersih). Open: highlight menu Watchlist. Group: highlight daftar grup di kiri, grup \"Saham pak PP\".",
+      "lines": [
+        {
+          "id": "watch-1-open",
+          "pauseBefore": 0.6,
+          "text": "Sekarang klik menu Watchlist, daftar saham pantauan kamu."
+        },
+        {
+          "id": "watch-1-group",
+          "text": "Sahamnya dikelompokkan per grup di sebelah kiri, misalnya grup Saham pak PP."
+        }
+      ]
+    },
+    {
+      "id": "watch-2",
+      "minSec": 8,
+      "visual": "New.mp4 0:24–0:33, zoom ke judul kolom; click ripple di Last, Δ%, Value saat diklik. Value: highlight kolom Value.",
+      "lines": [
+        {
+          "id": "watch-2-sort",
+          "text": "Klik judul kolom buat ngurutin, misalnya harga terakhir, persen perubahan atau Value."
+        },
+        {
+          "id": "watch-2-value",
+          "text": "Value itu total nilai transaksinya dalam rupiah."
+        }
+      ]
+    },
+    {
+      "id": "watch-3",
+      "minSec": 12,
+      "visual": "New.mp4 0:34–0:49 (pangkas ketikan). Group: highlight kolom \"New list…\", nama \"Blue chip\" diketik. Add: highlight kolom pencarian, BBCA lalu BBRI masuk ke tabel.",
+      "lines": [
+        {
+          "id": "watch-3-group",
+          "text": "Mau bikin grup baru? Ketik namanya di kolom New list, misalnya Blue chip, sebutan buat saham perusahaan besar yang udah mapan."
+        },
+        {
+          "id": "watch-3-add",
+          "text": "Lalu cari kode sahamnya, kayak {BBCA|Be-Be-Ce-A} dan {BBRI|Be-Be-Er-I}, dan klik buat masukin."
+        }
+      ]
+    },
+    {
+      "id": "watch-4",
+      "minSec": 10,
+      "visual": "New.mp4 0:49–1:00. Remove: click ripple di tanda × (0:50). Rename: highlight ikon pensil → dialog \"Rename watchlist\" → \"Gorengan\" (0:52–0:56). Delete: highlight ikon hapus di baris grup (sebelah pensil, 0:57) → dialog konfirmasi hapus (0:58).",
+      "lines": [
+        {
+          "id": "watch-4-remove",
+          "text": "Tanda silang di ujung baris buat hapus saham dari grup."
+        },
+        {
+          "id": "watch-4-rename",
+          "text": "Ikon pensil buat ganti nama grup."
+        },
+        {
+          "id": "watch-4-delete",
+          "text": "Ikon di sebelahnya buat hapus grup, dan Hakabot bakal nanya dulu biar nggak kehapus nggak sengaja."
+        }
+      ]
+    },
+    {
+      "id": "watch-5",
+      "minSec": 6,
+      "visual": "New.mp4 1:03–1:09, toggle Charts → kartu chart mini. Charts: highlight toggle Charts. Why: highlight grid kartu.",
+      "lines": [
+        {
+          "id": "watch-5-charts",
+          "text": "Nyalain tombol Charts, dan semua saham di grup itu muncul jadi chart kecil, kayak lihat dari drone."
+        },
+        {
+          "id": "watch-5-why",
+          "text": "Jadi kamu bisa cepat nyaring mana yang chart-nya jelek."
+        }
+      ]
+    },
+    {
+      "id": "watch-6",
+      "minSec": 14,
+      "visual": "New.mp4 1:10–1:17, toggle Acc/Dist → kotak 5 hari; legend \"Kiri: Top 5 broker · Kanan: jumlah broker\". Toggle: highlight tombol Acc/Dist. Left: highlight kotak kiri satu hari. Right: highlight kotak kanan hari yang sama.",
+      "lines": [
+        {
+          "id": "watch-6-toggle",
+          "text": "Tombol {Acc/Dist|akumulasi distribusi} nunjukin lima hari terakhir, saham ini lagi dikumpulin atau dilepas."
+        },
+        {
+          "id": "watch-6-left",
+          "text": "Tiap hari ada dua kotak. Kotak kiri bandingin lima broker pembeli terbesar dengan lima penjual terbesar, hijau artinya pembelinya menang. Broker itu perusahaan sekuritas tempat orang jual beli saham."
+        },
+        {
+          "id": "watch-6-right",
+          "text": "Kotak kanan bandingin jumlah broker pembeli dan penjual. Hijau artinya pembelinya lebih sedikit, jadi barang lagi dikumpulin segelintir pihak."
+        }
+      ]
+    },
+    {
+      "id": "watch-7",
+      "minSec": 11,
+      "visual": "New.mp4 1:17–1:28, zoom ke baris BREN. Hover: kursor ke kotak. Acc: tooltip 13 Okt \"Top 5: +Rp 2.4B (Acc) · 15 beli vs 30 jual (Acc)\". Dist: tooltip 14 Okt \"−Rp 5.1B (Dist) · 44 beli vs 12 jual (Dist)\". Satu tooltip per baris.",
+      "lines": [
+        {
+          "id": "watch-7-acc",
+          "text": "Arahin mouse ke kotaknya buat lihat detailnya. Contohnya {BREN|Bren} tanggal {13 Okt|tiga belas Oktober}, lima broker teratas net beli {Rp 2,4 miliar|dua koma empat miliar rupiah}. Pembelinya cuma {15|lima belas} broker lawan {30|tiga puluh}, jadi dua kotaknya hijau."
+        },
+        {
+          "id": "watch-7-dist",
+          "text": "Besoknya kebalikannya, net jual {Rp 5,1 miliar|lima koma satu miliar}, dan pembelinya {44|empat puluh empat} broker lawan {12|dua belas}. Dua-duanya merah."
+        }
+      ]
+    },
+    {
+      "id": "stock-1",
+      "minSec": 8,
+      "visual": "New.mp4 1:30–1:42 (klik Stock, halaman PTBA, ketik di \"Search code or company\" → dropdown → ERAA). Open: highlight menu Stock. Search: highlight kolom pencarian, lalu dropdown. ERAA: highlight nama ERAA di header.",
+      "lines": [
+        {
+          "id": "stock-1-open",
+          "pauseBefore": 0.6,
+          "text": "Sekarang menu Stock, tempat bedah satu saham."
+        },
+        {
+          "id": "stock-1-search",
+          "text": "Ketik kode atau nama perusahaannya di kolom pencarian, lalu pilih dari daftarnya."
+        },
+        {
+          "id": "stock-1-eraa",
+          "text": "Di video ini pakai {ERAA|E-Er-A-A}, cuma contoh cara baca ya, bukan rekomendasi."
+        }
+      ]
+    },
+    {
+      "id": "stock-2",
+      "minSec": 6,
+      "visual": "New.mp4 ~1:42 (still ditahan sepanjang voice), panel kanan. Health: highlight kartu Stock Health (Trend UPTREND, MA ABOVE, Bandar MODERATE). RS: chip RS 88. SR: chip R 645 · S 350.",
+      "lines": [
+        {
+          "id": "stock-2-health",
+          "text": "Di kanan ada Stock Health, rangkuman kondisi saham ini. Isinya tren, posisi terhadap harga rata-rata, dan kondisi bandar."
+        },
+        {
+          "id": "stock-2-rs",
+          "text": "Lalu {RS|Er-Es}, Relative Strength rating ala Mark Minervini dan William O'Neil. Angka {88|delapan puluh delapan} artinya ngalahin {88%|delapan puluh delapan persen} saham lain setahun terakhir."
+        },
+        {
+          "id": "stock-2-sr",
+          "text": "Di bawahnya support dan resistance terdekat. Support itu area yang biasanya nahan harga turun, resistance yang nahan naik."
+        }
+      ]
+    },
+    {
+      "id": "stock-3",
+      "minSec": 8,
+      "visual": "New.mp4 1:44–1:52, menu Tech terbuka (MA50/100/200, Vol MA50, AVWAP, IHSG, S/R, Tren, Breakout). Tech: highlight menu Tech. Click: click ripple double-click di MA200 → hanya MA200 tampil (badge \"Tech 1\").",
+      "lines": [
+        {
+          "id": "stock-3-tech",
+          "text": "Sekarang indikatornya. Buka menu Tech di atas chart. {MA50|Em-A lima puluh}, {MA100|Em-A seratus} dan {MA200|Em-A dua ratus} itu garis harga rata-rata lima puluh, seratus dan dua ratus hari."
+        },
+        {
+          "id": "stock-3-click",
+          "text": "Klik sekali buat nyalain atau matiin. Klik dua kali, dan cuma indikator itu yang tampil."
+        }
+      ]
+    },
+    {
+      "id": "stock-4",
+      "minSec": 10,
+      "visual": "New.mp4 1:52–2:06. AVWAP: highlight garis putus-putus AVWAP. IHSG: highlight garis IHSG yang turun sejak Sep sementara candle ERAA datar (~1:58).",
+      "lines": [
+        {
+          "id": "stock-4-avwap",
+          "text": "{AVWAP|Anchored Ve-Wap} itu harga rata-rata yang ditimbang volume, dan titik awalnya dipasang otomatis."
+        },
+        {
+          "id": "stock-4-ihsg",
+          "text": "Klik {IHSG|I-Ha-Es-Ge} buat numpuk garis {IHSG|I-Ha-Es-Ge} di chart. Waktu {IHSG|I-Ha-Es-Ge} turun, {ERAA|E-Er-A-A} malah bertahan datar."
+        }
+      ]
+    },
+    {
+      "id": "stock-5",
+      "minSec": 6,
+      "visual": "New.mp4 2:06–2:13, S/R aktif: garis 645 / 350 dengan label pivot. Highlight garis 645.",
+      "lines": [
+        {
+          "id": "stock-5-sr",
+          "text": "Klik {S/R|Es Er}, dan support resistance tadi muncul di chart. Resistance-nya di {645|enam ratus empat puluh lima}, area di mana harga sering ketahan."
+        }
+      ]
+    },
+    {
+      "id": "stock-6",
+      "minSec": 8,
+      "visual": "New.mp4 2:14–2:26 (chart di-zoom out), Tren: highlight garis kuning, lalu biru (satu highlight, pindah saat \"biru\").",
+      "lines": [
+        {
+          "id": "stock-6-tren",
+          "text": "Klik Tren buat trendline. Kuning itu resistance mingguan dan biru support mingguan. Kalau trendline harian, warnanya hijau dan merah."
+        }
+      ]
+    },
+    {
+      "id": "stock-7",
+      "minSec": 8,
+      "visual": "New.mp4 2:27–2:50 (pangkas ke ±10 s), Breakout: highlight candle kuning di Agustus.",
+      "lines": [
+        {
+          "id": "stock-7-breakout",
+          "text": "Klik Breakout, dan candle yang jebol ke atas resistance diwarnai kuning. Candle itu batang harga per hari."
+        },
+        {
+          "id": "stock-7-aug",
+          "text": "Di sini breakout-nya Agustus, lalu harganya naik lebih tinggi."
+        }
+      ]
+    },
+    {
+      "id": "stock-8",
+      "minSec": 14,
+      "visual": "New.mp4 2:54–3:08, menu Flow (Bandar, Retail, Foreign, SM Local), tiap garis di-isolate dengan double-click. Flow: highlight menu Flow. Bandar: garis Bandar. Retail: garis Retail turun tajam Agu–Okt (~3:00). Rest: garis SM Local, naik lagi di Okt (~3:06).",
+      "lines": [
+        {
+          "id": "stock-8-flow",
+          "text": "Menu Flow isinya garis Bandar, Retail, Foreign dan {SM Local|Smart Money Local}. Di sini juga bisa klik dua kali."
+        },
+        {
+          "id": "stock-8-bandar",
+          "text": "Bandar itu bandarmology secara keseluruhan, kalau naik biasanya tanda bagus."
+        },
+        {
+          "id": "stock-8-retail",
+          "text": "Retail itu investor ritel, dan di sini turun tajam. Itu juga bagus, soalnya makin sedikit ritel yang jadi beban."
+        },
+        {
+          "id": "stock-8-rest",
+          "text": "Foreign itu dana asing, dan {SM Local|Smart Money Local} itu bandar lokal, yang belakangan naik lagi."
+        }
+      ]
+    },
+    {
+      "id": "stock-9",
+      "minSec": 5,
+      "visual": "New.mp4 3:08–3:14, menu Stats → HB Signals; chip \"REV\" muncul di toolbar chart. Highlight item HB Signals, lalu chip REV (dan marker di chart kalau terlihat).",
+      "lines": [
+        {
+          "id": "stock-9-hbsig",
+          "text": "Di menu Stats, {HB Signals|Ha-Be Signals} nandain di chart kapan saham ini dapat sinyal dari {HB Center|Ha-Be Center}, misalnya label {REV|Rev} buat setup Reversal."
+        }
+      ]
+    },
+    {
+      "id": "stock-10",
+      "minSec": 9,
+      "visual": "New.mp4 3:14–3:24. Click: tooltip \"Klik candle awal untuk mulai analisa range\", click ripple di candle 13 Jul lalu 14 Okt; area range tersorot. What: highlight panel Drivers (judul \"2026-07-13 → 2026-10-14 · 66 hari\").",
+      "lines": [
+        {
+          "id": "stock-10-click",
+          "text": "Lalu klik Drivers, terus klik candle awal dan akhir periodenya, di sini {13 Juli|tiga belas Juli} sampai {14 Oktober|empat belas Oktober}."
+        },
+        {
+          "id": "stock-10-what",
+          "text": "Drivers nunjukin broker mana yang paling ngegerakin harga di periode itu, dan seberapa besar pengaruhnya."
+        }
+      ]
+    },
+    {
+      "id": "stock-11",
+      "minSec": 10,
+      "visual": "New.mp4 3:24–3:35 (hold di panel Drivers). AK: highlight baris AK 26% +80B TAKING PROFIT. BK: baris BK 14% +228B AKUMULASI. Grid: strip kotak warna di baris AK; lalu tombol \"Ubah range\".",
+      "lines": [
+        {
+          "id": "stock-11-ak",
+          "text": "{AK|A-Ka} paling berpengaruh, {26%|dua puluh enam persen}, net buy {Rp 80 miliar|delapan puluh miliar rupiah}. Tapi statusnya Taking Profit, alias lagi ambil untung."
+        },
+        {
+          "id": "stock-11-bk",
+          "text": "{BK|Be-Ka} net buy-nya paling gede, {Rp 228 miliar|dua ratus dua puluh delapan miliar}, dan masih akumulasi."
+        },
+        {
+          "id": "stock-11-grid",
+          "text": "Kotak warnanya per candle, hijau biru itu beli dan merah ungu itu jual. Ubah range buat ganti periode."
+        }
+      ]
+    },
+    {
+      "id": "stock-12",
+      "minSec": 9,
+      "visual": "New.mp4 3:36–3:58 (pangkas drag ke ±8 s), Insider; chart digeser mundur ke 2025. Insider: highlight item Insider. Arrow: highlight panah hijau (21 Mar '25, tooltip \"INSIDER ▲ ERALINK INTERNATIONAL\").",
+      "lines": [
+        {
+          "id": "stock-12-insider",
+          "text": "Klik Insider buat tanda panah tiap orang dalam atau pemegang saham besar jual beli."
+        },
+        {
+          "id": "stock-12-arrow",
+          "text": "Geser chart-nya mundur ke {2025|dua ribu dua puluh lima}, ada panah hijau ke atas. Artinya pemegang saham besarnya nambah."
+        }
+      ]
+    },
+    {
+      "id": "stock-13",
+      "minSec": 9,
+      "visual": "New.mp4 4:02–4:16, Data Flows di bawah chart; tooltip \"Klik lagi untuk sembunyikan histogram\". Data: highlight histogram. Toggle: highlight baris chip DATA FLOWS.",
+      "lines": [
+        {
+          "id": "stock-13-data",
+          "pauseBefore": 0.6,
+          "text": "Di bawah chart ada Data Flows, flow yang sama dalam bentuk batang per candle."
+        },
+        {
+          "id": "stock-13-toggle",
+          "text": "Klik namanya buat nampilin atau nyembunyiin."
+        }
+      ]
+    },
+    {
+      "id": "stock-14",
+      "minSec": 11,
+      "visual": "New.mp4 4:16–4:30, SM Local: batang hijau dan kuning; hover → note kiri atas \"Pola broker ritel tidak biasa: CP\"; badge \"Anomali Broker Ritel: CP\". Yellow: highlight batang kuning. Note: note kiri atas. Badge: badge CP.",
+      "lines": [
+        {
+          "id": "stock-14-yellow",
+          "text": "Di {SM Local|Smart Money Local}, batang kuning artinya ada broker ritel yang perilakunya nggak biasa."
+        },
+        {
+          "id": "stock-14-note",
+          "text": "Arahin mouse ke situ, dan muncul catatannya, di sini broker {CP|Ce-Pe}."
+        },
+        {
+          "id": "stock-14-badge",
+          "text": "Makanya ada label Anomali Broker Ritel {CP|Ce-Pe}."
+        }
+      ]
+    },
+    {
+      "id": "stock-15",
+      "minSec": 9,
+      "visual": "New.mp4 4:36–4:46, dua tabel START RANGE / END RANGE dan baris filter di atasnya. Tables: highlight kedua judul tabel. Filters: highlight baris Mode / TRX / Origin sebagai satu elemen.",
+      "lines": [
+        {
+          "id": "stock-15-tables",
+          "text": "Geser lagi, ada dua tabel broker summary. Isinya broker mana yang beli dan jual, berapa banyak dan di harga berapa."
+        },
+        {
+          "id": "stock-15-filters",
+          "text": "Di atasnya ada pilihan Net atau Gross, jenis pasar, sama lokal atau asing."
+        }
+      ]
+    },
+    {
+      "id": "stock-16",
+      "minSec": 12,
+      "visual": "New.mp4 4:46–5:04 (pangkas ke klik tanggal + hasil). Range: click ripple di date picker START 13/07–03/09/2026. Top: highlight baris TOP 1 / TOP 3 / TOP 5 (TOP 5 +86,3B ACC). Count: highlight broker 25 vs 49 ACC.",
+      "lines": [
+        {
+          "id": "stock-16-range",
+          "text": "Isi Start Range dengan periode naiknya, di sini {13 Juli|tiga belas Juli} sampai {3 September|tiga September}."
+        },
+        {
+          "id": "stock-16-top",
+          "text": "{TOP 1|Top satu}, {TOP 3|Top tiga} dan {TOP 5|Top lima} di bawah tabel nunjukin kuatnya akumulasi broker teratas. Lima teratas net beli sekitar {Rp 86 miliar|delapan puluh enam miliar}."
+        },
+        {
+          "id": "stock-16-count",
+          "text": "Pembelinya juga cuma {25|dua puluh lima} broker lawan {49|empat puluh sembilan}, jadi akumulasi."
+        }
+      ]
+    },
+    {
+      "id": "stock-17",
+      "minSec": 9,
+      "visual": "New.mp4 5:04–5:18 (pangkas). Range: date picker END 04/09–14/10/2026. Buyers: highlight baris top buyer BK 129,2B dan KI 98,1B (satu elemen).",
+      "lines": [
+        {
+          "id": "stock-17-range",
+          "text": "End Range diisi periode sesudahnya, waktu harganya datar alias konsolidasi."
+        },
+        {
+          "id": "stock-17-buyers",
+          "text": "Pembeli terbesarnya sekarang {BK|Be-Ka} dan {KI|Ka-I}, dan masih akumulasi."
+        }
+      ]
+    },
+    {
+      "id": "stock-18",
+      "minSec": 13,
+      "visual": "New.mp4 5:20–5:36, tabel POSITION. What: highlight judul POSITION. AK: baris AK −11%, P/L +26,88% (16,0b). BK: baris BK +102,5% (Adding on 602). Add: tombol \"+ Broker\".",
+      "lines": [
+        {
+          "id": "stock-18-what",
+          "text": "Begitu dua tabel terisi, tabel Position kebuka. Isinya berapa persen barang yang tiap broker keluarin atau tambah."
+        },
+        {
+          "id": "stock-18-ak",
+          "text": "{AK|A-Ka} ngurangin {11%|sebelas persen} barangnya, dengan untung sekitar {27%|dua puluh tujuh persen}."
+        },
+        {
+          "id": "stock-18-bk",
+          "text": "Sebaliknya {BK|Be-Ka} malah nambah, di harga sekitar {602|enam ratus dua}."
+        },
+        {
+          "id": "stock-18-add",
+          "text": "Broker lain bisa dimasukin lewat tombol {+ Broker|tambah Broker}."
+        }
+      ]
+    },
+    {
+      "id": "stock-19",
+      "minSec": 6,
+      "visual": "New.mp4 5:36–5:40 (hold di tabel Huge Nego sampai voice selesai). What: highlight judul Huge Nego. Example: baris 2026-08-04 KI ← LG 50.63 B.",
+      "lines": [
+        {
+          "id": "stock-19-what",
+          "text": "Di bawahnya ada Huge Nego, jual beli partai besar yang disepakati langsung dua pihak, di luar pasar reguler."
+        },
+        {
+          "id": "stock-19-example",
+          "text": "Contohnya {4 Agustus|empat Agustus}, {KI|Ka-I} beli dari {LG|El-Ge} senilai {Rp 50,6 miliar|lima puluh koma enam miliar rupiah}."
+        }
+      ]
+    },
+    {
+      "id": "stock-20",
+      "minSec": 12,
+      "visual": "New.mp4 5:40–6:00, Broker Activity (6M, All/Local/Foreign). Panel: highlight judul panel. Read: garis BK dan KI naik; lalu AK dan ZP turun. Tabs: 3M/6M/1Y/2Y dan All/Local/Foreign (satu elemen).",
+      "lines": [
+        {
+          "id": "stock-20-panel",
+          "text": "Paling bawah ada Broker Activity, posisi broker paling berpengaruh dari waktu ke waktu."
+        },
+        {
+          "id": "stock-20-read",
+          "text": "Di sini {BK|Be-Ka} dan {KI|Ka-I} terus naik, artinya masih akumulasi dan masih nopang harganya. {AK|A-Ka} dan {ZP|Zet-Pe} malah turun belakangan."
+        },
+        {
+          "id": "stock-20-tabs",
+          "text": "Rentang waktu dan pilihan lokal atau asing ada di atasnya."
+        }
+      ]
+    },
+    {
+      "id": "stock-21",
+      "minSec": 12,
+      "visual": "New.mp4 6:00–6:18 (pangkas). Dbl: click ripple double-click AK di chip legend (6:02) → hanya garis AK. Full: highlight ikon fullscreen Broker Activity (6:08) → layar penuh → balik (6:10). Chart: ikon fullscreen chart utama (6:14) → keluar (6:18).",
+      "lines": [
+        {
+          "id": "stock-21-dbl",
+          "text": "Klik dua kali nama broker, misalnya {AK|A-Ka}, dan cuma garisnya yang tampil. Jelas {AK|A-Ka} lagi jualan belakangan."
+        },
+        {
+          "id": "stock-21-full",
+          "text": "Ikon di pojok kanan atas bikin panelnya layar penuh, klik lagi buat balik. Chart utama juga punya tombol yang sama."
+        }
+      ]
+    },
+    {
+      "id": "fund-1",
+      "minSec": 10,
+      "visual": "New.mp4 6:24–6:36, tab Fundamental. Tab: highlight tab Fundamental. Cap: kartu Kapitalisasi pasar Rp 9.97 T. PE: kartu PE 7.06x, lalu kartu Margin bersih 1.7%.",
+      "lines": [
+        {
+          "id": "fund-1-tab",
+          "pauseBefore": 0.6,
+          "text": "Klik tab Fundamental buat angka kunci perusahaannya."
+        },
+        {
+          "id": "fund-1-cap",
+          "text": "Misalnya market cap alias nilai semua sahamnya, sekitar {Rp 10 triliun|sepuluh triliun rupiah}."
+        },
+        {
+          "id": "fund-1-pe",
+          "text": "{PE|Pe-E}, singkatan dari Price to Earnings, itu harga dibanding laba. Di sini sekitar {7 kali|tujuh kali}, dan laba bersihnya cuma {1,7%|satu koma tujuh persen} dari pendapatan."
+        }
+      ]
+    },
+    {
+      "id": "fund-2",
+      "minSec": 10,
+      "visual": "New.mp4 6:36–6:46 (scroll + expand Piotroski 6:42). Grade: highlight \"Kualitas Fundamental C · skor 59/100\". Parts: highlight Profitabilitas 80 baik, lalu Piotroski 44 lemah. Pio: daftar Piotroski terbuka, \"4 dari 9 lolos\".",
+      "lines": [
+        {
+          "id": "fund-2-grade",
+          "text": "Hakabot ngerangkumnya jadi Kualitas Fundamental, di sini C dengan skor {59|lima puluh sembilan} dari {100|seratus}."
+        },
+        {
+          "id": "fund-2-parts",
+          "text": "Profitabilitasnya baik, tapi skor Piotroski-nya lemah."
+        },
+        {
+          "id": "fund-2-pio",
+          "text": "Piotroski itu cek {9|sembilan} syarat kesehatan keuangan, dan di sini cuma {4|empat} yang lolos."
+        }
+      ]
+    },
+    {
+      "id": "fund-3",
+      "minSec": 8,
+      "visual": "New.mp4 6:46–6:52 (still ditahan). Range: highlight \"Rentang Wajar Rp 619–739\". Price: highlight harga 625 \"di zona bawah rentang\".",
+      "lines": [
+        {
+          "id": "fund-3-range",
+          "text": "Rentang Wajar ngitung kisaran harga wajar dari beberapa rumus, di sini {Rp 619–739|enam ratus sembilan belas sampai tujuh ratus tiga puluh sembilan rupiah}."
+        },
+        {
+          "id": "fund-3-price",
+          "text": "Harganya {625|enam ratus dua puluh lima}, di zona bawah rentang. Artinya belum mahal menurut hitungan ini, tapi bukan jaminan bakal naik."
+        }
+      ]
+    },
+    {
+      "id": "fund-4",
+      "minSec": 10,
+      "visual": "New.mp4 6:52–7:16 (pangkas ke ±12 s). Chart: grafik key stat, click ripple di toggle EPS. Reports: tab Laba Rugi / Neraca / Arus Kas, lalu Kuartalan/Tahunan.",
+      "lines": [
+        {
+          "id": "fund-4-chart",
+          "text": "Mau analisa sendiri? Geser ke bawah, ada grafik angka kunci dan laporan keuangan lengkap."
+        },
+        {
+          "id": "fund-4-reports",
+          "text": "Laba Rugi, Neraca dan Arus Kas, per kuartal atau per tahun."
+        }
+      ]
+    },
+    {
+      "id": "fund-5",
+      "minSec": 10,
+      "visual": "New.mp4 7:20–7:38 (pangkas ketikan). Button: highlight tombol \"+ Watchlist\". New: dropdown grup + kolom \"Buat watchlist baru…\" → \"Test\". Check: halaman Watchlist dengan grup Test (7:34–7:38).",
+      "lines": [
+        {
+          "id": "fund-5-button",
+          "text": "Mau simpan saham ini? Klik tombol {+ Watchlist|tambah Watchlist} di bawah nama sahamnya."
+        },
+        {
+          "id": "fund-5-new",
+          "text": "Pilih grupnya, atau ketik nama baru buat bikin grup."
+        },
+        {
+          "id": "fund-5-check",
+          "text": "Grupnya langsung muncul di halaman Watchlist."
+        }
+      ]
+    },
+    {
+      "id": "idx-1",
+      "minSec": 6,
+      "visual": "New.mp4 7:40–7:50 (cut skeleton loading 7:40). Open: highlight menu Index. Tiles: highlight deretan kotak indeks (IHSG 5.943,02 · LQ45 · IDX30 · HIDIV20 · IDX80).",
+      "lines": [
+        {
+          "id": "idx-1-open",
+          "pauseBefore": 0.6,
+          "text": "Menu Index buat lihat kondisi pasar secara keseluruhan lewat chart {IHSG|I-Ha-Es-Ge}."
+        },
+        {
+          "id": "idx-1-tiles",
+          "text": "Di atasnya ada indeks lain, kayak {LQ45|El Kiu empat lima} dan {IDX30|I-De-Eks tiga puluh}."
+        }
+      ]
+    },
+    {
+      "id": "idx-2",
+      "minSec": 9,
+      "visual": "New.mp4 7:50–8:10. Menu: highlight menu Indicators, click ripple double-click MA50 (7:50) → hanya MA50. Tren: garis Tren muncul.",
+      "lines": [
+        {
+          "id": "idx-2-menu",
+          "text": "Menu Indicators cara pakainya sama kayak menu Tech, termasuk klik dua kali."
+        },
+        {
+          "id": "idx-2-tren",
+          "text": "Klik Tren, dan trendline {IHSG|I-Ha-Es-Ge} muncul."
+        }
+      ]
+    },
+    {
+      "id": "idx-3",
+      "minSec": 9,
+      "visual": "New.mp4 8:10–8:20. Cum: highlight garis Cum. Foreign (putus-putus, turun). Footer: highlight footer FOREIGN FLOW \"5D −Rp 1,01 T\".",
+      "lines": [
+        {
+          "id": "idx-3-cum",
+          "text": "{Cum. Foreign|Cumulative Foreign} itu garis total beli dikurangi jual investor asing. Garisnya terus turun, artinya asing konsisten jualan."
+        },
+        {
+          "id": "idx-3-footer",
+          "text": "Lima hari terakhir aja, asing net sell sekitar {Rp 1 triliun|satu triliun rupiah}."
+        }
+      ]
+    },
+    {
+      "id": "idx-4",
+      "minSec": 5,
+      "visual": "New.mp4 8:18–8:22, panel Sector Performance 14 Okt. Highlight baris Technology +2,76%.",
+      "lines": [
+        {
+          "id": "idx-4-sector",
+          "text": "Sector Performance nunjukin naik turunnya tiap sektor hari itu, di sini Technology paling tinggi."
+        }
+      ]
+    },
+    {
+      "id": "idx-5",
+      "minSec": 9,
+      "visual": "New.mp4 8:22–8:33, Sector Foreign Flow. Panel: highlight chart. Dbl: click ripple double-click Infrastructure di legend (8:27) → hanya garis Infrastructure, turun.",
+      "lines": [
+        {
+          "id": "idx-5-panel",
+          "text": "Sector Foreign Flow itu foreign flow per sektor, satu garis buat tiap sektor."
+        },
+        {
+          "id": "idx-5-dbl",
+          "text": "Klik dua kali titik warnanya, misalnya {Infrastructure|Infrastruktur}, dan cuma sektor itu yang tampil. Garisnya turun, artinya asing lagi keluar."
+        }
+      ]
+    },
+    {
+      "id": "idx-6",
+      "minSec": 5,
+      "visual": "New.mp4 ~8:34–8:40 (hold), baris Index Health: Downtrend · 35,2% below 52W high · Foreign Danger; highlight satu per satu.",
+      "lines": [
+        {
+          "id": "idx-6-health",
+          "text": "Di Index Health, trennya downtrend alias lagi turun, sekitar {35%|tiga puluh lima persen} di bawah puncak setahun terakhir. Status foreign flow-nya Danger, alias bahaya."
+        }
+      ]
+    },
+    {
+      "id": "idx-7",
+      "minSec": 15,
+      "visual": "New.mp4 8:40–8:56, RRG · Rotasi Sektor vs Pasar, kuadran berlabel di aplikasi. RRG: highlight seluruh peta. Lalu highlight tiap kuadran saat disebut: Mulai Akumulasi (kiri atas), Akumulasi (kanan atas), Mulai Distribusi (kanan bawah), Distribusi (kiri bawah).",
+      "lines": [
+        {
+          "id": "idx-7-rrg",
+          "text": "{RRG|Er-Er-Ge}, singkatan dari Relative Rotation Graph, itu peta momentum tiap sektor dibanding pasar."
+        },
+        {
+          "id": "idx-7-tl",
+          "text": "Kiri atas itu Mulai Akumulasi, sektornya baru mulai dapat momentum."
+        },
+        {
+          "id": "idx-7-tr",
+          "text": "Kanan atas Akumulasi, momentumnya lagi kencang."
+        },
+        {
+          "id": "idx-7-br",
+          "text": "Kanan bawah Mulai Distribusi, mulai melambat."
+        },
+        {
+          "id": "idx-7-bl",
+          "text": "Dan kiri bawah Distribusi, momentumnya lemah dan sektornya lagi turun."
+        }
+      ]
+    },
+    {
+      "id": "idx-8",
+      "minSec": 11,
+      "visual": "New.mp4 8:56–9:16 (pangkas). Chips: click ripple double-click chip Finance (8:56) → hanya Finance. Stocks: node saham Finance muncul (BBRI, BBCA…, 9:00–9:16), highlight node BBRI/BBCA.",
+      "lines": [
+        {
+          "id": "idx-8-chips",
+          "text": "Klik dua kali sektor Finance, dan cuma Finance yang tampil."
+        },
+        {
+          "id": "idx-8-stocks",
+          "text": "Saham di dalamnya bisa dimunculin juga, kayak {BBRI|Be-Be-Er-I} dan {BBCA|Be-Be-Ce-A}. Jadi kamu bisa cari saham terkuat di sektor terkuat."
+        }
+      ]
+    },
+    {
+      "id": "comp-1",
+      "minSec": 7,
+      "visual": "New.mp4 9:20–9:24. Open: highlight menu Composition, lalu tab Ringkasan Saham / Per Investor / Perubahan. Float: highlight Free float 25,07%.",
+      "lines": [
+        {
+          "id": "comp-1-open",
+          "pauseBefore": 0.6,
+          "text": "Sekarang menu Composition, isinya siapa aja pemilik sebuah saham."
+        },
+        {
+          "id": "comp-1-float",
+          "text": "Free float {ERAA|E-Er-A-A}, alias porsi saham yang beredar bebas di publik, sekitar {25%|dua puluh lima persen}."
+        }
+      ]
+    },
+    {
+      "id": "comp-2",
+      "minSec": 9,
+      "visual": "New.mp4 9:24–9:34, Holder Network; node diklik dan digeser. Highlight satu node pemegang dan garisnya ke saham lain.",
+      "lines": [
+        {
+          "id": "comp-2-net",
+          "text": "Holder Network itu peta pemegang saham. Bulatannya pemegang saham atau emiten, dan garisnya nunjukin siapa pegang apa."
+        },
+        {
+          "id": "comp-2-drag",
+          "text": "Bulatannya bisa diklik dan digeser."
+        }
+      ]
+    },
+    {
+      "id": "comp-3",
+      "minSec": 11,
+      "visual": "New.mp4 9:36–9:50. Donut: zoom pelan ke donut Local 62,8% / Foreign 37,2%, highlight irisan Local. Tabs: tab Local (Perusahaan 56,5%), lalu tab Foreign (Bank 40,9%), satu highlight per tab.",
+      "lines": [
+        {
+          "id": "comp-3-donut",
+          "text": "Donat di kanannya bagi pemilik jadi lokal dan asing. Di {ERAA|E-Er-A-A}, investor lokal pegang sekitar {63%|enam puluh tiga persen}."
+        },
+        {
+          "id": "comp-3-tabs",
+          "text": "Tab Local dan Foreign ngasih rinciannya per jenis investor. Di lokal paling gede Perusahaan, di asing Bank."
+        }
+      ]
+    },
+    {
+      "id": "comp-4",
+      "minSec": 10,
+      "visual": "New.mp4 9:50–10:12 (pangkas). Chart: highlight Composition Over Time + tombol 1 Tahun / 3 Tahun / All Time. Read: garis Local turun dan Foreign naik sejak Jul (bagian kanan chart).",
+      "lines": [
+        {
+          "id": "comp-4-chart",
+          "text": "Composition Over Time nunjukin porsi lokal dan asing dari waktu ke waktu."
+        },
+        {
+          "id": "comp-4-read",
+          "text": "Belakangan Local turun dan Foreign naik, artinya lokal jualan dan asing yang nampung."
+        }
+      ]
+    },
+    {
+      "id": "comp-5",
+      "minSec": 7,
+      "visual": "New.mp4 10:14–10:20 (hold), Float Composition by Investor Type. What: highlight judul panel. Corp: bar Corporate & Strategic 36,3%, lalu bar Retail / Individual 14,8%.",
+      "lines": [
+        {
+          "id": "comp-5-what",
+          "text": "Float Composition by Investor Type bagi saham yang beredar tadi per jenis investor."
+        },
+        {
+          "id": "comp-5-corp",
+          "text": "Paling gede perusahaan dan investor strategis, sekitar {36%|tiga puluh enam persen}, sementara ritel cuma sekitar {15%|lima belas persen}."
+        }
+      ]
+    },
+    {
+      "id": "comp-6",
+      "minSec": 9,
+      "visual": "New.mp4 10:20–10:36 (pangkas). Major: highlight judul Kepemilikan Signifikan. Changes: baris JP Morgan Securities PLC +1,10% (30 Sep) di Perubahan Pemegang Saham.",
+      "lines": [
+        {
+          "id": "comp-6-major",
+          "text": "Kepemilikan Signifikan itu daftar pemegang saham besar."
+        },
+        {
+          "id": "comp-6-changes",
+          "text": "Di bawahnya ada Perubahan Pemegang Saham, misalnya {JP Morgan Securities PLC|Je-Pe Morgan Securities Pe-El-Ce} nambah sekitar {1%|satu persen} di akhir September."
+        }
+      ]
+    },
+    {
+      "id": "comp-7",
+      "minSec": 8,
+      "visual": "New.mp4 10:38–10:46 (cut \"Loading investors\"). Tab Per Investor → kartu JP Morgan Securities PLC dibuka; highlight daftar 6 saham di kartu.",
+      "lines": [
+        {
+          "id": "comp-7-investor",
+          "text": "Di tab Per Investor, klik nama investornya, misalnya {JP Morgan|Je-Pe Morgan}. Kelihatan {6|enam} saham yang mereka pegang."
+        }
+      ]
+    },
+    {
+      "id": "comp-8",
+      "minSec": 11,
+      "visual": "New.mp4 10:50–11:04. Filter: highlight chip filter PEP. Hover: tooltip penjelasan di label PEP.",
+      "lines": [
+        {
+          "id": "comp-8-filter",
+          "text": "Bisa juga saring per jenis. {PEP|Pe-E-Pe}, singkatan dari Politically Exposed Person, itu orang yang punya koneksi politik."
+        },
+        {
+          "id": "comp-8-hover",
+          "text": "Arahin mouse ke labelnya buat lihat alasannya."
+        }
+      ]
+    },
+    {
+      "id": "comp-9",
+      "minSec": 6,
+      "visual": "New.mp4 11:06–11:16 (cut \"Loading investors\" 11:06). Highlight chip filter Konglo, lalu tooltip.",
+      "lines": [
+        {
+          "id": "comp-9-konglo",
+          "text": "Filter Konglo sama aja, buat investor dari grup konglomerat."
+        }
+      ]
+    },
+    {
+      "id": "comp-10",
+      "minSec": 9,
+      "visual": "New.mp4 11:18–11:30, tab Perubahan (seluruh pasar). Page: highlight tab. ENRG: baris ENRG · CGS International Sekuritas Indonesia ADDED, 7,30% → 9,31%.",
+      "lines": [
+        {
+          "id": "comp-10-page",
+          "text": "Tab Perubahan isinya perubahan kepemilikan terbaru di semua saham."
+        },
+        {
+          "id": "comp-10-enrg",
+          "text": "Contohnya di {ENRG|E-En-Er-Ge}, {CGS International Sekuritas Indonesia|Ce-Ge-Es International Sekuritas Indonesia} nambah dari sekitar {7,3%|tujuh koma tiga persen} jadi {9,3%|sembilan koma tiga persen}."
+        }
+      ]
+    },
+    {
+      "id": "scr-1",
+      "minSec": 7,
+      "visual": "New.mp4 11:32–11:38. Open: highlight menu Screener. Groups: highlight judul Pola Teknikal, lalu Peringkat Aliran Dana.",
+      "lines": [
+        {
+          "id": "scr-1-open",
+          "pauseBefore": 0.6,
+          "text": "Sekarang menu Screener, saringan saham yang siap pakai."
+        },
+        {
+          "id": "scr-1-groups",
+          "text": "Pola Teknikal nyaring dari bentuk chart-nya, dan Peringkat Aliran Dana nyaring dari aliran uangnya."
+        }
+      ]
+    },
+    {
+      "id": "scr-2",
+      "minSec": 8,
+      "visual": "New.mp4 11:38–11:44. Tier: kartu Dekat Support → ANTM, ITMG (tier A); highlight kolom TIER. Uptrend: kartu Uptrend Fase 2 → tabel (RS, vs MA50/150/200), highlight header tabel.",
+      "lines": [
+        {
+          "id": "scr-2-tier",
+          "text": "Tiap hasil dikasih tier alias kelas, tier S paling atas lalu tier A."
+        },
+        {
+          "id": "scr-2-uptrend",
+          "text": "{Uptrend Fase 2|Uptrend Fase dua} isinya saham yang lagi di fase naik, lengkap dengan {RS|Er-Es} dan posisinya terhadap garis rata-rata."
+        }
+      ]
+    },
+    {
+      "id": "scr-3",
+      "minSec": 9,
+      "visual": "New.mp4 11:44–11:56. Filter: click ripple Filters → \"Tier S only\" (11:44–11:47), tabel tinggal 7. Charts: highlight toggle Charts (11:52), grid chart.",
+      "lines": [
+        {
+          "id": "scr-3-filter",
+          "text": "Mau kelas teratas aja? Klik Filters, terus pilih Tier S only. Sisanya tinggal {7|tujuh} saham."
+        },
+        {
+          "id": "scr-3-charts",
+          "text": "Nyalain Charts, biar kelihatan sekilas chart semua hasilnya."
+        }
+      ]
+    },
+    {
+      "id": "scr-4",
+      "minSec": 12,
+      "visual": "New.mp4 11:58–12:18 (pangkas). Ptba: click ripple di PTBA → halaman Stock PTBA. Health: highlight Stock Health (Uptrend, RS 83). Flow: garis Retail yang turun tajam (Tren + Retail aktif, ~12:10).",
+      "lines": [
+        {
+          "id": "scr-4-ptba",
+          "text": "Klik {PTBA|Pe-Te-Be-A}, sekali lagi cuma contoh cara baca ya, dan kamu langsung dibawa ke halaman Stock-nya."
+        },
+        {
+          "id": "scr-4-health",
+          "text": "Trennya uptrend dan {RS|Er-Es}-nya {83|delapan puluh tiga}."
+        },
+        {
+          "id": "scr-4-flow",
+          "text": "Nyalain Tren dan Retail, dan garis Retail-nya turun tajam. Dari sini tinggal kamu bedah pakai alat-alat tadi."
+        }
+      ]
+    },
+    {
+      "id": "hb-1",
+      "minSec": 8,
+      "visual": "New.mp4 12:20–12:28 (cut skeleton 12:20). Open: highlight menu HB Center. Chart: highlight chart Strategy vs IHSG, lalu tab Overall / per setup.",
+      "lines": [
+        {
+          "id": "hb-1-open",
+          "pauseBefore": 0.6,
+          "text": "Sekarang {HB Center|Ha-Be Center}, yang butuh paket Signal opsional tadi."
+        },
+        {
+          "id": "hb-1-chart",
+          "text": "Chart kiri atas bandingin performa semua sinyal dengan {IHSG|I-Ha-Es-Ge}, dan tab di atasnya buat per jenis sinyal."
+        }
+      ]
+    },
+    {
+      "id": "hb-2",
+      "minSec": 10,
+      "visual": "New.mp4 12:24–12:34 (hold). Win: highlight kartu Win rate 45,7% (dan Total trades 254). RR: highlight kartu Avg RR 2,89 \"avg win ÷ avg loss\".",
+      "lines": [
+        {
+          "id": "hb-2-win",
+          "text": "Dari {254|dua ratus lima puluh empat} trade, win rate-nya {45,7%|empat puluh lima koma tujuh persen}. Artinya kurang dari separuh trade-nya untung."
+        },
+        {
+          "id": "hb-2-rr",
+          "text": "Hasilnya ditopang Avg {RR|Er-Er}, singkatan dari risk reward. Di sini {2,89|dua koma delapan sembilan}, alias rata-rata untungnya hampir tiga kali rata-rata ruginya."
+        }
+      ]
+    },
+    {
+      "id": "hb-3",
+      "minSec": 7,
+      "visual": "New.mp4 12:28–12:36, tabel Performance per signal. Highlight baris HK-Lanjutan-v1 49,2%, lalu HK-Reversal-v1 33,3%.",
+      "lines": [
+        {
+          "id": "hb-3-setups",
+          "text": "Tabel Performance nunjukin hasil tiap setup. {HK-Lanjutan|Ha-Ka Lanjutan} win rate-nya paling tinggi, sekitar {49%|empat puluh sembilan persen}. {HK-Reversal|Ha-Ka Reversal} paling rendah, sekitar {33%|tiga puluh tiga persen}."
+        }
+      ]
+    },
+    {
+      "id": "hb-4",
+      "minSec": 11,
+      "visual": "New.mp4 12:34–12:44. Live: highlight baris Live signals PTBA · HK-LotBesar-v1 · stop 2.842,4. Active: tabel Active signals, highlight ANTM −9,05%.",
+      "lines": [
+        {
+          "id": "hb-4-live",
+          "text": "Live Signals itu sinyal terbaru, di sini {PTBA|Pe-Te-Be-A} dengan stop {2.842|dua ribu delapan ratus empat puluh dua}. Stop itu stop loss, batas harga buat keluar kalau ternyata salah."
+        },
+        {
+          "id": "hb-4-active",
+          "text": "Active Signals itu yang masih jalan. Ada yang lagi untung, ada juga yang lagi rugi, kayak {ANTM|Antam} {−9%|minus sembilan persen}."
+        }
+      ]
+    },
+    {
+      "id": "hb-5",
+      "minSec": 11,
+      "visual": "New.mp4 12:44–13:14 (pangkas paging ke ±11 s): Trade History, halaman mundur ke trade lama. History: highlight judul tabel. Honest: deretan merah tahun ini. Caveat: tahan tanpa highlight.",
+      "lines": [
+        {
+          "id": "hb-5-history",
+          "text": "Trade History isinya semua sinyal yang udah ditutup."
+        },
+        {
+          "id": "hb-5-honest",
+          "text": "Jujur aja, tahun ini lumayan berat dan merahnya banyak."
+        },
+        {
+          "id": "hb-5-caveat",
+          "text": "Jadi pakai sinyalnya sebagai bahan pertimbangan, bukan jaminan. Hasil masa lalu nggak menjamin hasil ke depan."
+        }
+      ]
+    },
+    {
+      "id": "akun-1",
+      "minSec": 8,
+      "visual": "New.mp4 13:18–13:28. Open: click ripple di nama akun kanan atas (blur nama + avatar). Plan: highlight Paket SIGNAL · Aktif — 8 hari tersisa. Ref: highlight tombol Salin. BLUR: email dan kode referral selalu.",
+      "lines": [
+        {
+          "id": "akun-1-open",
+          "pauseBefore": 0.6,
+          "text": "Terakhir halaman Akun. Klik nama akun kamu di pojok kanan atas."
+        },
+        {
+          "id": "akun-1-plan",
+          "text": "Ada paket kamu dan sisa harinya, di sini Signal tinggal {8|delapan} hari."
+        },
+        {
+          "id": "akun-1-ref",
+          "text": "Ada juga kode referral kamu, klik Salin buat nyalin kodenya."
+        }
+      ]
+    },
+    {
+      "id": "akun-2",
+      "minSec": 6,
+      "visual": "New.mp4 13:28–13:35. Name: highlight kartu Nama tampilan, lalu Kata sandi (blur isi kolom nama). Size: highlight pilihan Kecil / Normal / Besar / Sangat Besar (13:30–13:34).",
+      "lines": [
+        {
+          "id": "akun-2-name",
+          "text": "Di bawahnya kamu bisa ganti nama tampilan dan kata sandi."
+        },
+        {
+          "id": "akun-2-size",
+          "text": "Ukuran tampilan bisa dipilih dari Kecil sampai Sangat Besar, biar nyaman di layar kamu."
+        }
+      ]
+    },
+    {
+      "id": "akun-3",
+      "minSec": 10,
+      "visual": "New.mp4 13:36–13:50 (cut di 13:50, OBS muncul 13:51+). On: click ripple \"Aktifkan notifikasi harian\" → prompt izin browser. Test: tombol \"Kirim notifikasi uji\". Off: tombol Keluar.",
+      "lines": [
+        {
+          "id": "akun-3-on",
+          "text": "Klik Aktifkan notifikasi harian, lalu izinkan di browser. Notifikasinya datang tiap malam hari bursa, setelah datanya update."
+        },
+        {
+          "id": "akun-3-test",
+          "text": "Klik Kirim notifikasi uji buat ngetes."
+        },
+        {
+          "id": "akun-3-off",
+          "text": "Dan tombol Keluar buat keluar dari akun."
+        }
+      ]
+    },
+    {
+      "id": "end",
+      "minSec": 8,
+      "tailSec": 2,
+      "visual": "End card code-made: logo Hakabot, pill besar hakabot.com, ikon Telegram / Discord, disclaimer \"Bukan rekomendasi investasi · Hasil masa lalu tidak menjamin hasil ke depan\" dan sumber \"Rekaman layar aplikasi Hakabot, 15 Okt 2026\". Tanpa outro standar (keputusan user).",
+      "lines": [
+        {
+          "id": "end-recap",
+          "pauseBefore": 0.6,
+          "text": "Itu dia cara pakai Hakabot. Semua alat ini bantu kamu baca saham sendiri, keputusannya tetap di tangan kamu."
+        },
+        {
+          "id": "end-cta",
+          "text": "Mau coba? Buka {hakabot.com|hakabot dot com}. Ada pertanyaan? Gabung aja ke komunitas Telegram atau Discord Hakabot."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2257 @@
+{
+ "principal": 10000000,
+ "tax": 0.2,
+ "taxThreshold": 7500000,
+ "start": "2010-01",
+ "end": "2026-09",
+ "months": 201,
+ "years": 16.75,
+ "sources": {
+  "inflation": "BPS (via Bank Indonesia, Data Inflasi); Sep 2026: rilis BPS 1 Okt 2026",
+  "savings": "Bank Indonesia SEKI I.30 (Bank Umum)",
+  "deposit": "LPS Tingkat Bunga Penjaminan (bank umum, Rupiah); BI SEKI I.28 (Bank Umum, 1 bulan)",
+  "tax": "PP 131/2000: PPh final 20% bunga deposito & tabungan, berlaku kalau total simpanan > Rp 7.500.000"
+ },
+ "inflation": {
+  "basis": "BPS y-on-y Desember (Des-Des), 2010-2025, + y-to-d Jan-Sep 2026",
+  "decDec": {
+   "2010": 0.0696,
+   "2011": 0.0379,
+   "2012": 0.043,
+   "2013": 0.08380000000000001,
+   "2014": 0.0836,
+   "2015": 0.0335,
+   "2016": 0.0302,
+   "2017": 0.0361,
+   "2018": 0.0313,
+   "2019": 0.027200000000000002,
+   "2020": 0.0168,
+   "2021": 0.0187,
+   "2022": 0.055099999999999996,
+   "2023": 0.026099999999999998,
+   "2024": 0.015700000000000002,
+   "2025": 0.0292
+  },
+  "ytd2026": 0.0217,
+  "yoySep2026": 0.032799999999999996,
+  "ihkAug2026": 111.97,
+  "ihkSep2026": 112.31,
+  "priceFactor": 1.903298,
+  "priceRise": 0.903298,
+  "priceFactorDec2025": 1.862874,
+  "avgPerYear": 0.039171,
+  "avgPerYear2010to2025": 0.039648,
+  "doublingYearsExact": 18.04,
+  "doublingYearsRule72": 18.381,
+  "needToday": 19032983,
+  "realValueOf10jt": 5254037,
+  "needDec2025": 18628740,
+  "realValueDec2025": 5368050,
+  "maxYear": 2013,
+  "minYear": 2024,
+  "path": [
+   {
+    "ym": "2009-12",
+    "priceFactor": 1.0,
+    "realValue": 10000000
+   },
+   {
+    "ym": "2010-12",
+    "priceFactor": 1.0696,
+    "realValue": 9349289
+   },
+   {
+    "ym": "2011-12",
+    "priceFactor": 1.110138,
+    "realValue": 9007890
+   },
+   {
+    "ym": "2012-12",
+    "priceFactor": 1.157874,
+    "realValue": 8636520
+   },
+   {
+    "ym": "2013-12",
+    "priceFactor": 1.254904,
+    "realValue": 7968740
+   },
+   {
+    "ym": "2014-12",
+    "priceFactor": 1.359814,
+    "realValue": 7353949
+   },
+   {
+    "ym": "2015-12",
+    "priceFactor": 1.405367,
+    "realValue": 7115578
+   },
+   {
+    "ym": "2016-12",
+    "priceFactor": 1.447809,
+    "realValue": 6906987
+   },
+   {
+    "ym": "2017-12",
+    "priceFactor": 1.500075,
+    "realValue": 6666332
+   },
+   {
+    "ym": "2018-12",
+    "priceFactor": 1.547028,
+    "realValue": 6464009
+   },
+   {
+    "ym": "2019-12",
+    "priceFactor": 1.589107,
+    "realValue": 6292843
+   },
+   {
+    "ym": "2020-12",
+    "priceFactor": 1.615804,
+    "realValue": 6188870
+   },
+   {
+    "ym": "2021-12",
+    "priceFactor": 1.646019,
+    "realValue": 6075263
+   },
+   {
+    "ym": "2022-12",
+    "priceFactor": 1.736715,
+    "realValue": 5757997
+   },
+   {
+    "ym": "2023-12",
+    "priceFactor": 1.782043,
+    "realValue": 5611536
+   },
+   {
+    "ym": "2024-12",
+    "priceFactor": 1.810021,
+    "realValue": 5524797
+   },
+   {
+    "ym": "2025-12",
+    "priceFactor": 1.862874,
+    "realValue": 5368050
+   },
+   {
+    "ym": "2026-09",
+    "priceFactor": 1.903298,
+    "realValue": 5254037
+   }
+  ]
+ },
+ "crossCheck": {
+  "worldBankCpi2010": 99.9999999999999,
+  "worldBankCpi2025": 176.046565851866,
+  "worldBankRatio2025over2010": 1.760466,
+  "worldBankRealValue": 5680315,
+  "worldBankAvg": 0.038425,
+  "bpsDec2010toDec2025": 1.741655
+ },
+ "summary": {
+  "kas": {
+   "valueNominal": 10000000,
+   "valueReal2010": 5254037,
+   "netPerYear": 0.0,
+   "grossValueNominal": 10000000,
+   "grossPerYear": 0.0,
+   "realPerYear": -0.037694,
+   "realChange": -0.474596,
+   "grossValueReal2010": 5254037
+  },
+  "tabungan": {
+   "valueNominal": 12062159,
+   "valueReal2010": 6337503,
+   "netPerYear": 0.011256,
+   "grossValueNominal": 12640562,
+   "grossPerYear": 0.014088,
+   "realPerYear": -0.026862,
+   "realChange": -0.36625,
+   "grossValueReal2010": 6641398
+  },
+  "deposito_lps": {
+   "valueNominal": 21406984,
+   "valueReal2010": 11247309,
+   "netPerYear": 0.046489,
+   "grossValueNominal": 25881344,
+   "grossPerYear": 0.058415,
+   "realPerYear": 0.007042,
+   "realChange": 0.124731,
+   "grossValueReal2010": 13598154
+  },
+  "deposito_bi": {
+   "valueNominal": 21504842,
+   "valueReal2010": 11298724,
+   "netPerYear": 0.046774,
+   "grossValueNominal": 26029157,
+   "grossPerYear": 0.058775,
+   "realPerYear": 0.007316,
+   "realChange": 0.129872,
+   "grossValueReal2010": 13675816
+  }
+ },
+ "beatInflationYears": {
+  "tabungan": 0,
+  "deposito_lps": 12,
+  "deposito_bi": 12
+ },
+ "beatInflationYearList": {
+  "tabungan": [],
+  "deposito_lps": [
+   2011,
+   2012,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2023,
+   2024,
+   2025
+  ],
+  "deposito_bi": [
+   2011,
+   2012,
+   2015,
+   2016,
+   2017,
+   2018,
+   2019,
+   2020,
+   2021,
+   2023,
+   2024,
+   2025
+  ]
+ },
+ "fullYears": 16,
+ "snapshot": {
+  "inflationYoy": 0.032799999999999996,
+  "inflationMonth": "2026-09",
+  "lpsRate": 0.0375,
+  "lpsPeriod": [
+   "2026-10-01",
+   "2027-01-31"
+  ],
+  "lpsNet": 0.03,
+  "lpsNetMinusInflation": -0.0028,
+  "lpsRealExact": -0.002711,
+  "seki1mRate": 0.05076,
+  "seki1mNet": 0.040608,
+  "seki1mNetMinusInflation": 0.007808,
+  "savingsRate": 0.007507,
+  "savingsNet": 0.006006,
+  "savingsNetMinusInflation": -0.026794,
+  "sekiMonth": "2026-08"
+ },
+ "yearly": [
+  {
+   "year": 2010,
+   "months": 12,
+   "inflation": 0.0696,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.0696,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.065071,
+    "valueNominal": 10000000,
+    "valueReal2010": 9349289
+   },
+   "tabungan": {
+    "gross": 0.031735,
+    "net": 0.025315,
+    "realNet": -0.041403,
+    "valueNominal": 10253154,
+    "valueReal2010": 9585971
+   },
+   "deposito_lps": {
+    "gross": 0.07229,
+    "net": 0.05746,
+    "realNet": -0.01135,
+    "valueNominal": 10574599,
+    "valueReal2010": 9886499
+   },
+   "deposito_bi": {
+    "gross": 0.070435,
+    "net": 0.055994,
+    "realNet": -0.01272,
+    "valueNominal": 10559943,
+    "valueReal2010": 9872796
+   }
+  },
+  {
+   "year": 2011,
+   "months": 12,
+   "inflation": 0.0379,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.110138,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.036516,
+    "valueNominal": 10000000,
+    "valueReal2010": 9007890
+   },
+   "tabungan": {
+    "gross": 0.025612,
+    "net": 0.020442,
+    "realNet": -0.01682,
+    "valueNominal": 10462753,
+    "valueReal2010": 9424733
+   },
+   "deposito_lps": {
+    "gross": 0.073846,
+    "net": 0.058688,
+    "realNet": 0.020029,
+    "valueNominal": 11195206,
+    "valueReal2010": 10084519
+   },
+   "deposito_bi": {
+    "gross": 0.06953,
+    "net": 0.05528,
+    "realNet": 0.016745,
+    "valueNominal": 11143693,
+    "valueReal2010": 10038116
+   }
+  },
+  {
+   "year": 2012,
+   "months": 12,
+   "inflation": 0.043,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.157874,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.041227,
+    "valueNominal": 10000000,
+    "valueReal2010": 8636520
+   },
+   "tabungan": {
+    "gross": 0.019548,
+    "net": 0.015611,
+    "realNet": -0.02626,
+    "valueNominal": 10626082,
+    "valueReal2010": 9177237
+   },
+   "deposito_lps": {
+    "gross": 0.0586,
+    "net": 0.046634,
+    "realNet": 0.003484,
+    "valueNominal": 11717287,
+    "valueReal2010": 10119659
+   },
+   "deposito_bi": {
+    "gross": 0.057065,
+    "net": 0.045419,
+    "realNet": 0.002319,
+    "valueNominal": 11649825,
+    "valueReal2010": 10061395
+   }
+  },
+  {
+   "year": 2013,
+   "months": 12,
+   "inflation": 0.0838,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.254904,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.077321,
+    "valueNominal": 10000000,
+    "valueReal2010": 7968740
+   },
+   "tabungan": {
+    "gross": 0.018556,
+    "net": 0.01482,
+    "realNet": -0.063647,
+    "valueNominal": 10783558,
+    "valueReal2010": 8593136
+   },
+   "deposito_lps": {
+    "gross": 0.062116,
+    "net": 0.049417,
+    "realNet": -0.031724,
+    "valueNominal": 12296325,
+    "valueReal2010": 9798621
+   },
+   "deposito_bi": {
+    "gross": 0.063525,
+    "net": 0.050532,
+    "realNet": -0.030696,
+    "valueNominal": 12238515,
+    "valueReal2010": 9752554
+   }
+  },
+  {
+   "year": 2014,
+   "months": 12,
+   "inflation": 0.0836,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.359814,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.07715,
+    "valueNominal": 10000000,
+    "valueReal2010": 7353949
+   },
+   "tabungan": {
+    "gross": 0.018098,
+    "net": 0.014455,
+    "realNet": -0.063811,
+    "valueNominal": 10939433,
+    "valueReal2010": 8044803
+   },
+   "deposito_lps": {
+    "gross": 0.078972,
+    "net": 0.062735,
+    "realNet": -0.019256,
+    "valueNominal": 13067730,
+    "valueReal2010": 9609943
+   },
+   "deposito_bi": {
+    "gross": 0.085566,
+    "net": 0.067934,
+    "realNet": -0.014457,
+    "valueNominal": 13069930,
+    "valueReal2010": 9611560
+   }
+  },
+  {
+   "year": 2015,
+   "months": 12,
+   "inflation": 0.0335,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.405367,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.032414,
+    "valueNominal": 10000000,
+    "valueReal2010": 7115578
+   },
+   "tabungan": {
+    "gross": 0.017548,
+    "net": 0.014016,
+    "realNet": -0.018853,
+    "valueNominal": 11092758,
+    "valueReal2010": 7893138
+   },
+   "deposito_lps": {
+    "gross": 0.079866,
+    "net": 0.06344,
+    "realNet": 0.028969,
+    "valueNominal": 13896744,
+    "valueReal2010": 9888336
+   },
+   "deposito_bi": {
+    "gross": 0.081494,
+    "net": 0.064724,
+    "realNet": 0.030212,
+    "valueNominal": 13915867,
+    "valueReal2010": 9901943
+   }
+  },
+  {
+   "year": 2016,
+   "months": 12,
+   "inflation": 0.0302,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.447809,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.029315,
+    "valueNominal": 10000000,
+    "valueReal2010": 6906987
+   },
+   "tabungan": {
+    "gross": 0.016524,
+    "net": 0.013199,
+    "realNet": -0.016502,
+    "valueNominal": 11239174,
+    "valueReal2010": 7762882
+   },
+   "deposito_lps": {
+    "gross": 0.071401,
+    "net": 0.056758,
+    "realNet": 0.025779,
+    "valueNominal": 14685493,
+    "valueReal2010": 10143250
+   },
+   "deposito_bi": {
+    "gross": 0.070221,
+    "net": 0.055826,
+    "realNet": 0.024875,
+    "valueNominal": 14692732,
+    "valueReal2010": 10148250
+   }
+  },
+  {
+   "year": 2017,
+   "months": 12,
+   "inflation": 0.0361,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.500075,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.034842,
+    "valueNominal": 10000000,
+    "valueReal2010": 6666332
+   },
+   "tabungan": {
+    "gross": 0.014462,
+    "net": 0.011554,
+    "realNet": -0.023691,
+    "valueNominal": 11369032,
+    "valueReal2010": 7578974
+   },
+   "deposito_lps": {
+    "gross": 0.06344,
+    "net": 0.050464,
+    "realNet": 0.013864,
+    "valueNominal": 15426584,
+    "valueReal2010": 10283873
+   },
+   "deposito_bi": {
+    "gross": 0.063942,
+    "net": 0.050862,
+    "realNet": 0.014247,
+    "valueNominal": 15440029,
+    "valueReal2010": 10292836
+   }
+  },
+  {
+   "year": 2018,
+   "months": 12,
+   "inflation": 0.0313,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.547028,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.03035,
+    "valueNominal": 10000000,
+    "valueReal2010": 6464009
+   },
+   "tabungan": {
+    "gross": 0.013027,
+    "net": 0.010409,
+    "realNet": -0.020257,
+    "valueNominal": 11487376,
+    "valueReal2010": 7425450
+   },
+   "deposito_lps": {
+    "gross": 0.062558,
+    "net": 0.049767,
+    "realNet": 0.017906,
+    "valueNominal": 16194313,
+    "valueReal2010": 10468018
+   },
+   "deposito_bi": {
+    "gross": 0.062355,
+    "net": 0.049606,
+    "realNet": 0.017751,
+    "valueNominal": 16205949,
+    "valueReal2010": 10475540
+   }
+  },
+  {
+   "year": 2019,
+   "months": 12,
+   "inflation": 0.0272,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.589107,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.02648,
+    "valueNominal": 10000000,
+    "valueReal2010": 6292843
+   },
+   "tabungan": {
+    "gross": 0.012066,
+    "net": 0.009642,
+    "realNet": -0.017093,
+    "valueNominal": 11598141,
+    "valueReal2010": 7298528
+   },
+   "deposito_lps": {
+    "gross": 0.070071,
+    "net": 0.055707,
+    "realNet": 0.027752,
+    "valueNominal": 17096447,
+    "valueReal2010": 10758526
+   },
+   "deposito_bi": {
+    "gross": 0.067617,
+    "net": 0.053768,
+    "realNet": 0.025864,
+    "valueNominal": 17077305,
+    "valueReal2010": 10746480
+   }
+  },
+  {
+   "year": 2020,
+   "months": 12,
+   "inflation": 0.0168,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.615804,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.016522,
+    "valueNominal": 10000000,
+    "valueReal2010": 6188870
+   },
+   "tabungan": {
+    "gross": 0.009735,
+    "net": 0.007781,
+    "realNet": -0.00887,
+    "valueNominal": 11688385,
+    "valueReal2010": 7233790
+   },
+   "deposito_lps": {
+    "gross": 0.056188,
+    "net": 0.044724,
+    "realNet": 0.027463,
+    "valueNominal": 17861070,
+    "valueReal2010": 11053985
+   },
+   "deposito_bi": {
+    "gross": 0.054139,
+    "net": 0.043101,
+    "realNet": 0.025867,
+    "valueNominal": 17813358,
+    "valueReal2010": 11024456
+   }
+  },
+  {
+   "year": 2021,
+   "months": 12,
+   "inflation": 0.0187,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.646019,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.018357,
+    "valueNominal": 10000000,
+    "valueReal2010": 6075263
+   },
+   "tabungan": {
+    "gross": 0.007375,
+    "net": 0.005896,
+    "realNet": -0.012569,
+    "valueNominal": 11757298,
+    "valueReal2010": 7142868
+   },
+   "deposito_lps": {
+    "gross": 0.040957,
+    "net": 0.032645,
+    "realNet": 0.013689,
+    "valueNominal": 18444142,
+    "valueReal2010": 11205301
+   },
+   "deposito_bi": {
+    "gross": 0.035205,
+    "net": 0.028075,
+    "realNet": 0.009203,
+    "valueNominal": 18313461,
+    "valueReal2010": 11125909
+   }
+  },
+  {
+   "year": 2022,
+   "months": 12,
+   "inflation": 0.0551,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.736715,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.052223,
+    "valueNominal": 10000000,
+    "valueReal2010": 5757997
+   },
+   "tabungan": {
+    "gross": 0.006528,
+    "net": 0.005219,
+    "realNet": -0.047276,
+    "valueNominal": 11818661,
+    "valueReal2010": 6805182
+   },
+   "deposito_lps": {
+    "gross": 0.036212,
+    "net": 0.028875,
+    "realNet": -0.024855,
+    "valueNominal": 18976721,
+    "valueReal2010": 10926790
+   },
+   "deposito_bi": {
+    "gross": 0.031161,
+    "net": 0.024858,
+    "realNet": -0.028662,
+    "valueNominal": 18768705,
+    "valueReal2010": 10807015
+   }
+  },
+  {
+   "year": 2023,
+   "months": 12,
+   "inflation": 0.0261,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.782043,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.025436,
+    "valueNominal": 10000000,
+    "valueReal2010": 5611536
+   },
+   "tabungan": {
+    "gross": 0.006729,
+    "net": 0.00538,
+    "realNet": -0.020193,
+    "valueNominal": 11882244,
+    "valueReal2010": 6667764
+   },
+   "deposito_lps": {
+    "gross": 0.042688,
+    "net": 0.034019,
+    "realNet": 0.007718,
+    "valueNominal": 19622292,
+    "valueReal2010": 11011120
+   },
+   "deposito_bi": {
+    "gross": 0.043615,
+    "net": 0.034755,
+    "realNet": 0.008435,
+    "valueNominal": 19421009,
+    "valueReal2010": 10898169
+   }
+  },
+  {
+   "year": 2024,
+   "months": 12,
+   "inflation": 0.0157,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.810021,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.015457,
+    "valueNominal": 10000000,
+    "valueReal2010": 5524797
+   },
+   "tabungan": {
+    "gross": 0.006704,
+    "net": 0.00536,
+    "realNet": -0.01018,
+    "valueNominal": 11945930,
+    "valueReal2010": 6599884
+   },
+   "deposito_lps": {
+    "gross": 0.043338,
+    "net": 0.034535,
+    "realNet": 0.018544,
+    "valueNominal": 20299945,
+    "valueReal2010": 11215307
+   },
+   "deposito_bi": {
+    "gross": 0.048034,
+    "net": 0.038262,
+    "realNet": 0.022213,
+    "valueNominal": 20164089,
+    "valueReal2010": 11140250
+   }
+  },
+  {
+   "year": 2025,
+   "months": 12,
+   "inflation": 0.0292,
+   "inflationBasis": "Des-Des y-on-y",
+   "priceFactor": 1.862874,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.028372,
+    "valueNominal": 10000000,
+    "valueReal2010": 5368050
+   },
+   "tabungan": {
+    "gross": 0.006911,
+    "net": 0.005525,
+    "realNet": -0.023003,
+    "valueNominal": 12011936,
+    "valueReal2010": 6448067
+   },
+   "deposito_lps": {
+    "gross": 0.040309,
+    "net": 0.03213,
+    "realNet": 0.002847,
+    "valueNominal": 20952184,
+    "valueReal2010": 11247237
+   },
+   "deposito_bi": {
+    "gross": 0.04746,
+    "net": 0.037806,
+    "realNet": 0.008362,
+    "valueNominal": 20926411,
+    "valueReal2010": 11233401
+   }
+  },
+  {
+   "year": 2026,
+   "months": 9,
+   "inflation": 0.0217,
+   "inflationBasis": "y-to-d Jan-Sep 2026",
+   "priceFactor": 1.903298,
+   "kas": {
+    "gross": 0.0,
+    "net": 0.0,
+    "realNet": -0.021239,
+    "valueNominal": 10000000,
+    "valueReal2010": 5254037
+   },
+   "tabungan": {
+    "gross": 0.005229,
+    "net": 0.004181,
+    "realNet": -0.017147,
+    "valueNominal": 12062159,
+    "valueReal2010": 6337503
+   },
+   "deposito_lps": {
+    "gross": 0.027198,
+    "net": 0.021707,
+    "realNet": 6e-06,
+    "valueNominal": 21406984,
+    "valueReal2010": 11247309
+   },
+   "deposito_bi": {
+    "gross": 0.034657,
+    "net": 0.027641,
+    "realNet": 0.005815,
+    "valueNominal": 21504842,
+    "valueReal2010": 11298724
+   }
+  }
+ ],
+ "monthlyRates": [
+  {
+   "ym": "2010-01",
+   "kas": 0.0,
+   "tabungan": 0.0308,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0709
+  },
+  {
+   "ym": "2010-02",
+   "kas": 0.0,
+   "tabungan": 0.0306,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0693
+  },
+  {
+   "ym": "2010-03",
+   "kas": 0.0,
+   "tabungan": 0.0303,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0677
+  },
+  {
+   "ym": "2010-04",
+   "kas": 0.0,
+   "tabungan": 0.0302,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0689
+  },
+  {
+   "ym": "2010-05",
+   "kas": 0.0,
+   "tabungan": 0.0305,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0676
+  },
+  {
+   "ym": "2010-06",
+   "kas": 0.0,
+   "tabungan": 0.029,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0679
+  },
+  {
+   "ym": "2010-07",
+   "kas": 0.0,
+   "tabungan": 0.029,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0679
+  },
+  {
+   "ym": "2010-08",
+   "kas": 0.0,
+   "tabungan": 0.0288,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0675
+  },
+  {
+   "ym": "2010-09",
+   "kas": 0.0,
+   "tabungan": 0.0291,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0672
+  },
+  {
+   "ym": "2010-10",
+   "kas": 0.0,
+   "tabungan": 0.0385,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0681
+  },
+  {
+   "ym": "2010-11",
+   "kas": 0.0,
+   "tabungan": 0.0294,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0678
+  },
+  {
+   "ym": "2010-12",
+   "kas": 0.0,
+   "tabungan": 0.0392,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0683
+  },
+  {
+   "ym": "2011-01",
+   "kas": 0.0,
+   "tabungan": 0.027,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0672
+  },
+  {
+   "ym": "2011-02",
+   "kas": 0.0,
+   "tabungan": 0.0268,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0672
+  },
+  {
+   "ym": "2011-03",
+   "kas": 0.0,
+   "tabungan": 0.0262,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0683
+  },
+  {
+   "ym": "2011-04",
+   "kas": 0.0,
+   "tabungan": 0.0256,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.068
+  },
+  {
+   "ym": "2011-05",
+   "kas": 0.0,
+   "tabungan": 0.0257,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0685
+  },
+  {
+   "ym": "2011-06",
+   "kas": 0.0,
+   "tabungan": 0.0264,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0682
+  },
+  {
+   "ym": "2011-07",
+   "kas": 0.0,
+   "tabungan": 0.0252,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0686
+  },
+  {
+   "ym": "2011-08",
+   "kas": 0.0,
+   "tabungan": 0.0252,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.068
+  },
+  {
+   "ym": "2011-09",
+   "kas": 0.0,
+   "tabungan": 0.0247,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0683
+  },
+  {
+   "ym": "2011-10",
+   "kas": 0.0,
+   "tabungan": 0.0239,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0675
+  },
+  {
+   "ym": "2011-11",
+   "kas": 0.0,
+   "tabungan": 0.0238,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0656
+  },
+  {
+   "ym": "2011-12",
+   "kas": 0.0,
+   "tabungan": 0.0233,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0635
+  },
+  {
+   "ym": "2012-01",
+   "kas": 0.0,
+   "tabungan": 0.0227,
+   "deposito_lps": 0.065,
+   "deposito_bi": 0.0626
+  },
+  {
+   "ym": "2012-02",
+   "kas": 0.0,
+   "tabungan": 0.0215,
+   "deposito_lps": 0.065,
+   "deposito_bi": 0.0597
+  },
+  {
+   "ym": "2012-03",
+   "kas": 0.0,
+   "tabungan": 0.0203,
+   "deposito_lps": 0.06,
+   "deposito_bi": 0.0566
+  },
+  {
+   "ym": "2012-04",
+   "kas": 0.0,
+   "tabungan": 0.0199,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0542
+  },
+  {
+   "ym": "2012-05",
+   "kas": 0.0,
+   "tabungan": 0.0197,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0535
+  },
+  {
+   "ym": "2012-06",
+   "kas": 0.0,
+   "tabungan": 0.0193,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0539
+  },
+  {
+   "ym": "2012-07",
+   "kas": 0.0,
+   "tabungan": 0.0184,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0539
+  },
+  {
+   "ym": "2012-08",
+   "kas": 0.0,
+   "tabungan": 0.0182,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0542
+  },
+  {
+   "ym": "2012-09",
+   "kas": 0.0,
+   "tabungan": 0.0181,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.054
+  },
+  {
+   "ym": "2012-10",
+   "kas": 0.0,
+   "tabungan": 0.018,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0549
+  },
+  {
+   "ym": "2012-11",
+   "kas": 0.0,
+   "tabungan": 0.0181,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0542
+  },
+  {
+   "ym": "2012-12",
+   "kas": 0.0,
+   "tabungan": 0.0183,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0558
+  },
+  {
+   "ym": "2013-01",
+   "kas": 0.0,
+   "tabungan": 0.0179,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0549
+  },
+  {
+   "ym": "2013-02",
+   "kas": 0.0,
+   "tabungan": 0.0178,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0543
+  },
+  {
+   "ym": "2013-03",
+   "kas": 0.0,
+   "tabungan": 0.0176,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0551
+  },
+  {
+   "ym": "2013-04",
+   "kas": 0.0,
+   "tabungan": 0.0176,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0542
+  },
+  {
+   "ym": "2013-05",
+   "kas": 0.0,
+   "tabungan": 0.0188,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0553
+  },
+  {
+   "ym": "2013-06",
+   "kas": 0.0,
+   "tabungan": 0.0188,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.056
+  },
+  {
+   "ym": "2013-07",
+   "kas": 0.0,
+   "tabungan": 0.0187,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.059
+  },
+  {
+   "ym": "2013-08",
+   "kas": 0.0,
+   "tabungan": 0.0188,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0619
+  },
+  {
+   "ym": "2013-09",
+   "kas": 0.0,
+   "tabungan": 0.0187,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0673
+  },
+  {
+   "ym": "2013-10",
+   "kas": 0.0,
+   "tabungan": 0.0186,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.071
+  },
+  {
+   "ym": "2013-11",
+   "kas": 0.0,
+   "tabungan": 0.0186,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0728
+  },
+  {
+   "ym": "2013-12",
+   "kas": 0.0,
+   "tabungan": 0.0189,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0792
+  },
+  {
+   "ym": "2014-01",
+   "kas": 0.0,
+   "tabungan": 0.0188,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0789
+  },
+  {
+   "ym": "2014-02",
+   "kas": 0.0,
+   "tabungan": 0.0188,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.0798
+  },
+  {
+   "ym": "2014-03",
+   "kas": 0.0,
+   "tabungan": 0.0188,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.0799
+  },
+  {
+   "ym": "2014-04",
+   "kas": 0.0,
+   "tabungan": 0.0188,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.081
+  },
+  {
+   "ym": "2014-05",
+   "kas": 0.0,
+   "tabungan": 0.0177,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.0816
+  },
+  {
+   "ym": "2014-06",
+   "kas": 0.0,
+   "tabungan": 0.0169,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0832
+  },
+  {
+   "ym": "2014-07",
+   "kas": 0.0,
+   "tabungan": 0.0174,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0841
+  },
+  {
+   "ym": "2014-08",
+   "kas": 0.0,
+   "tabungan": 0.0176,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0849
+  },
+  {
+   "ym": "2014-09",
+   "kas": 0.0,
+   "tabungan": 0.0177,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0848
+  },
+  {
+   "ym": "2014-10",
+   "kas": 0.0,
+   "tabungan": 0.0176,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0824
+  },
+  {
+   "ym": "2014-11",
+   "kas": 0.0,
+   "tabungan": 0.0177,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0822
+  },
+  {
+   "ym": "2014-12",
+   "kas": 0.0,
+   "tabungan": 0.0176,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0858
+  },
+  {
+   "ym": "2015-01",
+   "kas": 0.0,
+   "tabungan": 0.0172,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0846
+  },
+  {
+   "ym": "2015-02",
+   "kas": 0.0,
+   "tabungan": 0.0176,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0836
+  },
+  {
+   "ym": "2015-03",
+   "kas": 0.0,
+   "tabungan": 0.0174,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0831
+  },
+  {
+   "ym": "2015-04",
+   "kas": 0.0,
+   "tabungan": 0.0194,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0796
+  },
+  {
+   "ym": "2015-05",
+   "kas": 0.0,
+   "tabungan": 0.0173,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0785
+  },
+  {
+   "ym": "2015-06",
+   "kas": 0.0,
+   "tabungan": 0.0172,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0776
+  },
+  {
+   "ym": "2015-07",
+   "kas": 0.0,
+   "tabungan": 0.0172,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0777
+  },
+  {
+   "ym": "2015-08",
+   "kas": 0.0,
+   "tabungan": 0.0172,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0765
+  },
+  {
+   "ym": "2015-09",
+   "kas": 0.0,
+   "tabungan": 0.0172,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0762
+  },
+  {
+   "ym": "2015-10",
+   "kas": 0.0,
+   "tabungan": 0.0169,
+   "deposito_lps": 0.0775,
+   "deposito_bi": 0.0748
+  },
+  {
+   "ym": "2015-11",
+   "kas": 0.0,
+   "tabungan": 0.017,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.075
+  },
+  {
+   "ym": "2015-12",
+   "kas": 0.0,
+   "tabungan": 0.0173,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.076
+  },
+  {
+   "ym": "2016-01",
+   "kas": 0.0,
+   "tabungan": 0.0172,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.0751
+  },
+  {
+   "ym": "2016-02",
+   "kas": 0.0,
+   "tabungan": 0.0171,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.0732
+  },
+  {
+   "ym": "2016-03",
+   "kas": 0.0,
+   "tabungan": 0.0166,
+   "deposito_lps": 0.075,
+   "deposito_bi": 0.0706
+  },
+  {
+   "ym": "2016-04",
+   "kas": 0.0,
+   "tabungan": 0.016,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0695
+  },
+  {
+   "ym": "2016-05",
+   "kas": 0.0,
+   "tabungan": 0.0159,
+   "deposito_lps": 0.0725,
+   "deposito_bi": 0.0679
+  },
+  {
+   "ym": "2016-06",
+   "kas": 0.0,
+   "tabungan": 0.0167,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.068
+  },
+  {
+   "ym": "2016-07",
+   "kas": 0.0,
+   "tabungan": 0.0168,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0666
+  },
+  {
+   "ym": "2016-08",
+   "kas": 0.0,
+   "tabungan": 0.0168,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0667
+  },
+  {
+   "ym": "2016-09",
+   "kas": 0.0,
+   "tabungan": 0.0176,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0663
+  },
+  {
+   "ym": "2016-10",
+   "kas": 0.0,
+   "tabungan": 0.0162,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0646
+  },
+  {
+   "ym": "2016-11",
+   "kas": 0.0,
+   "tabungan": 0.0151,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0636
+  },
+  {
+   "ym": "2016-12",
+   "kas": 0.0,
+   "tabungan": 0.0148,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0646
+  },
+  {
+   "ym": "2017-01",
+   "kas": 0.0,
+   "tabungan": 0.0146,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0646
+  },
+  {
+   "ym": "2017-02",
+   "kas": 0.0,
+   "tabungan": 0.0146,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0642
+  },
+  {
+   "ym": "2017-03",
+   "kas": 0.0,
+   "tabungan": 0.0146,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0644
+  },
+  {
+   "ym": "2017-04",
+   "kas": 0.0,
+   "tabungan": 0.0144,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0637
+  },
+  {
+   "ym": "2017-05",
+   "kas": 0.0,
+   "tabungan": 0.0145,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0637
+  },
+  {
+   "ym": "2017-06",
+   "kas": 0.0,
+   "tabungan": 0.0144,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.063
+  },
+  {
+   "ym": "2017-07",
+   "kas": 0.0,
+   "tabungan": 0.0143,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0632
+  },
+  {
+   "ym": "2017-08",
+   "kas": 0.0,
+   "tabungan": 0.0144,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.063
+  },
+  {
+   "ym": "2017-09",
+   "kas": 0.0,
+   "tabungan": 0.0143,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0609
+  },
+  {
+   "ym": "2017-10",
+   "kas": 0.0,
+   "tabungan": 0.0138,
+   "deposito_lps": 0.06,
+   "deposito_bi": 0.0589
+  },
+  {
+   "ym": "2017-11",
+   "kas": 0.0,
+   "tabungan": 0.0138,
+   "deposito_lps": 0.06,
+   "deposito_bi": 0.058
+  },
+  {
+   "ym": "2017-12",
+   "kas": 0.0,
+   "tabungan": 0.0147,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0581
+  },
+  {
+   "ym": "2018-01",
+   "kas": 0.0,
+   "tabungan": 0.0137,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0572
+  },
+  {
+   "ym": "2018-02",
+   "kas": 0.0,
+   "tabungan": 0.0135,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0565
+  },
+  {
+   "ym": "2018-03",
+   "kas": 0.0,
+   "tabungan": 0.0133,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0565
+  },
+  {
+   "ym": "2018-04",
+   "kas": 0.0,
+   "tabungan": 0.0131,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0564
+  },
+  {
+   "ym": "2018-05",
+   "kas": 0.0,
+   "tabungan": 0.013,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0564
+  },
+  {
+   "ym": "2018-06",
+   "kas": 0.0,
+   "tabungan": 0.0129,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0574
+  },
+  {
+   "ym": "2018-07",
+   "kas": 0.0,
+   "tabungan": 0.0128,
+   "deposito_lps": 0.06,
+   "deposito_bi": 0.0601
+  },
+  {
+   "ym": "2018-08",
+   "kas": 0.0,
+   "tabungan": 0.0127,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.062
+  },
+  {
+   "ym": "2018-09",
+   "kas": 0.0,
+   "tabungan": 0.0127,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0632
+  },
+  {
+   "ym": "2018-10",
+   "kas": 0.0,
+   "tabungan": 0.0126,
+   "deposito_lps": 0.065,
+   "deposito_bi": 0.0656
+  },
+  {
+   "ym": "2018-11",
+   "kas": 0.0,
+   "tabungan": 0.0126,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0672
+  },
+  {
+   "ym": "2018-12",
+   "kas": 0.0,
+   "tabungan": 0.0125,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0692
+  },
+  {
+   "ym": "2019-01",
+   "kas": 0.0,
+   "tabungan": 0.0123,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0691
+  },
+  {
+   "ym": "2019-02",
+   "kas": 0.0,
+   "tabungan": 0.0123,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0683
+  },
+  {
+   "ym": "2019-03",
+   "kas": 0.0,
+   "tabungan": 0.0124,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0684
+  },
+  {
+   "ym": "2019-04",
+   "kas": 0.0,
+   "tabungan": 0.0123,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.068
+  },
+  {
+   "ym": "2019-05",
+   "kas": 0.0,
+   "tabungan": 0.0121,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0682
+  },
+  {
+   "ym": "2019-06",
+   "kas": 0.0,
+   "tabungan": 0.0123,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0676
+  },
+  {
+   "ym": "2019-07",
+   "kas": 0.0,
+   "tabungan": 0.0123,
+   "deposito_lps": 0.07,
+   "deposito_bi": 0.0668
+  },
+  {
+   "ym": "2019-08",
+   "kas": 0.0,
+   "tabungan": 0.0121,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0652
+  },
+  {
+   "ym": "2019-09",
+   "kas": 0.0,
+   "tabungan": 0.0118,
+   "deposito_lps": 0.0675,
+   "deposito_bi": 0.0634
+  },
+  {
+   "ym": "2019-10",
+   "kas": 0.0,
+   "tabungan": 0.0115,
+   "deposito_lps": 0.065,
+   "deposito_bi": 0.0617
+  },
+  {
+   "ym": "2019-11",
+   "kas": 0.0,
+   "tabungan": 0.0114,
+   "deposito_lps": 0.065,
+   "deposito_bi": 0.0601
+  },
+  {
+   "ym": "2019-12",
+   "kas": 0.0,
+   "tabungan": 0.0112,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0605
+  },
+  {
+   "ym": "2020-01",
+   "kas": 0.0,
+   "tabungan": 0.0113,
+   "deposito_lps": 0.0625,
+   "deposito_bi": 0.0597
+  },
+  {
+   "ym": "2020-02",
+   "kas": 0.0,
+   "tabungan": 0.0111,
+   "deposito_lps": 0.06,
+   "deposito_bi": 0.0591
+  },
+  {
+   "ym": "2020-03",
+   "kas": 0.0,
+   "tabungan": 0.0108,
+   "deposito_lps": 0.06,
+   "deposito_bi": 0.0576
+  },
+  {
+   "ym": "2020-04",
+   "kas": 0.0,
+   "tabungan": 0.0105,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0569
+  },
+  {
+   "ym": "2020-05",
+   "kas": 0.0,
+   "tabungan": 0.0099,
+   "deposito_lps": 0.0575,
+   "deposito_bi": 0.0563
+  },
+  {
+   "ym": "2020-06",
+   "kas": 0.0,
+   "tabungan": 0.0099,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0552
+  },
+  {
+   "ym": "2020-07",
+   "kas": 0.0,
+   "tabungan": 0.0094,
+   "deposito_lps": 0.055,
+   "deposito_bi": 0.0539
+  },
+  {
+   "ym": "2020-08",
+   "kas": 0.0,
+   "tabungan": 0.0092,
+   "deposito_lps": 0.0525,
+   "deposito_bi": 0.052
+  },
+  {
+   "ym": "2020-09",
+   "kas": 0.0,
+   "tabungan": 0.0091,
+   "deposito_lps": 0.0525,
+   "deposito_bi": 0.0493
+  },
+  {
+   "ym": "2020-10",
+   "kas": 0.0,
+   "tabungan": 0.0086,
+   "deposito_lps": 0.05,
+   "deposito_bi": 0.0468
+  },
+  {
+   "ym": "2020-11",
+   "kas": 0.0,
+   "tabungan": 0.0083,
+   "deposito_lps": 0.05,
+   "deposito_bi": 0.0448
+  },
+  {
+   "ym": "2020-12",
+   "kas": 0.0,
+   "tabungan": 0.0082,
+   "deposito_lps": 0.045,
+   "deposito_bi": 0.0425
+  },
+  {
+   "ym": "2021-01",
+   "kas": 0.0,
+   "tabungan": 0.008,
+   "deposito_lps": 0.045,
+   "deposito_bi": 0.0407
+  },
+  {
+   "ym": "2021-02",
+   "kas": 0.0,
+   "tabungan": 0.0079,
+   "deposito_lps": 0.045,
+   "deposito_bi": 0.0388
+  },
+  {
+   "ym": "2021-03",
+   "kas": 0.0,
+   "tabungan": 0.0079,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0372
+  },
+  {
+   "ym": "2021-04",
+   "kas": 0.0,
+   "tabungan": 0.0076,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0365
+  },
+  {
+   "ym": "2021-05",
+   "kas": 0.0,
+   "tabungan": 0.0076,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0357
+  },
+  {
+   "ym": "2021-06",
+   "kas": 0.0,
+   "tabungan": 0.0077,
+   "deposito_lps": 0.04,
+   "deposito_bi": 0.0349
+  },
+  {
+   "ym": "2021-07",
+   "kas": 0.0,
+   "tabungan": 0.0072,
+   "deposito_lps": 0.04,
+   "deposito_bi": 0.0342
+  },
+  {
+   "ym": "2021-08",
+   "kas": 0.0,
+   "tabungan": 0.0073,
+   "deposito_lps": 0.04,
+   "deposito_bi": 0.0334
+  },
+  {
+   "ym": "2021-09",
+   "kas": 0.0,
+   "tabungan": 0.007,
+   "deposito_lps": 0.04,
+   "deposito_bi": 0.0327
+  },
+  {
+   "ym": "2021-10",
+   "kas": 0.0,
+   "tabungan": 0.0068,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0316
+  },
+  {
+   "ym": "2021-11",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0305
+  },
+  {
+   "ym": "2021-12",
+   "kas": 0.0,
+   "tabungan": 0.0065,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0296
+  },
+  {
+   "ym": "2022-01",
+   "kas": 0.0,
+   "tabungan": 0.0069,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0292
+  },
+  {
+   "ym": "2022-02",
+   "kas": 0.0,
+   "tabungan": 0.0063,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0284
+  },
+  {
+   "ym": "2022-03",
+   "kas": 0.0,
+   "tabungan": 0.0063,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0285
+  },
+  {
+   "ym": "2022-04",
+   "kas": 0.0,
+   "tabungan": 0.0062,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0283
+  },
+  {
+   "ym": "2022-05",
+   "kas": 0.0,
+   "tabungan": 0.0064,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0283
+  },
+  {
+   "ym": "2022-06",
+   "kas": 0.0,
+   "tabungan": 0.0064,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0284
+  },
+  {
+   "ym": "2022-07",
+   "kas": 0.0,
+   "tabungan": 0.0064,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0286
+  },
+  {
+   "ym": "2022-08",
+   "kas": 0.0,
+   "tabungan": 0.0065,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0289
+  },
+  {
+   "ym": "2022-09",
+   "kas": 0.0,
+   "tabungan": 0.0066,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0298
+  },
+  {
+   "ym": "2022-10",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0375,
+   "deposito_bi": 0.0337
+  },
+  {
+   "ym": "2022-11",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0375,
+   "deposito_bi": 0.037
+  },
+  {
+   "ym": "2022-12",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0375,
+   "deposito_bi": 0.0396
+  },
+  {
+   "ym": "2023-01",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0375,
+   "deposito_bi": 0.0399
+  },
+  {
+   "ym": "2023-02",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.04,
+   "deposito_bi": 0.0414
+  },
+  {
+   "ym": "2023-03",
+   "kas": 0.0,
+   "tabungan": 0.0069,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0417
+  },
+  {
+   "ym": "2023-04",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0414
+  },
+  {
+   "ym": "2023-05",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.042
+  },
+  {
+   "ym": "2023-06",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.042
+  },
+  {
+   "ym": "2023-07",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0425
+  },
+  {
+   "ym": "2023-08",
+   "kas": 0.0,
+   "tabungan": 0.0065,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0427
+  },
+  {
+   "ym": "2023-09",
+   "kas": 0.0,
+   "tabungan": 0.0066,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0432
+  },
+  {
+   "ym": "2023-10",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0443
+  },
+  {
+   "ym": "2023-11",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.045
+  },
+  {
+   "ym": "2023-12",
+   "kas": 0.0,
+   "tabungan": 0.0069,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0471
+  },
+  {
+   "ym": "2024-01",
+   "kas": 0.0,
+   "tabungan": 0.0068,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0466
+  },
+  {
+   "ym": "2024-02",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.046
+  },
+  {
+   "ym": "2024-03",
+   "kas": 0.0,
+   "tabungan": 0.0068,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0458
+  },
+  {
+   "ym": "2024-04",
+   "kas": 0.0,
+   "tabungan": 0.0068,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0462
+  },
+  {
+   "ym": "2024-05",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0464
+  },
+  {
+   "ym": "2024-06",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0468
+  },
+  {
+   "ym": "2024-07",
+   "kas": 0.0,
+   "tabungan": 0.0065,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0475
+  },
+  {
+   "ym": "2024-08",
+   "kas": 0.0,
+   "tabungan": 0.0065,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0476
+  },
+  {
+   "ym": "2024-09",
+   "kas": 0.0,
+   "tabungan": 0.0066,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0477
+  },
+  {
+   "ym": "2024-10",
+   "kas": 0.0,
+   "tabungan": 0.0066,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0475
+  },
+  {
+   "ym": "2024-11",
+   "kas": 0.0,
+   "tabungan": 0.0067,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0473
+  },
+  {
+   "ym": "2024-12",
+   "kas": 0.0,
+   "tabungan": 0.0068,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.0487
+  },
+  {
+   "ym": "2025-01",
+   "kas": 0.0,
+   "tabungan": 0.006776,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.048375
+  },
+  {
+   "ym": "2025-02",
+   "kas": 0.0,
+   "tabungan": 0.006822,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.04805
+  },
+  {
+   "ym": "2025-03",
+   "kas": 0.0,
+   "tabungan": 0.006839,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.048156
+  },
+  {
+   "ym": "2025-04",
+   "kas": 0.0,
+   "tabungan": 0.006871,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.048515
+  },
+  {
+   "ym": "2025-05",
+   "kas": 0.0,
+   "tabungan": 0.006988,
+   "deposito_lps": 0.0425,
+   "deposito_bi": 0.048419
+  },
+  {
+   "ym": "2025-06",
+   "kas": 0.0,
+   "tabungan": 0.00708,
+   "deposito_lps": 0.04,
+   "deposito_bi": 0.048745
+  },
+  {
+   "ym": "2025-07",
+   "kas": 0.0,
+   "tabungan": 0.006798,
+   "deposito_lps": 0.04,
+   "deposito_bi": 0.047777
+  },
+  {
+   "ym": "2025-08",
+   "kas": 0.0,
+   "tabungan": 0.006954,
+   "deposito_lps": 0.04,
+   "deposito_bi": 0.046798
+  },
+  {
+   "ym": "2025-09",
+   "kas": 0.0,
+   "tabungan": 0.006991,
+   "deposito_lps": 0.0375,
+   "deposito_bi": 0.045496
+  },
+  {
+   "ym": "2025-10",
+   "kas": 0.0,
+   "tabungan": 0.006809,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.042821
+  },
+  {
+   "ym": "2025-11",
+   "kas": 0.0,
+   "tabungan": 0.006745,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.041697
+  },
+  {
+   "ym": "2025-12",
+   "kas": 0.0,
+   "tabungan": 0.006998,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.042647
+  },
+  {
+   "ym": "2026-01",
+   "kas": 0.0,
+   "tabungan": 0.006871,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.041447
+  },
+  {
+   "ym": "2026-02",
+   "kas": 0.0,
+   "tabungan": 0.006772,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.041797
+  },
+  {
+   "ym": "2026-03",
+   "kas": 0.0,
+   "tabungan": 0.006722,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.042043
+  },
+  {
+   "ym": "2026-04",
+   "kas": 0.0,
+   "tabungan": 0.006783,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.041817
+  },
+  {
+   "ym": "2026-05",
+   "kas": 0.0,
+   "tabungan": 0.006809,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.0427
+  },
+  {
+   "ym": "2026-06",
+   "kas": 0.0,
+   "tabungan": 0.006783,
+   "deposito_lps": 0.035,
+   "deposito_bi": 0.047921
+  },
+  {
+   "ym": "2026-07",
+   "kas": 0.0,
+   "tabungan": 0.006846,
+   "deposito_lps": 0.0375,
+   "deposito_bi": 0.050371
+  },
+  {
+   "ym": "2026-08",
+   "kas": 0.0,
+   "tabungan": 0.007507,
+   "deposito_lps": 0.0375,
+   "deposito_bi": 0.05076
+  },
+  {
+   "ym": "2026-09",
+   "kas": 0.0,
+   "tabungan": 0.007507,
+   "deposito_lps": 0.0375,
+   "deposito_bi": 0.05076
+  }
+ ]
+}

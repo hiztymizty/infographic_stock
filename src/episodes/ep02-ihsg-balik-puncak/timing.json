@@ -1,0 +1,1190 @@
+{
+ "episode": "ep02-ihsg-balik-puncak",
+ "fps": 30,
+ "estimated": true,
+ "totalFrames": 2284,
+ "scenes": [
+  {
+   "id": "hook",
+   "from": 0,
+   "dur": 168
+  },
+  {
+   "id": "math",
+   "from": 168,
+   "dur": 426
+  },
+  {
+   "id": "today",
+   "from": 594,
+   "dur": 310
+  },
+  {
+   "id": "history",
+   "from": 904,
+   "dur": 512
+  },
+  {
+   "id": "lesson",
+   "from": 1416,
+   "dur": 237
+  },
+  {
+   "id": "hakabot-outro",
+   "from": 1653,
+   "dur": 631
+  }
+ ],
+ "voice": [
+  {
+   "id": "take-hook-1",
+   "scene": "hook",
+   "from": 10,
+   "dur": 144,
+   "audio": null,
+   "display": "IHSG sempat turun 41%. Butuh naik berapa buat balik?",
+   "spoken": "I-Ha-Es-Ge sempat turun empat puluh satu persen. Butuh naik berapa buat balik?"
+  },
+  {
+   "id": "take-math-1",
+   "scene": "math",
+   "from": 178,
+   "dur": 214,
+   "audio": null,
+   "display": "Modal Rp 100 turun jadi Rp 50. Buat balik, harus naik 100%, alias dobel. Nggak simetris, kan?",
+   "spoken": "Modal seratus rupiah turun jadi lima puluh. Buat balik, harus naik seratus persen, alias dobel. Nggak simetris, kan?"
+  },
+  {
+   "id": "take-math-2",
+   "scene": "math",
+   "from": 410,
+   "dur": 166,
+   "audio": null,
+   "display": "Makanya IHSG yang turun 41%, butuh naik 71%.",
+   "spoken": "Makanya I-Ha-Es-Ge yang turun empat puluh satu persen, butuh naik tujuh puluh satu persen."
+  },
+  {
+   "id": "take-today-1",
+   "scene": "today",
+   "from": 605,
+   "dur": 286,
+   "audio": null,
+   "display": "Sekarang IHSG udah naik 11% dari dasarnya. Tapi masih 35% di bawah puncak, dan butuh naik 54% lagi.",
+   "spoken": "Sekarang I-Ha-Es-Ge udah naik sebelas persen dari dasarnya. Tapi masih tiga puluh lima persen di bawah puncak, dan butuh naik lima puluh empat persen lagi."
+  },
+  {
+   "id": "take-history-1",
+   "scene": "history",
+   "from": 914,
+   "dur": 477,
+   "audio": null,
+   "display": "Sejak 1997, IHSG tiga kali jatuh sedalam ini. Dari puncak sampai balik lagi, krismon butuh 6,5 tahun. Krisis 2008, 2,2 tahun. COVID, dari puncak 2018, 3,7 tahun.",
+   "spoken": "Sejak sembilan belas sembilan puluh tujuh, I-Ha-Es-Ge tiga kali jatuh sedalam ini. Dari puncak sampai balik lagi, krismon butuh enam setengah tahun. Krisis dua ribu delapan, dua koma dua tahun. COVID, dari puncak dua ribu delapan belas, tiga koma tujuh tahun."
+  },
+  {
+   "id": "take-lesson-1",
+   "scene": "lesson",
+   "from": 1426,
+   "dur": 203,
+   "audio": null,
+   "display": "Tahun ini jatuhnya nggak sampai 5 bulan. Baliknya bisa bertahun-tahun, dan nggak ada yang bisa nebak kapan.",
+   "spoken": "Tahun ini jatuhnya nggak sampai lima bulan. Baliknya bisa bertahun-tahun, dan nggak ada yang bisa nebak kapan."
+  },
+  {
+   "id": "take-hakabot-outro-1",
+   "scene": "hakabot-outro",
+   "from": 1662,
+   "dur": 159,
+   "audio": null,
+   "display": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart.",
+   "spoken": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart."
+  },
+  {
+   "id": "take-hakabot-outro-2",
+   "scene": "hakabot-outro",
+   "from": 1840,
+   "dur": 120,
+   "audio": null,
+   "display": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya.",
+   "spoken": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya."
+  },
+  {
+   "id": "take-hakabot-outro-3",
+   "scene": "hakabot-outro",
+   "from": 1979,
+   "dur": 79,
+   "audio": null,
+   "display": "Pemilik saham tiap perusahaan, tampil rapi.",
+   "spoken": "Pemilik saham tiap perusahaan, tampil rapi."
+  },
+  {
+   "id": "take-hakabot-outro-4",
+   "scene": "hakabot-outro",
+   "from": 2078,
+   "dur": 96,
+   "audio": null,
+   "display": "Screener siap pakai, bantu nyaring saham yang jelek.",
+   "spoken": "Screener siap pakai, bantu nyaring saham yang jelek."
+  },
+  {
+   "id": "take-hakabot-outro-5",
+   "scene": "hakabot-outro",
+   "from": 2193,
+   "dur": 42,
+   "audio": null,
+   "display": "Cek di hakabot.com.",
+   "spoken": "Cek di hakabot dot com."
+  }
+ ],
+ "lines": [
+  {
+   "id": "hook-1",
+   "scene": "hook",
+   "take": "take-hook-1",
+   "from": 10,
+   "dur": 89,
+   "audio": null,
+   "display": "IHSG sempat turun 41%.",
+   "spoken": "I-Ha-Es-Ge sempat turun empat puluh satu persen."
+  },
+  {
+   "id": "hook-2",
+   "scene": "hook",
+   "take": "take-hook-1",
+   "from": 101,
+   "dur": 53,
+   "audio": null,
+   "display": "Butuh naik berapa buat balik?",
+   "spoken": "Butuh naik berapa buat balik?"
+  },
+  {
+   "id": "math-1",
+   "scene": "math",
+   "take": "take-math-1",
+   "from": 178,
+   "dur": 80,
+   "audio": null,
+   "display": "Modal Rp 100 turun jadi Rp 50.",
+   "spoken": "Modal seratus rupiah turun jadi lima puluh."
+  },
+  {
+   "id": "math-2",
+   "scene": "math",
+   "take": "take-math-1",
+   "from": 259,
+   "dur": 94,
+   "audio": null,
+   "display": "Buat balik, harus naik 100%, alias dobel.",
+   "spoken": "Buat balik, harus naik seratus persen, alias dobel."
+  },
+  {
+   "id": "math-3",
+   "scene": "math",
+   "take": "take-math-1",
+   "from": 355,
+   "dur": 37,
+   "audio": null,
+   "display": "Nggak simetris, kan?",
+   "spoken": "Nggak simetris, kan?"
+  },
+  {
+   "id": "math-4",
+   "scene": "math",
+   "take": "take-math-2",
+   "from": 410,
+   "dur": 166,
+   "audio": null,
+   "display": "Makanya IHSG yang turun 41%, butuh naik 71%.",
+   "spoken": "Makanya I-Ha-Es-Ge yang turun empat puluh satu persen, butuh naik tujuh puluh satu persen."
+  },
+  {
+   "id": "today-1",
+   "scene": "today",
+   "take": "take-today-1",
+   "from": 605,
+   "dur": 108,
+   "audio": null,
+   "display": "Sekarang IHSG udah naik 11% dari dasarnya.",
+   "spoken": "Sekarang I-Ha-Es-Ge udah naik sebelas persen dari dasarnya."
+  },
+  {
+   "id": "today-2",
+   "scene": "today",
+   "take": "take-today-1",
+   "from": 715,
+   "dur": 175,
+   "audio": null,
+   "display": "Tapi masih 35% di bawah puncak, dan butuh naik 54% lagi.",
+   "spoken": "Tapi masih tiga puluh lima persen di bawah puncak, dan butuh naik lima puluh empat persen lagi."
+  },
+  {
+   "id": "hist-1",
+   "scene": "history",
+   "take": "take-history-1",
+   "from": 914,
+   "dur": 151,
+   "audio": null,
+   "display": "Sejak 1997, IHSG tiga kali jatuh sedalam ini.",
+   "spoken": "Sejak sembilan belas sembilan puluh tujuh, I-Ha-Es-Ge tiga kali jatuh sedalam ini."
+  },
+  {
+   "id": "hist-krismon",
+   "scene": "history",
+   "take": "take-history-1",
+   "from": 1067,
+   "dur": 120,
+   "audio": null,
+   "display": "Dari puncak sampai balik lagi, krismon butuh 6,5 tahun.",
+   "spoken": "Dari puncak sampai balik lagi, krismon butuh enam setengah tahun."
+  },
+  {
+   "id": "hist-2008",
+   "scene": "history",
+   "take": "take-history-1",
+   "from": 1189,
+   "dur": 81,
+   "audio": null,
+   "display": "Krisis 2008, 2,2 tahun.",
+   "spoken": "Krisis dua ribu delapan, dua koma dua tahun."
+  },
+  {
+   "id": "hist-covid",
+   "scene": "history",
+   "take": "take-history-1",
+   "from": 1272,
+   "dur": 120,
+   "audio": null,
+   "display": "COVID, dari puncak 2018, 3,7 tahun.",
+   "spoken": "COVID, dari puncak dua ribu delapan belas, tiga koma tujuh tahun."
+  },
+  {
+   "id": "lesson-1",
+   "scene": "lesson",
+   "take": "take-lesson-1",
+   "from": 1426,
+   "dur": 79,
+   "audio": null,
+   "display": "Tahun ini jatuhnya nggak sampai 5 bulan.",
+   "spoken": "Tahun ini jatuhnya nggak sampai lima bulan."
+  },
+  {
+   "id": "lesson-2",
+   "scene": "lesson",
+   "take": "take-lesson-1",
+   "from": 1507,
+   "dur": 122,
+   "audio": null,
+   "display": "Baliknya bisa bertahun-tahun, dan nggak ada yang bisa nebak kapan.",
+   "spoken": "Baliknya bisa bertahun-tahun, dan nggak ada yang bisa nebak kapan."
+  },
+  {
+   "id": "outro-1",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-1",
+   "from": 1662,
+   "dur": 158,
+   "audio": null,
+   "display": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart.",
+   "spoken": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart."
+  },
+  {
+   "id": "outro-2",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-2",
+   "from": 1840,
+   "dur": 120,
+   "audio": null,
+   "display": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya.",
+   "spoken": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya."
+  },
+  {
+   "id": "outro-3",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-3",
+   "from": 1979,
+   "dur": 80,
+   "audio": null,
+   "display": "Pemilik saham tiap perusahaan, tampil rapi.",
+   "spoken": "Pemilik saham tiap perusahaan, tampil rapi."
+  },
+  {
+   "id": "outro-4",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-4",
+   "from": 2078,
+   "dur": 96,
+   "audio": null,
+   "display": "Screener siap pakai, bantu nyaring saham yang jelek.",
+   "spoken": "Screener siap pakai, bantu nyaring saham yang jelek."
+  },
+  {
+   "id": "outro-5",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-5",
+   "from": 2193,
+   "dur": 43,
+   "audio": null,
+   "display": "Cek di hakabot.com.",
+   "spoken": "Cek di hakabot dot com."
+  }
+ ],
+ "captions": [
+  {
+   "line": "hook-1",
+   "from": 10,
+   "to": 101,
+   "words": [
+    {
+     "text": "IHSG",
+     "from": 10,
+     "to": 29
+    },
+    {
+     "text": "sempat",
+     "from": 31,
+     "to": 42
+    },
+    {
+     "text": "turun",
+     "from": 44,
+     "to": 53
+    },
+    {
+     "text": "41%.",
+     "from": 55,
+     "to": 99
+    }
+   ]
+  },
+  {
+   "line": "hook-2",
+   "from": 101,
+   "to": 178,
+   "words": [
+    {
+     "text": "Butuh",
+     "from": 101,
+     "to": 110
+    },
+    {
+     "text": "naik",
+     "from": 112,
+     "to": 119
+    },
+    {
+     "text": "berapa",
+     "from": 121,
+     "to": 132
+    },
+    {
+     "text": "buat",
+     "from": 134,
+     "to": 141
+    },
+    {
+     "text": "balik?",
+     "from": 143,
+     "to": 154
+    }
+   ]
+  },
+  {
+   "line": "math-1",
+   "from": 178,
+   "to": 259,
+   "words": [
+    {
+     "text": "Modal",
+     "from": 178,
+     "to": 187
+    },
+    {
+     "text": "Rp 100",
+     "from": 189,
+     "to": 215
+    },
+    {
+     "text": "turun",
+     "from": 217,
+     "to": 226
+    },
+    {
+     "text": "jadi",
+     "from": 228,
+     "to": 235
+    },
+    {
+     "text": "Rp 50.",
+     "from": 237,
+     "to": 258
+    }
+   ]
+  },
+  {
+   "line": "math-2",
+   "from": 259,
+   "to": 282,
+   "words": [
+    {
+     "text": "Buat",
+     "from": 259,
+     "to": 267
+    },
+    {
+     "text": "balik,",
+     "from": 269,
+     "to": 280
+    }
+   ]
+  },
+  {
+   "line": "math-2",
+   "from": 282,
+   "to": 331,
+   "words": [
+    {
+     "text": "harus",
+     "from": 282,
+     "to": 291
+    },
+    {
+     "text": "naik",
+     "from": 293,
+     "to": 300
+    },
+    {
+     "text": "100%,",
+     "from": 302,
+     "to": 329
+    }
+   ]
+  },
+  {
+   "line": "math-2",
+   "from": 331,
+   "to": 355,
+   "words": [
+    {
+     "text": "alias",
+     "from": 331,
+     "to": 340
+    },
+    {
+     "text": "dobel.",
+     "from": 342,
+     "to": 353
+    }
+   ]
+  },
+  {
+   "line": "math-3",
+   "from": 355,
+   "to": 410,
+   "words": [
+    {
+     "text": "Nggak",
+     "from": 355,
+     "to": 364
+    },
+    {
+     "text": "simetris,",
+     "from": 366,
+     "to": 383
+    },
+    {
+     "text": "kan?",
+     "from": 385,
+     "to": 392
+    }
+   ]
+  },
+  {
+   "line": "math-4",
+   "from": 410,
+   "to": 511,
+   "words": [
+    {
+     "text": "Makanya",
+     "from": 410,
+     "to": 423
+    },
+    {
+     "text": "IHSG",
+     "from": 425,
+     "to": 443
+    },
+    {
+     "text": "yang",
+     "from": 445,
+     "to": 452
+    },
+    {
+     "text": "turun",
+     "from": 454,
+     "to": 464
+    },
+    {
+     "text": "41%,",
+     "from": 465,
+     "to": 510
+    }
+   ]
+  },
+  {
+   "line": "math-4",
+   "from": 511,
+   "to": 605,
+   "words": [
+    {
+     "text": "butuh",
+     "from": 511,
+     "to": 521
+    },
+    {
+     "text": "naik",
+     "from": 523,
+     "to": 530
+    },
+    {
+     "text": "71%.",
+     "from": 532,
+     "to": 576
+    }
+   ]
+  },
+  {
+   "line": "today-1",
+   "from": 605,
+   "to": 715,
+   "words": [
+    {
+     "text": "Sekarang",
+     "from": 605,
+     "to": 619
+    },
+    {
+     "text": "IHSG",
+     "from": 621,
+     "to": 640
+    },
+    {
+     "text": "udah",
+     "from": 641,
+     "to": 649
+    },
+    {
+     "text": "naik",
+     "from": 651,
+     "to": 658
+    },
+    {
+     "text": "11%",
+     "from": 660,
+     "to": 686
+    },
+    {
+     "text": "dari",
+     "from": 687,
+     "to": 695
+    },
+    {
+     "text": "dasarnya.",
+     "from": 697,
+     "to": 713
+    }
+   ]
+  },
+  {
+   "line": "today-2",
+   "from": 715,
+   "to": 809,
+   "words": [
+    {
+     "text": "Tapi",
+     "from": 715,
+     "to": 722
+    },
+    {
+     "text": "masih",
+     "from": 724,
+     "to": 734
+    },
+    {
+     "text": "35%",
+     "from": 735,
+     "to": 776
+    },
+    {
+     "text": "di",
+     "from": 778,
+     "to": 781
+    },
+    {
+     "text": "bawah",
+     "from": 783,
+     "to": 793
+    },
+    {
+     "text": "puncak,",
+     "from": 794,
+     "to": 807
+    }
+   ]
+  },
+  {
+   "line": "today-2",
+   "from": 809,
+   "to": 914,
+   "words": [
+    {
+     "text": "dan",
+     "from": 809,
+     "to": 815
+    },
+    {
+     "text": "butuh",
+     "from": 816,
+     "to": 826
+    },
+    {
+     "text": "naik",
+     "from": 828,
+     "to": 835
+    },
+    {
+     "text": "54%",
+     "from": 837,
+     "to": 879
+    },
+    {
+     "text": "lagi.",
+     "from": 881,
+     "to": 890
+    }
+   ]
+  },
+  {
+   "line": "hist-1",
+   "from": 914,
+   "to": 993,
+   "words": [
+    {
+     "text": "Sejak",
+     "from": 914,
+     "to": 923
+    },
+    {
+     "text": "1997,",
+     "from": 925,
+     "to": 992
+    }
+   ]
+  },
+  {
+   "line": "hist-1",
+   "from": 993,
+   "to": 1067,
+   "words": [
+    {
+     "text": "IHSG",
+     "from": 993,
+     "to": 1012
+    },
+    {
+     "text": "tiga",
+     "from": 1014,
+     "to": 1021
+    },
+    {
+     "text": "kali",
+     "from": 1023,
+     "to": 1030
+    },
+    {
+     "text": "jatuh",
+     "from": 1032,
+     "to": 1041
+    },
+    {
+     "text": "sedalam",
+     "from": 1043,
+     "to": 1056
+    },
+    {
+     "text": "ini.",
+     "from": 1058,
+     "to": 1065
+    }
+   ]
+  },
+  {
+   "line": "hist-krismon",
+   "from": 1067,
+   "to": 1124,
+   "words": [
+    {
+     "text": "Dari",
+     "from": 1067,
+     "to": 1075
+    },
+    {
+     "text": "puncak",
+     "from": 1076,
+     "to": 1087
+    },
+    {
+     "text": "sampai",
+     "from": 1089,
+     "to": 1100
+    },
+    {
+     "text": "balik",
+     "from": 1102,
+     "to": 1111
+    },
+    {
+     "text": "lagi,",
+     "from": 1113,
+     "to": 1123
+    }
+   ]
+  },
+  {
+   "line": "hist-krismon",
+   "from": 1124,
+   "to": 1189,
+   "words": [
+    {
+     "text": "krismon",
+     "from": 1124,
+     "to": 1137
+    },
+    {
+     "text": "butuh",
+     "from": 1139,
+     "to": 1148
+    },
+    {
+     "text": "6,5 tahun.",
+     "from": 1150,
+     "to": 1187
+    }
+   ]
+  },
+  {
+   "line": "hist-2008",
+   "from": 1189,
+   "to": 1272,
+   "words": [
+    {
+     "text": "Krisis",
+     "from": 1189,
+     "to": 1200
+    },
+    {
+     "text": "2008,",
+     "from": 1202,
+     "to": 1233
+    },
+    {
+     "text": "2,2 tahun.",
+     "from": 1235,
+     "to": 1270
+    }
+   ]
+  },
+  {
+   "line": "hist-covid",
+   "from": 1272,
+   "to": 1392,
+   "words": [
+    {
+     "text": "COVID,",
+     "from": 1272,
+     "to": 1283
+    },
+    {
+     "text": "dari",
+     "from": 1285,
+     "to": 1292
+    },
+    {
+     "text": "puncak",
+     "from": 1294,
+     "to": 1305
+    },
+    {
+     "text": "2018,",
+     "from": 1307,
+     "to": 1349
+    },
+    {
+     "text": "3,7 tahun.",
+     "from": 1351,
+     "to": 1392
+    }
+   ]
+  },
+  {
+   "line": "lesson-1",
+   "from": 1426,
+   "to": 1507,
+   "words": [
+    {
+     "text": "Tahun",
+     "from": 1426,
+     "to": 1435
+    },
+    {
+     "text": "ini",
+     "from": 1437,
+     "to": 1443
+    },
+    {
+     "text": "jatuhnya",
+     "from": 1445,
+     "to": 1459
+    },
+    {
+     "text": "nggak",
+     "from": 1461,
+     "to": 1470
+    },
+    {
+     "text": "sampai",
+     "from": 1472,
+     "to": 1483
+    },
+    {
+     "text": "5 bulan.",
+     "from": 1485,
+     "to": 1505
+    }
+   ]
+  },
+  {
+   "line": "lesson-2",
+   "from": 1507,
+   "to": 1563,
+   "words": [
+    {
+     "text": "Baliknya",
+     "from": 1507,
+     "to": 1522
+    },
+    {
+     "text": "bisa",
+     "from": 1524,
+     "to": 1531
+    },
+    {
+     "text": "bertahun-tahun,",
+     "from": 1533,
+     "to": 1561
+    }
+   ]
+  },
+  {
+   "line": "lesson-2",
+   "from": 1563,
+   "to": 1629,
+   "words": [
+    {
+     "text": "dan",
+     "from": 1563,
+     "to": 1568
+    },
+    {
+     "text": "nggak",
+     "from": 1570,
+     "to": 1579
+    },
+    {
+     "text": "ada",
+     "from": 1581,
+     "to": 1587
+    },
+    {
+     "text": "yang",
+     "from": 1588,
+     "to": 1596
+    },
+    {
+     "text": "bisa",
+     "from": 1598,
+     "to": 1605
+    },
+    {
+     "text": "nebak",
+     "from": 1607,
+     "to": 1616
+    },
+    {
+     "text": "kapan.",
+     "from": 1618,
+     "to": 1629
+    }
+   ]
+  },
+  {
+   "line": "outro-1",
+   "from": 1662,
+   "to": 1719,
+   "words": [
+    {
+     "text": "Hakabot",
+     "from": 1662,
+     "to": 1675
+    },
+    {
+     "text": "punya",
+     "from": 1677,
+     "to": 1686
+    },
+    {
+     "text": "banyak",
+     "from": 1688,
+     "to": 1699
+    },
+    {
+     "text": "indikator",
+     "from": 1701,
+     "to": 1717
+    }
+   ]
+  },
+  {
+   "line": "outro-1",
+   "from": 1719,
+   "to": 1750,
+   "words": [
+    {
+     "text": "racikan",
+     "from": 1719,
+     "to": 1732
+    },
+    {
+     "text": "sendiri,",
+     "from": 1734,
+     "to": 1749
+    }
+   ]
+  },
+  {
+   "line": "outro-1",
+   "from": 1750,
+   "to": 1840,
+   "words": [
+    {
+     "text": "tinggal",
+     "from": 1750,
+     "to": 1763
+    },
+    {
+     "text": "klik",
+     "from": 1765,
+     "to": 1773
+    },
+    {
+     "text": "langsung",
+     "from": 1774,
+     "to": 1789
+    },
+    {
+     "text": "muncul",
+     "from": 1791,
+     "to": 1802
+    },
+    {
+     "text": "di",
+     "from": 1804,
+     "to": 1808
+    },
+    {
+     "text": "chart.",
+     "from": 1809,
+     "to": 1820
+    }
+   ]
+  },
+  {
+   "line": "outro-2",
+   "from": 1840,
+   "to": 1904,
+   "words": [
+    {
+     "text": "Kelihatan",
+     "from": 1840,
+     "to": 1857
+    },
+    {
+     "text": "broker",
+     "from": 1858,
+     "to": 1869
+    },
+    {
+     "text": "mana",
+     "from": 1871,
+     "to": 1879
+    },
+    {
+     "text": "yang",
+     "from": 1880,
+     "to": 1888
+    },
+    {
+     "text": "nambah,",
+     "from": 1890,
+     "to": 1903
+    }
+   ]
+  },
+  {
+   "line": "outro-2",
+   "from": 1904,
+   "to": 1979,
+   "words": [
+    {
+     "text": "keluar,",
+     "from": 1904,
+     "to": 1917
+    },
+    {
+     "text": "sampai",
+     "from": 1919,
+     "to": 1930
+    },
+    {
+     "text": "untung",
+     "from": 1932,
+     "to": 1943
+    },
+    {
+     "text": "ruginya.",
+     "from": 1945,
+     "to": 1960
+    }
+   ]
+  },
+  {
+   "line": "outro-3",
+   "from": 1979,
+   "to": 2036,
+   "words": [
+    {
+     "text": "Pemilik",
+     "from": 1979,
+     "to": 1992
+    },
+    {
+     "text": "saham",
+     "from": 1994,
+     "to": 2003
+    },
+    {
+     "text": "tiap",
+     "from": 2005,
+     "to": 2012
+    },
+    {
+     "text": "perusahaan,",
+     "from": 2014,
+     "to": 2035
+    }
+   ]
+  },
+  {
+   "line": "outro-3",
+   "from": 2036,
+   "to": 2078,
+   "words": [
+    {
+     "text": "tampil",
+     "from": 2036,
+     "to": 2047
+    },
+    {
+     "text": "rapi.",
+     "from": 2049,
+     "to": 2059
+    }
+   ]
+  },
+  {
+   "line": "outro-4",
+   "from": 2078,
+   "to": 2117,
+   "words": [
+    {
+     "text": "Screener",
+     "from": 2078,
+     "to": 2093
+    },
+    {
+     "text": "siap",
+     "from": 2095,
+     "to": 2102
+    },
+    {
+     "text": "pakai,",
+     "from": 2104,
+     "to": 2115
+    }
+   ]
+  },
+  {
+   "line": "outro-4",
+   "from": 2117,
+   "to": 2193,
+   "words": [
+    {
+     "text": "bantu",
+     "from": 2117,
+     "to": 2126
+    },
+    {
+     "text": "nyaring",
+     "from": 2128,
+     "to": 2141
+    },
+    {
+     "text": "saham",
+     "from": 2143,
+     "to": 2152
+    },
+    {
+     "text": "yang",
+     "from": 2154,
+     "to": 2161
+    },
+    {
+     "text": "jelek.",
+     "from": 2163,
+     "to": 2174
+    }
+   ]
+  },
+  {
+   "line": "outro-5",
+   "from": 2193,
+   "to": 2236,
+   "words": [
+    {
+     "text": "Cek",
+     "from": 2193,
+     "to": 2199
+    },
+    {
+     "text": "di",
+     "from": 2201,
+     "to": 2204
+    },
+    {
+     "text": "hakabot.com.",
+     "from": 2206,
+     "to": 2236
+    }
+   ]
+  }
+ ]
+}

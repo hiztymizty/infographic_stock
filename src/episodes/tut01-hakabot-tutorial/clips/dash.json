@@ -1,0 +1,6 @@
+{
+  "_doc": "Clips of chapter Dashboard (owner: beats/dash.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each.",
+  "clips": {
+    "dash-a": {"rec": "n", "start": 0.5, "end": 13.0, "note": "dashboard top static 0.5-4.5; Next 4.55 -> page 2/2 at 4.60; scroll 6.93-7.80 (+554 px); Quick View + Community idle to 13.0 (scroll back up starts 13.07)"}
+  }
+}

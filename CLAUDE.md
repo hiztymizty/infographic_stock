@@ -119,7 +119,8 @@ should eyeball or listen to (VO pronunciation, music choice). Changes go back to
    and logos, and personal info (account names, emails).
 5. **Code-made visuals only.** Motion graphics are built in Remotion. AI is used for the voice only.
 6. **Voiceover costs money.** ElevenLabs bills per character. `voiceover.py` caches by take (one take per
-   scene), so editing a line re-bills only its scene's take. Never regenerate everything to fix one line,
+   scene), so editing a line re-bills only its scene's take. A take identical to one already paid for in another episode (same text, voice, model,
+   settings; e.g. the standard outro) is copied from there for free. Never regenerate everything to fix one line,
    never loop. Use `--estimate` / `--estimate-new` for drafts (free). Report characters billed in `status.md`.
 7. **Secrets stay secret.** Never print, log or commit `.env` values.
 
@@ -199,6 +200,13 @@ All take the episode id as their last argument, e.g. `npm run vo -- ep02-bbca-di
   null). Set up `.env` before previewing a revised script.
 - Remotion mis-seeks long 1080p clips (every frame past ~24 s of a 31 s clip returned the same picture). Keep outro
   clips ≤ ~16 s; split longer footage (`outroClips.json`).
+- **Facebook Reels caps at 90 s.** For a longer episode the user approved (14 Okt, ep03) a separate `out/final-fb.mp4` played
+  ≈ 1,06× faster with pitch kept, made with the system ffmpeg (Remotion's bundled one has no `setpts`):
+  `ffmpeg -i final.mp4 -filter_complex "[0:v]setpts=PTS/1.06,fps=30[v];[0:a]atempo=1.06[a]" -map "[v]" -map "[a]" -c:v libx264 -crf 18 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart final-fb.mp4`
+  (pick the factor so the result is ≤ 88 s). The originals stay untouched.
+- **Loudness within 1 LU of −14 (−13…−15 LUFS) passes. Don't chase −14,0** (platforms normalize anyway). On 14 Okt a
+  sound-designer spent ~1 h of trial renders lifting ep03 from −14,8 for an inaudible gain, and the user asked why audio
+  took over an hour. Only fix loudness when it's outside that window or a peak is audibly harsh.
 - Render loudness is capped by the single highest true peak. Stacked sub hits on a spoken peak (a `b-hit` on "Maret")
   held ep01 at −14,8 LUFS; moving the hit 2 frames earlier fixed it. If a render lands under −14, find that peak.
 
@@ -213,6 +221,11 @@ shot held ≥ 1,2 s (if it can't be held that long, leave it out). No punch-ins,
 edit is calm the user is happy to speed footage up (the outro runs at ≈ 1,5×), but then the voice lines get
 **shorter**; the voice is never time-stretched. "Compact" or "more interactive" means fewer moments, never more cuts.
 Rules in full: `docs/hakabot.md` → Pacing rules and `docs/outro-recordings.md` → v3.1/v3.3.
+
+**One idea per screen (14 Okt).** The user rejected ep03's first Bank scene (a 4-line chart, two scorecards with
+16-box strips, a tax callout and chips at once) as "too noisy… might confuse the viewers on what is what". Each line
+gets one focal element; the previous one leaves before the next arrives; at most ~2 key numbers on screen, set big;
+charts with at most 2 series and no clutter. Test every still: can a first-time viewer say what it means in one second?
 
 **Outro.** The standard outro is v3.3 (≈ 20 s): Indikator (Trend, Retail, Drivers), Bandarmology (broker tables →
 POSITION, with a still close-up of `public/outro/position.png`), Komposisi (holder network), Screener (Uptrend Fase 2 →
@@ -229,6 +242,12 @@ video"); their files stay in `public/sfx/` but are not used. Table: `docs/style-
 Veritasium: curious and cinematic, building with the story, dropping to silence at the big shock, resolving on the end
 card. Level 0.3 (it's mastered at −16 LUFS). Don't download music; licensing is the user's call (they may supply
 licensed tracks into `public/music/`). Details: `docs/style-guide.md` → Music.
+
+**Every video teaches and resolves (14 Okt).** The viewer must leave with something useful: a concept they now
+understand, a rule of thumb, a way to read the numbers, a habit. Never end on an open question or "nobody knows"
+(the user rejected ep02's "nggak ada yang bisa nebak kapan" ending: it hands the problem back to the viewer). Market
+stories are fine only if the ending gives a clear, honest takeaway the viewer can use, still without buy/sell calls.
+Educational topics are the priority for now.
 
 **Script.**
 - Captions show the rounded numbers the voice says; exact figures stay in the graphics (`facts.md` → Rounded forms).

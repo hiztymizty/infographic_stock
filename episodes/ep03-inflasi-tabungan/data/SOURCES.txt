@@ -1,0 +1,35 @@
+Raw sources for ep03-inflasi-tabungan (downloaded 14 Okt 2026 WIB, files untouched)
+
+bi_data_inflasi_yoy_monthly.xlsx
+  Bank Indonesia "Data Inflasi" (monthly CPI inflation, year-on-year, source BPS), Des 2002 - Agu 2026.
+  Page: https://www.bi.go.id/id/statistik/indikator/data-inflasi.aspx  (the page's "Export" button)
+
+news_idxchannel_inflasi_sep2026.html, news_pasardana_inflasi_sep2026.html, news_investortrust_inflasi_sep2026.html
+  BPS release of 1 Okt 2026 (September 2026: y-on-y 3,28%, y-to-d 2,17%, m-to-m 0,30%, IHK 112,31),
+  as reported by the press. bps.go.id blocks automated fetches (HTTP 403), and the BI table above
+  had not yet added September 2026 on 14 Okt 2026.
+  https://www.idxchannel.com/economics/bps-catat-inflasi-ri-030-persen-di-september-2026/all  (has the y-to-d 2,17%)
+  https://pasardana.id/news/2026/10/1/inflasi-september-2026-tembus-3-28-sulawesi-utara-dan-minahasa-utara-catat-lonjakan-tertinggi
+  https://investortrust.id/macro/118018/bps-inflasi-september-2026-tembus-0-30-tahunan-3-28
+
+bi_seki_I28_suku_bunga_deposito_rupiah.xls (+ .pdf)
+  BI SEKI table I.28 "Suku Bunga Simpanan Berjangka Rupiah menurut Kelompok Bank dan Jangka Waktu"
+  (% per year, monthly), 1990 - Agu 2026.  https://www.bi.go.id/seki/tabel/TABEL1_28.xls
+
+bi_seki_I30_suku_bunga_tabungan_rupiah.xls (+ .pdf)
+  BI SEKI table I.30 "Suku Bunga Tabungan Rupiah menurut Kelompok Bank" (% per year, monthly), 1990 - Agu 2026.
+  https://www.bi.go.id/seki/tabel/TABEL1_30.xls
+
+lps_tbp_listperiode.json
+  LPS Tingkat Bunga Penjaminan (TBP) history, all periods since Sep 2005 (bank umum IDR / valas, BPR).
+  JSON behind https://apps.lps.go.id/lpsrate/periode  ->  https://apps.lps.go.id/LPSRate/ListPeriode
+
+pajak_go_id_pp131_2000.html
+  PP 131 Tahun 2000, PPh atas bunga deposito dan tabungan: final 20% of gross interest when deposits +
+  savings exceed Rp 7.500.000.  https://pajak.go.id/en/node/57574
+
+worldbank_FP.CPI.TOTL_IDN.json, worldbank_FP.CPI.TOTL.ZG_IDN.json
+  World Bank WDI, Indonesia CPI (2010 = 100, annual average) and inflation (annual %), last updated 8 Okt 2026.
+  Cross-check only.
+  https://api.worldbank.org/v2/country/IDN/indicator/FP.CPI.TOTL?format=json&per_page=100
+  https://api.worldbank.org/v2/country/IDN/indicator/FP.CPI.TOTL.ZG?format=json&per_page=100

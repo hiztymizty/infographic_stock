@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run vo *)",
+      "Bash(npm run vo:check *)",
+      "Bash(python -I scripts/voiceover.py *)"
+    ]
+  }
+}

@@ -6,6 +6,9 @@ Writes  public/episodes/<id>/vo/take-<scene>-<n>.mp3   (mastered audio, one file
         episodes/<id>/vo-cache.json                    (what was generated, so unchanged takes are never re-billed)
         src/episodes/<id>/timing.json                  (scene/line frames + word-timed caption chunks for Remotion)
 
+A take whose cache key (spoken text + voice + model + settings) already exists in ANOTHER episode's
+vo-cache.json is copied from there instead of re-billed (e.g. the standard Hakabot outro lines).
+
 A scene is voiced as ONE continuous take, the way a narrator reads a paragraph, so pauses and
 pitch follow the whole sentence instead of resolving at the end of every line. A line with
 `pauseBefore` starts a new take (a deliberate breath). Lines and words are placed inside each take
@@ -110,6 +113,25 @@ def parse_line(text: str) -> tuple[str, str, list[tuple[str, int, int]]]:
 def cache_key(spoken: str, voice: str, model: str, settings: dict) -> str:
     blob = json.dumps([spoken, voice, model, settings], sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(blob.encode()).hexdigest()[:16]
+
+
+def find_shared(key: str, episode: str) -> tuple[Path, dict] | None:
+    """An identical take (same cache key) already paid for in another episode: (its raw/mastered mp3, cache entry)."""
+    for other in sorted((ROOT / "episodes").glob("*/vo-cache.json")):
+        ep = other.parent.name
+        if ep == episode:
+            continue
+        try:
+            entries = json.loads(other.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        for take_id, entry in entries.items():
+            if entry.get("key") != key or not entry.get("alignment"):
+                continue
+            for src in (other.parent / "vo-raw" / f"{take_id}.mp3", ROOT / "public" / "episodes" / ep / "vo" / f"{take_id}.mp3"):
+                if src.exists():
+                    return src, {**entry, "reusedFrom": f"{ep}/{take_id}"}
+    return None
 
 
 def eleven(spoken: str, voice: str, model: str, settings: dict, prev: str, nxt: str) -> dict:
@@ -334,6 +356,15 @@ def main() -> None:
         raw = raw_dir / mp3.name
         hit = cache.get(tk["id"])
         cached = bool(hit and hit["key"] == key and (mp3.exists() or raw.exists()))
+        if not cached and tk["id"] not in force:
+            shared = find_shared(key, args.episode)
+            if shared:  # same text/voice/model/settings already paid for in another episode: copy, don't bill
+                src, entry = shared
+                shutil.copyfile(src, raw)
+                hit = cache[tk["id"]] = {**entry, "norm": None, "lines": [ln["id"] for ln in tk["lines"]]}
+                cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=1), encoding="utf-8")
+                cached = True
+                print(f"  reused {tk['id']} from {entry['reusedFrom']} (0 chars)")
         if args.estimate_new and not cached:
             tk["audio"] = guess
             partial_estimate = True

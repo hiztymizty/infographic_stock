@@ -17,6 +17,10 @@ Mastered to -16 LUFS integrated (the voice's level), so `music.level` reads dire
 voice. Everything is synthesized from oscillators and noise: nothing to license.
 
 The arrangement in score() is ep01's. A new episode copies score() and rewrites the sections.
+ep03 (ep03-inflasi-tabungan) has its own load_anchors_ep03() / score_ep03() / main_ep03(): instead of a
+tape-stop it builds into the -0,28% reveal and stops dead 30 ms before it (the b-hit lands in silence), and its
+DBus declicks every note with 3 ms fades, and peak_guard() dips the score for a few 20 ms blocks where it would
+lift the voice's true peak (it decodes the VO takes, so rebuild after any re-voice). main() dispatches on the episode id.
 """
 import json
 import sys
@@ -518,8 +522,328 @@ def integrated(x):
     return float(lufs(p.mean()))
 
 
+# ---------------------------------------------------------------------------------------------
+# ep03 score (ep03-inflasi-tabungan): "Rp 10 juta di lemari", inflation, bank, the formula, the habit
+# ---------------------------------------------------------------------------------------------
+
+# Extra voicing for ep03 (same D major / B minor family).
+CH["Bm/A"] = (hz("A2"), H("A3", "B3", "D4", "F#4"), H("B3", "D4", "F#4", "A4"))
+
+
+class DBus(Bus):
+    """Bus that declicks every clip it receives (3 ms fade in and out per note/layer), so no splice has a step."""
+
+    def add(self, x, at, gain=1.0, pan=0.0, rev=0.3):
+        x = np.array(x, dtype=float)
+        k = min(int(0.003 * SR), len(x) // 2)
+        if k > 0:
+            r = np.linspace(0.0, 1.0, k)
+            x[:k] *= r
+            x[-k:] *= r[::-1]
+        super().add(x, at, gain, pan, rev)
+
+
+def load_anchors_ep03(ep: str) -> dict:
+    t = json.loads((ROOT / "src" / "episodes" / ep / "timing.json").read_text(encoding="utf-8"))
+    if t.get("estimated"):
+        print("WARNING: timing.json is estimated; re-run after the real voiceover lands.")
+    fps = t["fps"]
+    sc = {s["id"]: s["from"] / fps for s in t["scenes"]}
+    lines = {l["id"]: l for l in t["lines"]}
+    words = {}
+    for c in t.get("captions", []):
+        for w in c["words"]:
+            words.setdefault((c["line"], w["text"].rstrip(",.!?").replace(" ", " ")), w["from"])
+
+    def word(line, text, fallback):
+        return words.get((line, text), fallback)
+
+    # Mirrors Formula.tsx: the red -0,28% term lands on `result` = "minus"; the b-hit fires at result - 3.
+    minus = word("formula-3", "minus", lines["formula-3"]["from"] + 90)
+    return {
+        "total": t["totalFrames"] / fps,
+        "shrink": sc["shrink"], "bank": sc["bank"], "formula": sc["formula"], "lesson": sc["lesson"],
+        "outro": sc["hakabot-outro"],
+        "reveal": (sc["formula"] * fps + max(minus - sc["formula"] * fps, 0) - 3) / fps,
+        "tumbuh": word("lesson-2", "tumbuh", lines["lesson-2"]["from"] + 90) / fps,
+        "end": lines["outro-5"]["from"] / fps,
+        "voiced": [(l["from"] / fps, (l["from"] + l["dur"]) / fps) for l in t["lines"]],
+    }
+
+
+def score_ep03(A: dict):
+    total = A["total"]
+    pre, post = DBus(total), DBus(total)  # `pre` is everything up to the reveal; it stops dead just before it
+    sections = []
+
+    # A · hook: a curious question. Sparse piano quarters over a thin pad; Gmaj9 -> Asus4, left hanging.
+    prog = ["Gmaj9", "Asus4"]
+    starts, bar = bars(0.0, A["shrink"], len(prog))
+    sections.append(("A hook", 0.0, A["shrink"], 240 / bar, "Gmaj9 -> Asus4: sparse piano quarters, thin pad (the question left open)"))
+    beat = bar / 4
+    for i, (s, ch) in enumerate(zip(starts, prog)):
+        arp = CH[ch][2]
+        for k, idx in enumerate([0, 2, 1, 3]):
+            pre.add(piano(arp[idx], hold=beat * 1.6, vel=0.3 + 0.05 * (k == 0)), s + k * beat, 1.0, -0.25 + idx / 6, 0.55)
+        chord_pad(pre, ch, s, bar, 0.13, cutoff=850, att=1.2)
+
+    # B · shrink: a slow, uneasy drift. A falling piano figure each bar over a descending bass (B A G E F#), clock
+    # ticks above the voice band ("tiap tahun"); F#sus -> F# leans into the bank question.
+    prog = ["Bm", "Bm/A", "Gmaj7#11", "Em9", "F#sus", "F#"]
+    starts, bar = bars(A["shrink"], A["bank"], len(prog))
+    sections.append(("B shrink", A["shrink"], A["bank"], 240 / bar, "Bm Bm/A Gmaj7#11 Em9 F#sus F#: falling piano 8ths, low bass, clock ticks"))
+    beat = bar / 4
+    for i, (s, ch) in enumerate(zip(starts, prog)):
+        root, _, arp = CH[ch]
+        chord_pad(pre, ch, s, bar, 0.17 + 0.01 * i, cutoff=780, att=1.0)
+        for k, idx in enumerate([3, 2, 1, 0, 3, 2, 1, 0]):
+            if k in (3, 7) and i % 2 == 0:
+                continue  # breathe
+            pre.add(piano(arp[idx], hold=beat * 0.9, vel=0.26 + 0.04 * (k % 4 == 0)), s + k * beat / 2, 1.0, 0.3 - 0.2 * idx, 0.55)
+        pre.add(bass(root, bar * 0.95, 0.24), s, 1.0, 0, 0.12)
+        if i >= 1:
+            for k in range(4):
+                pre.add(tick(0.07 if k % 2 == 0 else 0.04), s + k * beat, 1.0, 0.4, 0.15)
+
+    # C · bank: neutral, a light pulse. Soft pulse bass throughout, light plucked 8ths from bar 2, no drums.
+    prog = ["Gmaj9", "D/F#", "Em9", "F#sus", "D", "A", "Asus4"]
+    starts, bar = bars(A["bank"], A["formula"], len(prog))
+    sections.append(("C bank", A["bank"], A["formula"], 240 / bar, "Gmaj9 D/F# Em9 F#sus D A Asus4: pad, soft pulse bass, light plucks from bar 2"))
+    beat = bar / 4
+    for i, (s, ch) in enumerate(zip(starts, prog)):
+        root, _, arp = CH[ch]
+        chord_pad(pre, ch, s, bar, 0.2, cutoff=950, att=0.8)
+        bass_8ths(pre, root, s, beat, 0.17)
+        if i >= 1:
+            pluck_8ths(pre, arp, s, beat, 0.12, accent=0.03)
+        else:
+            for k, idx in enumerate([0, 2, 1, 3]):
+                pre.add(piano(arp[idx], hold=beat * 1.2, vel=0.26), s + k * beat, 1.0, -0.25 + idx / 6, 0.5)
+
+    # D · formula build: calm piano -> pulse bass -> plucks -> kick -> kick + shaker + octave plucks, a reversed
+    # F# bloom, then a dead stop 30 ms before the red -0,28% lands (b-build + b-hit and the voice carry it alone).
+    prog = ["Bm", "G", "D", "A", "Em9", "F#sus"]
+    starts, bar = bars(A["formula"], A["reveal"], len(prog))
+    sections.append(("D build", A["formula"], A["reveal"], 240 / bar, "Bm G D A Em9 F#sus: piano 8ths; pulse bass bar 2; plucks bar 3; kick bar 4; shaker bar 5; octaves + kick on every beat bar 6"))
+    beat = bar / 4
+    for i, (s, ch) in enumerate(zip(starts, prog)):
+        root, _, arp = CH[ch]
+        chord_pad(pre, ch, s, bar, 0.2 + 0.02 * i, cutoff=800 + 100 * i, att=0.6)
+        if i < 2:
+            for k, idx in enumerate([0, 1, 2, 3, 2, 1, 2, 3]):
+                pre.add(piano(arp[idx], hold=beat * 0.9, vel=0.27), s + k * beat / 2, 1.0, -0.3 + 0.2 * idx, 0.5)
+        else:
+            pluck_8ths(pre, arp, s, beat, 0.14 + 0.015 * (i - 2), accent=0.04, octave=0.06 if i == 5 else 0.0)
+        if i >= 1:
+            bass_8ths(pre, root, s, beat, 0.2 + 0.02 * i)
+        if i >= 3:
+            for k in range(0, 4, 1 if i == 5 else 2):
+                pre.add(kick(0.3 + 0.04 * (i - 3)), s + k * beat, 1.0, 0, 0.08)
+        if i >= 4:
+            for k in range(8):
+                pre.add(shaker(0.09 if k % 2 else 0.05), s + k * beat / 2, 1.0, 0.3, 0.2)
+    pre.add(swell(CH["F#"][2], bar * 0.75, 0.26), A["reveal"] - bar * 0.75, 1.0, 0, 0.5)
+
+    # E · after the reveal: ~1 s of silence, then a low B drone creeps in; a dark pad and single low piano notes
+    # under "saldonya kelihatan nambah, padahal nilainya sebenarnya turun"; the shrink's clock ticks return; a
+    # reversed A bloom leads into the lesson's D.
+    prog = ["Bm", "Gmaj7#11", "Em9"]
+    starts, bar = bars(A["reveal"], A["lesson"], len(prog))
+    sections.append(("E aftermath", A["reveal"], A["lesson"], 240 / bar, "Bm Gmaj7#11 Em9: silence ~1 s, low B drone, dark pad, single low piano notes, ticks; A bloom into D"))
+    beat = bar / 4
+    drone_from = A["reveal"] + 1.0
+    d = pad(H("B1", "F#2", "B2"), A["lesson"] - drone_from + 0.3, att=1.6, rel=1.4, cutoff=420)
+    post.add(d[0], drone_from, 0.5, -0.5, 0.4)
+    post.add(d[1], drone_from, 0.5, 0.5, 0.4)
+    for i, (s, ch) in enumerate(zip(starts, prog)):
+        root, _, arp = CH[ch]
+        if i == 0:
+            continue
+        chord_pad(post, ch, s, bar, 0.14, cutoff=700, att=1.2)
+        for k, idx in ((0, 0), (2, 2)) if i % 2 == 0 else ((0, 1), (3, 3)):
+            post.add(piano(arp[idx] / 2, hold=beat * 2, vel=0.32), s + k * beat, 1.0, -0.2, 0.6)
+        for k in range(4):
+            post.add(tick(0.07 if k % 2 == 0 else 0.04), s + k * beat, 1.0, 0.4, 0.15)
+    post.add(swell(CH["A"][2], bar * 0.6, 0.18), A["lesson"] - bar * 0.6, 1.0, 0, 0.5)
+
+    # F · lesson: warm, confident resolve. Rolled piano chords from D, piano 8ths from bar 2, soft pulse bass from
+    # bar 3; a high C#5 on "tumbuh"; the A blooms home into the outro's D.
+    prog = ["D", "Gmaj9", "Em9", "A"]
+    starts, bar = bars(A["lesson"], A["outro"], len(prog))
+    sections.append(("F lesson", A["lesson"], A["outro"], 240 / bar, "D Gmaj9 Em9 A: rolled piano + warm pad; 8ths bar 2; pulse bass bar 3; C#5 on 'tumbuh'; bloom into D"))
+    beat = bar / 4
+    for i, (s, ch) in enumerate(zip(starts, prog)):
+        root, _, arp = CH[ch]
+        chord_pad(post, ch, s, bar, 0.2 + 0.015 * i, cutoff=950 + 60 * i, att=0.6, rel=2.0)
+        for k, f in enumerate([root * 2] + arp):
+            post.add(piano(f, hold=bar * (1.0 if i == 0 else 0.5), vel=0.28), s + k * 0.07, 1.0, -0.4 + 0.2 * k, 0.6)
+        if i >= 1:
+            for k, idx in enumerate([0, 1, 2, 3, 2, 1, 2, 3]):
+                if k == 0:
+                    continue  # the rolled chord carries the downbeat
+                post.add(piano(arp[idx], hold=beat * 0.9, vel=0.22), s + k * beat / 2, 1.0, -0.3 + 0.2 * idx, 0.5)
+        if i >= 2:
+            bass_8ths(post, root, s, beat, 0.17)
+        else:
+            post.add(bass(root, bar * 0.95, 0.26), s, 1.0, 0, 0.15)
+    post.add(piano(hz("C#5"), hold=1.2, vel=0.24), A["tumbuh"], 1.0, 0.2, 0.6)
+    post.add(swell(CH["D"][2], bar * 0.6, 0.22), A["outro"] - bar * 0.6, 1.0, 0, 0.5)
+
+    # G · Hakabot tour: ep01's forward outro cue, re-fitted to this episode's outro timing.
+    prog = ["D", "A", "Bm", "G", "D", "A", "G"]
+    starts, bar = bars(A["outro"], A["end"], len(prog))
+    sections.append(("G outro", A["outro"], A["end"], 240 / bar, "D A Bm G D A G->A: plucks, pulse bass, kick (halves, then quarters) + shaker (as ep01)"))
+    beat = bar / 4
+    for i, (s, ch) in enumerate(zip(starts, prog)):
+        root, _, arp = CH[ch]
+        last = i == len(prog) - 1
+        chord_pad(post, ch, s, bar, 0.22, cutoff=1200, att=0.4)
+        if last:  # G for two beats, then A leading home
+            for k, idx in enumerate([0, 2, 1, 3]):
+                post.add(pluck(arp[idx], 0.2 if k % 2 == 0 else 0.17), s + k * beat / 2, 1.0, 0.4 if k % 2 else -0.4, 0.4)
+                post.add(pluck(CH["A"][2][idx], 0.22 if k % 2 == 0 else 0.18), s + bar / 2 + k * beat / 2, 1.0, 0.4 if k % 2 else -0.4, 0.4)
+        else:
+            pluck_8ths(post, arp, s, beat, 0.17)
+        if i >= 1:
+            bass_8ths(post, root, s, beat, 0.26)
+        if i >= 2:
+            for k in range(0, 4, 2 if i < 4 else 1):
+                post.add(kick(0.36), s + k * beat, 1.0, 0, 0.08)
+            for k in range(8):
+                post.add(shaker(0.09 if k % 2 else 0.05), s + k * beat / 2, 1.0, 0.3, 0.2)
+    post.add(swell(CH["Dadd9"][2], beat * 2, 0.22), A["end"] - beat * 2, 1.0, 0, 0.5)
+
+    # H · end card: home on D add9 under "Cek di hakabot.com".
+    ring = total - A["end"]
+    sections.append(("H end card", A["end"], total, None, "D add9: rolled piano + pad + low D, rings out"))
+    root, _, arp = CH["Dadd9"]
+    chord_pad(post, "Dadd9", A["end"], ring, 0.26, cutoff=1000, att=0.05, rel=1.5)
+    post.add(bass(root, ring, 0.32), A["end"], 1.0, 0, 0.2)
+    for k, f in enumerate([hz("D3")] + arp):
+        post.add(piano(f, hold=ring, vel=0.34), A["end"] + k * 0.05, 1.0, -0.4 + 0.16 * k, 0.65)
+
+    return pre, post, sections
+
+
+def voice_timeline(ep: str, n: int):
+    """The episode's voiceover as Remotion plays it (mono takes at -3 dB per channel), on the master timeline.
+    Decoded via temp WAVs: binary stdout doesn't survive the npx wrapper on Windows."""
+    import subprocess
+    import tempfile
+    t = json.loads((ROOT / "src" / "episodes" / ep / "timing.json").read_text(encoding="utf-8"))
+    v = np.zeros(n)
+    with tempfile.TemporaryDirectory() as tmp:
+        for take in t.get("voice") or []:
+            if not take.get("audio"):
+                continue
+            wav = Path(tmp) / f"{take['id']}.wav"
+            subprocess.run(["npx", "remotion", "ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i",
+                            str(ROOT / "public" / take["audio"]), "-ac", "1", "-ar", str(SR), str(wav)],
+                           capture_output=True, cwd=ROOT, shell=sys.platform == "win32")
+            if not wav.exists():
+                raise SystemExit(f"could not decode {take['audio']} (is Remotion's ffmpeg blocked?)")
+            sr, x = wavfile.read(wav)
+            x = x.astype(float) / 32768 * 10 ** (-3.01 / 20)
+            i = int(round(take["from"] / t["fps"] * SR))
+            j = min(n, i + len(x))
+            v[i:j] += x[: j - i]
+    return v
+
+
+def peak_guard(mix, v, A, level=0.3, blk_s=0.02, depth_db=10.0, iters=4):
+    """Dip the score only where it would push the voice's true peak higher (ep03 QA round 1).
+
+    The final render normalizes to -14 LUFS with a gain capped by the true peak, and the voice is limited, so its
+    loudest syllables already sit near that cap. A score 20 dB down still adds up to ~0.6 dB when it lines up in phase
+    with one of them. This rebuilds what the viewer hears (voice as Remotion plays a mono take, score at `level` with
+    MusicBed's duck), finds the 20 ms blocks whose 4x-oversampled peak is above the voice's own maximum, and dips
+    the score `depth_db` there (+/-20 ms, 15 ms ramps). The dips are a few, each under a loud syllable, so inaudible.
+    Returns the gain curve and the number of blocks dipped."""
+    from scipy.signal import resample_poly
+    n = mix.shape[1]
+    fps = 30.0
+    spans_v = [(a * fps, b * fps) for a, b in A["voiced"]]
+    frames = np.arange(int(n / SR * fps) + 2)
+    voiced = np.array([any(a - 6 <= f <= b + 6 for a, b in spans_v) for f in range(len(frames) + 16)])
+    on = np.array([sum(voiced[max(0, f + k)] for k in range(-8, 9, 2)) for f in frames]) / 9
+    env = level * (1 - 0.65 * on)
+    heard_gain = np.interp(np.arange(n) / SR * fps, frames, env)
+    blk = int(blk_s * SR)
+    nb = n // blk
+
+    def block_tp(x):
+        up = np.abs(resample_poly(x, 4, 1, axis=-1))
+        if up.ndim == 2:
+            up = up.max(0)
+        return up[: nb * blk * 4].reshape(nb, blk * 4).max(1)
+
+    ceiling = block_tp(v).max()
+    gain = np.ones(n)
+    hot_blocks = set()
+    for _ in range(iters):
+        s = mix * gain * heard_gain + v
+        hot = np.flatnonzero(block_tp(s) > ceiling)
+        if not len(hot):
+            break
+        hot_blocks.update(hot.tolist())
+        spans = [(b * blk_s, (b + 1) * blk_s) for b in sorted(hot_blocks)]
+        mask = np.clip(smooth_mask(spans, n, pad_s=0.02, ramp_s=0.015), 0, 1)
+        gain = 1 - (1 - 10 ** (-depth_db / 20)) * mask
+        depth_db += 4  # deepen if a block survives
+    return gain, len(hot_blocks)
+
+
+def main_ep03(ep: str):
+    A = load_anchors_ep03(ep)
+    pre, post, sections = score_ep03(A)
+    n = int(round(A["total"] * SR))
+    tv = np.arange(n) / SR
+
+    # The dead stop: the build (dry + its reverb) fades out over 20 ms, ending 30 ms before the reveal; then silence.
+    cut_end = A["reveal"] - 0.03
+    stop = np.clip((cut_end - tv) / 0.02, 0, 1)
+    stop = 0.5 - 0.5 * np.cos(np.pi * stop)
+    mix = render(pre)[:, :n] * stop + render(post)[:, :n]
+
+    # Fader automation (dB): quiet question, a slow drift up through shrink and bank, the build swelling into the
+    # reveal, the aftermath pulled right back, the lesson warming up, the outro forward, the end card settling.
+    auto = [
+        (0.0, -4.5), (A["shrink"] - 0.5, -4.5), (A["shrink"] + 0.5, -3.5), (A["bank"] - 0.5, -2.5),
+        (A["bank"] + 0.5, -2.5), (A["formula"] - 0.5, -2.0), (A["formula"] + 0.5, -2.5),
+        (A["reveal"] - 3.0, 1.5), (A["reveal"] - 0.05, 3.0), (A["reveal"], -6.0),
+        (A["lesson"] - 0.5, -5.0), (A["lesson"] + 0.5, -3.0), (A["outro"] - 0.5, -2.0),
+        (A["outro"] + 0.5, 3.8), (A["end"] - 0.3, 4.2), (A["end"] + 0.3, -2.5), (A["total"], -3.5),
+    ]
+    at, db = zip(*auto)
+    mix *= 10 ** (np.interp(tv, at, db) / 20)
+
+    # Speech-band dip: 1-4 kHz down ~8 dB while the voice speaks.
+    band = sosfiltfilt(butter(2, [1000, 4000], btype="band", fs=SR, output="sos"), mix, axis=1)
+    mix = mix - 0.6 * band * smooth_mask(A["voiced"], n)
+
+    mix = hp(mix, 30)
+    mix *= np.clip(tv / 0.4, 0, 1) * np.clip((A["total"] - tv) / 1.2, 0, 1)
+    mix *= 10 ** ((TARGET_LUFS - integrated(mix)) / 20)
+    # After mastering, so the dips don't nudge the -16 LUFS gain. Assumes music.level 0.3 in index.tsx.
+    dip, hot = peak_guard(mix, voice_timeline(ep, n), A)
+    mix *= dip
+    if np.abs(mix).max() > 0.89:
+        mix = np.tanh(mix / 0.89) * 0.89
+    print(f"  peak guard: score dipped in {hot} x 20 ms blocks where it would lift the voice's true peak")
+
+    out = ROOT / "public" / "music" / f"{ep.split('-')[0]}-score.wav"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    wavfile.write(out, SR, (mix.T * 32767).astype(np.int16))
+    print(f"{out.relative_to(ROOT)}  {n / SR:.3f} s  {integrated(mix):.1f} LUFS  peak {20 * np.log10(np.abs(mix).max()):.1f} dBFS")
+    for name, a, b, bpm, what in sections:
+        print(f"  {name:11s} {a:7.2f} -> {b:7.2f} s  " + (f"{bpm:5.1f} BPM  " if bpm else "            ") + what)
+    print(f"  dead stop   {cut_end - 0.02:7.2f} -> {cut_end:7.2f} s  build out; b-hit at {A['reveal']:.2f} s lands in silence")
+
+
 def main():
     ep = next((a for a in sys.argv[1:] if not a.startswith("-")), "ep01-ihsg-dca")
+    if ep.startswith("ep03"):
+        return main_ep03(ep)
     A = load_anchors(ep)
     early, late, sections = score(A)
     n = int(round(A["total"] * SR))

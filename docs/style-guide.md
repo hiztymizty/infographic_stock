@@ -54,7 +54,7 @@ close for deuteranopes, so **every gain/loss also carries ▲/▼ and a +/− si
 | `core/components/ui` | `Kicker`, `Reveal` (mask slide-up), `useIn(delay, bouncy)` spring, `useRamp`, `ChangeChip`, `Triangle`, `Panel`, `CLAMP` |
 | `core/components/chart` | `linePath`, `bandPath`, `fadingTicks` (gridlines that fade instead of popping when the axis rescales) |
 | `core/audio` | `<Sfx name at volume />` |
-| `core/format` | `fmt.rp/num/pct/signedPct/axis/words`, `monthLabel`, `monthShort`, `dateLabel` |
+| `core/format` | `fmt.rp/num/pct/signedPct/axis/words/juta` (`juta(n, digits)` → Rp 5,3 juta), `monthLabel`, `monthShort`, `dateLabel` |
 
 **Sync to the voice, never to guessed frames.** Anything that should land on a spoken word uses
 `useLine` or `useWordAt` (e.g. the twist's count-down starts at `useWordAt('twist-1', 'Juni')`).
@@ -152,6 +152,150 @@ B/C slots `b-tick`, `b-buzz`, `c-scan`, `c-boot`, `c-blip`, `c-click`, `c-cash`,
 (the single burst, replaced by the four step variants).
 
 Rebuild: `npm run sfx` regenerates everything and reproduces the B/C files bit for bit.
+
+## Tutorials (16:9 long-form, `src/core/tutorial/`)
+
+Long YouTube tutorials edited from the user's screen recordings (first: `tut01-hakabot-tutorial`, from the 4K
+`temp/New.mp4`). Not a short: no `EpisodeShell`, no 9:16 safe zones, no watermark, no `hakabot-outro`. The
+voice/timing pipeline is the same (`timing.json` + anchors), so the edit re-syncs when the real voice lands. Before
+you build, read the reference chapters `beats/dash.ts` and `beats/watch.ts` of tut01: they use every feature below.
+
+### Frame layout (`layout.ts`)
+
+| Zone (1920×1080) | What |
+|---|---|
+| y 0–72 | top margin: the chapter label ("02 │ Watchlist", quiet, left). Never over app UI. |
+| `WIN` x 40, y 72, 1840×937, radius 18 | the screen window. Aspect 1,964 = a 3840×1956 page viewport, so a full page at zoom 1 fills it. |
+| window y > ~820 (frame y ≈ 890–981) | burned-in subtitles (36 px, ≤ 2 lines). Keep rings and labels above it (labels flip automatically). |
+| y 1009–1080 | bottom margin: PREVIEW badge (right, only while timing is estimated); intro/end small print (centre). |
+
+### Files of a tutorial episode (one file per chapter, so chapters can be built in parallel)
+
+```
+src/episodes/<id>/
+  index.tsx            TutorialDef (shared; don't edit for a chapter)
+  recordings.json      source recordings: raw file, page viewport `bounds`, `clipWidth`, always-on blurs (shared)
+  recordings.ts        reads recordings.json for the player (shared)
+  chapters.ts          chapter cards: BAB number, title, first scene, which scene ids belong (shared)
+  copy.ts              intro, chapter titles, end card strings (shared)
+  timing.json          npm run vo:estimate -- <id> (estimated) / npm run vo -- <id> (real)
+  beats/index.ts       merges every chapter (shared: already imports all chapter files, incl. stubs)
+  beats/common.ts      REC, FULL, NAV menu rects, navCenter(), ACCOUNT (shared)
+  beats/<chapter>.ts   ONE CHAPTER: `export const beats: Record<string, Beat>` + its framings, element rects, labels
+  clips/index.ts       merges every chapter's clip list (shared)
+  clips/<chapter>.json ONE CHAPTER: {"clips": {"<chapter>-a": {rec, start, end, note}, ...}}
+  scenes/*.tsx         code-made scenes (Intro, EndCard, Stage helpers)
+```
+
+**Building a chapter = editing only `beats/<chapter>.ts` and `clips/<chapter>.json`** (tut01 chapters: `dash`,
+`watch`, `stock`, `fund`, `idx`, `comp`, `scr`, `hb`, `akun`; `intro` and `end` are code-made). Beat ids are the
+script's scene ids; a scene without a beat renders as a grey placeholder with its lines, so the whole timeline stays
+reviewable. Clip names start with the chapter id (`stock-a`, `stock-b`…) and must be unique across chapters (the
+merge throws on duplicates). The chapter's on-screen label strings (Bahasa, 2–5 words) sit in a `const L` at the top
+of its beat file. Need something in a shared file (a new NAV rect, a chapter title)? Ask the producer.
+
+### Coordinates and source
+
+- **All positions are raw-recording pixels.** New.mp4 is 3840×2160, so read positions straight off full-size 4K
+  frames with `scripts/tutorial_probe.py` (output into your scratchpad): `grid` crops an area 1:1 with a labelled
+  pixel grid (`grid temp/New.mp4 52.2 740 400 1800 1000 out.png 50`), so rects are read, not guessed (estimating
+  from downscaled screenshots puts rings on the wrong button). Recording times are raw seconds; shotlist-v2.md is
+  ±1 s, so find the exact frame first: `diff temp/New.mp4 51 60 1500 950 800 400` prints every frame where that
+  region changes (a click's result, a tooltip, a dialog); `sheet` makes timestamped contact sheets of a stretch;
+  `scroll` measures scroll offsets for blur `track`s.
+- New.mp4's page viewport is `bounds` x 0–3840, y 132–2088: the browser tab strip + URL bar (y < 132) and the
+  Windows taskbar (y ≥ 2088) are never drawn. The OBS window is in the first 0,3 s and from 13:51 (831 s): never use.
+- The menu bar is sticky (same place on every page and scroll position): `NAV` in `beats/common.ts`.
+- Layouts move: tables and side panels reflow when rows are added/removed and pages scroll, so measure each rect
+  at the moment it's ringed (tut01 Watchlist: the group panel sits 66 px higher with 2 table rows than with 3).
+
+### Clips (`scripts/tutorial_clips.py`)
+
+`python -I scripts/tutorial_clips.py <id>` cuts every clip that is missing or changed (`--chapter watch` re-cuts one
+chapter, clip names re-cut single clips, `--force` all, `--prune` deletes files no list mentions). Output
+`public/tutorial/<prefix>/<name>.mp4` (git-ignored, regenerable). Each clip is the recording **cropped to `bounds`
+at full 4K resolution** (`clipWidth` 3840: zoom ≈ 2 is 1:1 with the source, tooltips at zoom 3 still read cleanly),
+H.264 CRF 16, keyframe every 15 frames, no B-frames, no audio. Rules: ≤ ~16 s per clip (Remotion mis-seeks long
+clips), start on a frame boundary (multiple of 1/30 s), every footage piece must sit inside one clip (cover each
+beat's pieces with a clip and leave a little margin). Cutting is fast (≈ 1–3 s per clip). Rendering 4K clips is the
+slow part: ≈ 8 fps at concurrency 8 (≈ 3,8× real time at the default 3), so use `RENDER_CONCURRENCY=8` on this
+128 GB machine and run one render at a time.
+
+### Configuring a beat (`types.ts` documents every field)
+
+```ts
+'watch-5': {
+  kind: 'footage',
+  enter: 'cut',                 // continue the previous beat's picture (same page); default 'fade' (new page)
+  shots: [{
+    rec: REC,
+    // Play raw 62.6–66.5 s; the click at 63.93 lands on the spoken word "Charts". Before it the picture holds.
+    pieces: [{from: 62.6, to: 66.5, align: 63.93, at: {line: 'watch-5-charts', word: 'Charts'}}],
+    cam: {from: WATCH, to: CARDS, at: {rec: 64.2}, dur: 1.6},        // ONE eased move per shot, or none
+    marks: [
+      {kind: 'ring', rect: CHARTS_BTN, at: {line: 'watch-5-charts', word: 'Nyalain'}, until: {rec: 63.93, off: 0.4}, pad: 4},
+      {kind: 'click', x: 2732, y: 445, rec: 63.93},                   // ripple on the real click
+      {kind: 'ring', rect: CARD_GRID, at: {max: [{line: 'watch-5-charts', word: 'kecil'}, {rec: 64.6}]}},
+    ],
+    blur: [/* page-specific privacy blurs, see below */],
+  }],
+},
+```
+
+- **Pieces** (`{from, to, align?, at?, rate?}`): stretches of the recording, in order. `align` (a click, a keystroke)
+  lands on the anchor `at`; the part after `align` speeds up (≤ 1,6×) only if it must, never slower than 1×; before
+  and between pieces the picture holds; a gap between pieces is a jump cut (at most one per shot, only over dead
+  time: loading, typing pauses). A piece with no `at` plays right after the previous one. Pieces may go backwards in
+  the recording (tut01 watch-7 plays 13 Okt before 14 Okt); give the second one its own shot so it crossfades.
+- **Anchors**: `{line, word?, nth?, end?, off?}` (voice; `word` = case-insensitive prefix of the displayed word),
+  `{rec: s, off?}` (when raw second `s` plays in this shot), `{max: [...]}` (the later of several: "on this word,
+  but not before the dialog is open"), or a number (seconds into the scene: entrances only). Pieces and shot starts
+  take voice anchors only.
+- **Camera** `{from, to?, at?, dur?}`: centre (raw px) + zoom. zoom 1 = full page width; 1,5–2 for reading a page
+  area; 2,6–3 for tiny elements (Acc/Dist squares, tooltips). The view is clamped to the viewport. One slow move per
+  shot (house rule). Show the whole page briefly when a new page opens. A new shot (`start` anchor) crossfades in.
+- **Marks**: `ring` (rect, `at`, optional `until`, `label`, `side`, `spot`, `pad`, `track`), `click` (x, y, `rec`),
+  `path` (one ring gliding along several rects, e.g. a menu read out). One ring on screen at a time, each held
+  ≥ 1,2 s (enforced). Most rings need no label (the voice says it); a label is 2–5 words. `spot` dims the rest:
+  use it for tiny or crowded targets, not by default. Rect = the element's own box; the ring adds `pad` (default 8
+  screen px, 3–4 for small buttons). A ring on an element that only shows on hover must start after it appears
+  (`{max: [word, {rec}]}`).
+
+### Highlight style (15 Okt: "highlights can be more elegant")
+
+Thin and calm, like a product film: ring 2 px white at 92 %, radius scaled to the element (6–14 px), soft white
+glow; it enters over 14 frames with a fade and a 1,03 → 1 settle (no bounce) and leaves over 10. Spotlight dims the
+rest to 50 % over 18 frames. Labels: 24 px semibold on dark glass (86 %), 1 px hairline border, radius 10, fade + 6 px
+slide, 4 frames after the ring; they stay inside the window and out of the subtitle strip. Click: a faint 1,5 px
+ripple (7 → 34 px over 22 frames) and a small soft dot. Gold is not used in footage highlights (it's kept for the
+chapter card hairline, the intro cover line and the intro's active-chapter dot).
+
+### Privacy blur
+
+`BlurBox` = rect (raw px) + optional `from`/`to` (raw seconds), `track` (offsets by raw second, for scrolling
+content), `sigma` (default 16), `tint`. Always-on blurs live on the recording (`recordings.json`: the account name +
+avatar top-right). Page-specific ones go on the shot (`shot.blur`): tut01 Dashboard blurs the name in
+"Welcome back, …" and the announcement author with the measured scroll track, stopping before they slide under the
+sticky menu (a blur box over the menu would smear it). **Akun page: blur the email AND the referral code** (user,
+15 Okt): one `shot.blur` box each, limited with `from`/`to` to the seconds the Akun page is open (and `track` if it
+scrolls). Tickers, company and investor names stay readable (user decision).
+
+### Chapters, intro, end card
+
+`chapters.ts`: each chapter's card ("BAB 03" + title, ≈ 1,6 s: the footage dims, the title rises in, a short gold
+hairline) shows when its first scene starts, then its label sits in the top margin until the next chapter. A
+chapter's first ~1,6 s is under the card: start its footage on a calm view and keep the first click after it.
+Code-made scenes are `{kind: 'custom', component}` beats in window coordinates (1840×937), or with `full: true` over
+the whole 1920×1080 frame (tut01 intro and end card: `scenes/Intro.tsx`, `scenes/EndCard.tsx`, shared `Stage` look:
+deep navy, one slow brand-blue glow, centred type, one idea per phase, small print in the bottom margin). Frame 0 of
+the intro is the composed cover.
+
+### Checking a chapter
+
+`npm run typecheck`, then stills at the moments that matter (`npm run render -- <id> --stills 52.4 61`) or a range
+(`RENDER_CONCURRENCY=8 npm run render -- <id> --range a b`, then `npm run sheet -- <mp4> <jpg> --every 1`). Look
+for: ring on the right element at full size, crisp text, nothing personal (tabs, taskbar, account name, email,
+referral code), nothing under the subtitles, labels inside the window.
 
 ## Checking your work
 

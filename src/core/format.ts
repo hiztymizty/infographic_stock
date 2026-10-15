@@ -17,6 +17,8 @@ export const fmt = {
   axis: (n: number) => (n >= 1e9 ? `${dec(n / 1e9, n % 1e9 === 0 ? 0 : 1)} M` : `${Math.round(n / 1e6)} jt`),
   /** Rp 1,17 miliar · Rp 536 juta */
   words: (n: number) => (n >= 1e9 ? `Rp ${dec(n / 1e9, 2)} miliar` : `Rp ${Math.round(n / 1e6)} juta`),
+  /** Rp 5,3 juta · Rp 6,34 juta · Rp 19 juta (juta with a chosen number of decimals) */
+  juta: (n: number, digits = 1) => `Rp ${dec(n / 1e6, digits)} juta`,
 };
 
 const MON = ['JAN', 'FEB', 'MAR', 'APR', 'MEI', 'JUN', 'JUL', 'AGU', 'SEP', 'OKT', 'NOV', 'DES'];

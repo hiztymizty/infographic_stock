@@ -13,7 +13,7 @@ progress, and the next step, is in `episodes/<id>/status.md`.
 
 1. **Install**
    - Node.js 22 or newer (developed on 26).
-   - Python 3.12 with `numpy`, `scipy` and `Pillow` (`python -m pip install numpy scipy pillow`).
+   - Python 3.12+ with `numpy`, `scipy`, `Pillow` and `xlrd` (`python -m pip install numpy scipy pillow xlrd`; xlrd reads BI's .xls tables).
    - Git and **Git LFS** (the raw outro recordings in `outro_raw/*.mp4` are stored with LFS; run `git lfs install`
      once, then `git lfs pull` if a clone shows tiny pointer files instead of videos).
 2. **Project dependencies:** `npm install`. The first render downloads Chrome Headless Shell (~120 MB) automatically.

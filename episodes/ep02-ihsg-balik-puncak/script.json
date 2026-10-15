@@ -1,0 +1,146 @@
+{
+  "id": "ep02-ihsg-balik-puncak",
+  "title": "IHSG sempat turun 41%, butuh naik berapa buat balik?",
+  "fps": 30,
+  "voice": {
+    "settings": {
+      "speed": 1.05
+    }
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "minSec": 4.5,
+      "lines": [
+        {
+          "id": "hook-1",
+          "text": "{IHSG|I-Ha-Es-Ge} sempat turun {41%|empat puluh satu persen}."
+        },
+        {
+          "id": "hook-2",
+          "text": "Butuh naik berapa buat balik?"
+        }
+      ],
+      "visual": "Frame 0 sudah jadi: garis IHSG harian dari puncak 20 Jan 2026 menukik merah ke dasar 8 Jun, label besar −41,5% (sumber: drawdown.json). Di hook-2 muncul pill pertanyaan \"+?%\" di atas celah antara dasar dan puncak."
+    },
+    {
+      "id": "math",
+      "minSec": 8,
+      "lines": [
+        {
+          "id": "math-1",
+          "text": "Modal {Rp 100|seratus rupiah} turun jadi {Rp 50|lima puluh}."
+        },
+        {
+          "id": "math-2",
+          "text": "Buat balik, harus naik {100%|seratus persen}, alias dobel."
+        },
+        {
+          "id": "math-3",
+          "text": "Nggak simetris, kan?"
+        },
+        {
+          "id": "math-4",
+          "pauseBefore": 0.3,
+          "text": "Makanya {IHSG|I-Ha-Es-Ge} yang turun {41%|empat puluh satu persen}, butuh naik {71%|tujuh puluh satu persen}."
+        }
+      ],
+      "tailSec": 0.6,
+      "visual": "Bar Rp 100 menyusut ke Rp 50 (−50%), lalu bar Rp 50 harus tumbuh +100% balik ke garis Rp 100: panah turun pendek vs panah naik panjang, asimetrinya kelihatan. Di math-4 bar berganti ke IHSG: puncak 9.134,7 → dasar 5.342 (−41,5%) dan panah naik +71% ke puncak, dengan footnote kecil \"Puncak harian 20 Jan 2026; video DCA pakai harga akhir bulan\"."
+    },
+    {
+      "id": "today",
+      "minSec": 7,
+      "lines": [
+        {
+          "id": "today-1",
+          "text": "Sekarang {IHSG|I-Ha-Es-Ge} udah naik {11%|sebelas persen} dari dasarnya."
+        },
+        {
+          "id": "today-2",
+          "text": "Tapi masih {35%|tiga puluh lima persen} di bawah puncak, dan butuh naik {54%|lima puluh empat persen} lagi."
+        }
+      ],
+      "visual": "Garis harian Des 2025 → 13 Okt 2026: dari dasar 5.342 garis naik ke 5.926 (+10,9%, chip kecil), lalu bracket merah \"−35,1% dari puncak\" dan celah sisa ke garis puncak 9.134,7 dengan label +54,2%. Tanggal \"Per 13 Okt 2026\" di pojok grafik."
+    },
+    {
+      "id": "history",
+      "minSec": 12,
+      "lines": [
+        {
+          "id": "hist-1",
+          "text": "Sejak {1997|sembilan belas sembilan puluh tujuh}, {IHSG|I-Ha-Es-Ge} tiga kali jatuh sedalam ini."
+        },
+        {
+          "id": "hist-krismon",
+          "text": "Dari puncak sampai balik lagi, krismon butuh {6,5 tahun|enam setengah tahun}."
+        },
+        {
+          "id": "hist-2008",
+          "text": "Krisis {2008|dua ribu delapan}, {2,2 tahun|dua koma dua tahun}."
+        },
+        {
+          "id": "hist-covid",
+          "text": "COVID, dari puncak {2018|dua ribu delapan belas}, {3,7 tahun|tiga koma tujuh tahun}."
+        }
+      ],
+      "tailSec": 0.8,
+      "visual": "Grafik IHSG 1990–2026 skala log (data mingguan dari drawdown.json), tiap crash diwarnai merah dengan \"jembatan\" horizontal dari puncak ke hari ditutup di atas puncak itu lagi; tiap jembatan + bar durasinya muncul di line-nya dan ditahan ≥ 1,2 s: Krismon (8 Jul 1997 → 9 Jan 2004, −65,3%, 6,5 thn), 2008 (9 Jan 2008 → 5 Apr 2010, −60,7%, 2,2 thn), COVID (puncak 19 Feb 2018 → 11 Nov 2021, −41,1%, 3,7 thn). Akhirnya jembatan 2026 masih terbuka, ujungnya titik-titik dengan \"?\". Voice cuma sebut lamanya; persen jatuhnya tampil di label. Label kecil di bawah judul: \"Lama balik = dari puncak sampai ditutup di atas puncak itu lagi\"."
+    },
+    {
+      "id": "lesson",
+      "minSec": 5.5,
+      "lines": [
+        {
+          "id": "lesson-1",
+          "text": "Tahun ini jatuhnya nggak sampai {5 bulan|lima bulan}."
+        },
+        {
+          "id": "lesson-2",
+          "text": "Baliknya bisa bertahun-tahun, dan nggak ada yang bisa nebak kapan."
+        }
+      ],
+      "tailSec": 0.8,
+      "visual": "Statement dua baris: \"Turun: < 5 bulan\" vs \"Balik: bisa bertahun-tahun\". Footer kecil: \"Cuma harga indeks (penutupan harian), belum termasuk dividen. Balik = pertama kali ditutup di atas puncak lamanya. Data: Yahoo Finance (^JKSE), 1997 – 13 Okt 2026.\" dan pill disclaimer \"Sejarah nggak bisa nebak kapan IHSG balik. Bukan rekomendasi investasi.\" Tanpa pertanyaan komen, langsung ke outro."
+    },
+    {
+      "id": "hakabot-outro",
+      "minSec": 12,
+      "leadSec": 0.3,
+      "tailSec": 1.6,
+      "lines": [
+        {
+          "id": "outro-1",
+          "text": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart."
+        },
+        {
+          "id": "outro-2",
+          "pauseBefore": 0.35,
+          "text": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya."
+        },
+        {
+          "id": "outro-3",
+          "pauseBefore": 0.35,
+          "text": "Pemilik saham tiap perusahaan, tampil rapi."
+        },
+        {
+          "id": "outro-4",
+          "pauseBefore": 0.35,
+          "text": "Screener siap pakai, bantu nyaring saham yang jelek."
+        },
+        {
+          "id": "outro-5",
+          "pauseBefore": 0.35,
+          "text": "Cek di {hakabot.com|hakabot dot com}."
+        }
+      ],
+      "visual": "Outro standar Hakabot v3.3: Indikator, Bandarmology (POSITION), Komposisi, Screener (ticker & nama di-blur), lalu end card hakabot.com."
+    }
+  ],
+  "sources": [
+    "Yahoo Finance chart API, ^JKSE, interval 1d, 6 Apr 1990 – 13 Okt 2026 (episodes/ep02-ihsg-balik-puncak/data/jkse_daily_raw.json); penutupan 13 Okt 2026 dari meta.regularMarketPrice",
+    "Yahoo Finance chart API, ^JKSE, interval 1mo (episodes/ep02-ihsg-balik-puncak/data/jkse_monthly_raw.json), hanya untuk catatan puncak bulanan ep01",
+    "Perhitungan drawdown, crash ≥ 40% dan waktu balik: episodes/ep02-ihsg-balik-puncak/analysis/build_data.py → src/episodes/ep02-ihsg-balik-puncak/data/drawdown.json",
+    "Cek silang berita: rri.co.id (rekor 9.134,70, 20 Jan 2026), pasardana.id (5.342, 8 Jun 2026), katadata.co.id (1.111,39, Okt 2008), idxchannel.com (3.937,63, 24 Mar 2020), surabaya-memory.petra.ac.id (740,83 dan 256,83, 1997–98)"
+  ]
+}

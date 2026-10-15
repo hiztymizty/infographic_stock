@@ -1,0 +1,1478 @@
+{
+ "episode": "ep03-inflasi-tabungan",
+ "fps": 30,
+ "estimated": false,
+ "totalFrames": 2800,
+ "scenes": [
+  {
+   "id": "hook",
+   "from": 0,
+   "dur": 178
+  },
+  {
+   "id": "shrink",
+   "from": 178,
+   "dur": 444
+  },
+  {
+   "id": "bank",
+   "from": 622,
+   "dur": 537
+  },
+  {
+   "id": "formula",
+   "from": 1159,
+   "dur": 694
+  },
+  {
+   "id": "lesson",
+   "from": 1853,
+   "dur": 334
+  },
+  {
+   "id": "hakabot-outro",
+   "from": 2187,
+   "dur": 613
+  }
+ ],
+ "voice": [
+  {
+   "id": "take-hook-1",
+   "scene": "hook",
+   "from": 10,
+   "dur": 154,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-hook-1.mp3",
+   "display": "Rp 10 juta di lemari sejak 2010, sekarang bisa beli apa?",
+   "spoken": "Sepuluh juta rupiah di lemari sejak dua ribu sepuluh, sekarang bisa beli apa?"
+  },
+  {
+   "id": "take-shrink-1",
+   "scene": "shrink",
+   "from": 189,
+   "dur": 409,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-shrink-1.mp3",
+   "display": "Inflasi itu harga-harga yang naik pelan-pelan tiap tahun. Belanjaan yang dulu Rp 10 juta, sekarang harganya Rp 19 juta. Jadi uangmu tinggal setara Rp 5,3 juta zaman dulu, hampir setengahnya hilang.",
+   "spoken": "Inflasi itu harga-harga yang naik pelan-pelan tiap tahun. Belanjaan yang dulu sepuluh juta, sekarang harganya sembilan belas juta. Jadi uangmu tinggal setara lima koma tiga juta zaman dulu, hampir setengahnya hilang."
+  },
+  {
+   "id": "take-bank-1",
+   "scene": "bank",
+   "from": 632,
+   "dur": 224,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-bank-1.mp3",
+   "display": "Terus kalau ditabung di bank? Bunga tabungan dipotong pajak 20%, dan nggak pernah sekali pun ngalahin inflasi.",
+   "spoken": "Terus kalau ditabung di bank? Bunga tabungan dipotong pajak dua puluh persen, dan nggak pernah sekali pun ngalahin inflasi."
+  },
+  {
+   "id": "take-bank-2",
+   "scene": "bank",
+   "from": 875,
+   "dur": 260,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-bank-2.mp3",
+   "display": "Deposito lebih mending, tapi cuma menang tipis, sekitar 0,7% setahun. Itu pun pakai bunga deposito tertinggi yang dijamin.",
+   "spoken": "Deposito lebih mending, tapi cuma menang tipis, sekitar nol koma tujuh persen setahun. Itu pun pakai bunga deposito tertinggi yang dijamin."
+  },
+  {
+   "id": "take-formula-1",
+   "scene": "formula",
+   "from": 1169,
+   "dur": 188,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-formula-1.mp3",
+   "display": "Jadi inget rumus ini, hasil bersih setelah pajak dan biaya dikurangi inflasi, itulah untung beneran.",
+   "spoken": "Jadi inget rumus ini, hasil bersih setelah pajak dan biaya dikurangi inflasi, itulah untung beneran."
+  },
+  {
+   "id": "take-formula-2",
+   "scene": "formula",
+   "from": 1375,
+   "dur": 447,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-formula-2.mp3",
+   "display": "Deposito hari ini 3,75%, setelah pajak tinggal 3%. Inflasinya 3,28%, jadi malah minus 0,28%. Saldonya kelihatan nambah, padahal nilainya sebenarnya turun.",
+   "spoken": "Deposito hari ini tiga koma tujuh lima persen, setelah pajak tinggal tiga persen. Inflasinya tiga koma dua delapan persen, jadi malah minus nol koma dua delapan persen. Saldonya kelihatan nambah, padahal nilainya sebenarnya turun."
+  },
+  {
+   "id": "take-lesson-1",
+   "scene": "lesson",
+   "from": 1863,
+   "dur": 294,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-lesson-1.mp3",
+   "display": "Sebelum naruh uang, cek dulu inflasi terbaru dari BPS, Badan Pusat Statistik. Hasil bersihnya harus di atas itu, baru uangmu beneran tumbuh.",
+   "spoken": "Sebelum naruh uang, cek dulu inflasi terbaru dari Be-Pe-Es, Badan Pusat Statistik. Hasil bersihnya harus di atas itu, baru uangmu beneran tumbuh."
+  },
+  {
+   "id": "take-hakabot-outro-1",
+   "scene": "hakabot-outro",
+   "from": 2196,
+   "dur": 150,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-hakabot-outro-1.mp3",
+   "display": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart.",
+   "spoken": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart."
+  },
+  {
+   "id": "take-hakabot-outro-2",
+   "scene": "hakabot-outro",
+   "from": 2365,
+   "dur": 111,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-hakabot-outro-2.mp3",
+   "display": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya.",
+   "spoken": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya."
+  },
+  {
+   "id": "take-hakabot-outro-3",
+   "scene": "hakabot-outro",
+   "from": 2496,
+   "dur": 78,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-hakabot-outro-3.mp3",
+   "display": "Pemilik saham tiap perusahaan, tampil rapi.",
+   "spoken": "Pemilik saham tiap perusahaan, tampil rapi."
+  },
+  {
+   "id": "take-hakabot-outro-4",
+   "scene": "hakabot-outro",
+   "from": 2593,
+   "dur": 88,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-hakabot-outro-4.mp3",
+   "display": "Screener siap pakai, bantu nyaring saham yang jelek.",
+   "spoken": "Screener siap pakai, bantu nyaring saham yang jelek."
+  },
+  {
+   "id": "take-hakabot-outro-5",
+   "scene": "hakabot-outro",
+   "from": 2701,
+   "dur": 52,
+   "audio": "episodes/ep03-inflasi-tabungan/vo/take-hakabot-outro-5.mp3",
+   "display": "Cek di hakabot.com.",
+   "spoken": "Cek di hakabot dot com."
+  }
+ ],
+ "lines": [
+  {
+   "id": "hook-1",
+   "scene": "hook",
+   "take": "take-hook-1",
+   "from": 10,
+   "dur": 80,
+   "audio": null,
+   "display": "Rp 10 juta di lemari sejak 2010,",
+   "spoken": "Sepuluh juta rupiah di lemari sejak dua ribu sepuluh,"
+  },
+  {
+   "id": "hook-2",
+   "scene": "hook",
+   "take": "take-hook-1",
+   "from": 102,
+   "dur": 62,
+   "audio": null,
+   "display": "sekarang bisa beli apa?",
+   "spoken": "sekarang bisa beli apa?"
+  },
+  {
+   "id": "shrink-1",
+   "scene": "shrink",
+   "take": "take-shrink-1",
+   "from": 189,
+   "dur": 96,
+   "audio": null,
+   "display": "Inflasi itu harga-harga yang naik pelan-pelan tiap tahun.",
+   "spoken": "Inflasi itu harga-harga yang naik pelan-pelan tiap tahun."
+  },
+  {
+   "id": "shrink-2",
+   "scene": "shrink",
+   "take": "take-shrink-1",
+   "from": 311,
+   "dur": 106,
+   "audio": null,
+   "display": "Belanjaan yang dulu Rp 10 juta, sekarang harganya Rp 19 juta.",
+   "spoken": "Belanjaan yang dulu sepuluh juta, sekarang harganya sembilan belas juta."
+  },
+  {
+   "id": "shrink-3",
+   "scene": "shrink",
+   "take": "take-shrink-1",
+   "from": 439,
+   "dur": 158,
+   "audio": null,
+   "display": "Jadi uangmu tinggal setara Rp 5,3 juta zaman dulu, hampir setengahnya hilang.",
+   "spoken": "Jadi uangmu tinggal setara lima koma tiga juta zaman dulu, hampir setengahnya hilang."
+  },
+  {
+   "id": "bank-1",
+   "scene": "bank",
+   "take": "take-bank-1",
+   "from": 632,
+   "dur": 44,
+   "audio": null,
+   "display": "Terus kalau ditabung di bank?",
+   "spoken": "Terus kalau ditabung di bank?"
+  },
+  {
+   "id": "bank-2",
+   "scene": "bank",
+   "take": "take-bank-1",
+   "from": 699,
+   "dur": 157,
+   "audio": null,
+   "display": "Bunga tabungan dipotong pajak 20%, dan nggak pernah sekali pun ngalahin inflasi.",
+   "spoken": "Bunga tabungan dipotong pajak dua puluh persen, dan nggak pernah sekali pun ngalahin inflasi."
+  },
+  {
+   "id": "bank-3",
+   "scene": "bank",
+   "take": "take-bank-2",
+   "from": 875,
+   "dur": 158,
+   "audio": null,
+   "display": "Deposito lebih mending, tapi cuma menang tipis, sekitar 0,7% setahun.",
+   "spoken": "Deposito lebih mending, tapi cuma menang tipis, sekitar nol koma tujuh persen setahun."
+  },
+  {
+   "id": "bank-4",
+   "scene": "bank",
+   "take": "take-bank-2",
+   "from": 1052,
+   "dur": 82,
+   "audio": null,
+   "display": "Itu pun pakai bunga deposito tertinggi yang dijamin.",
+   "spoken": "Itu pun pakai bunga deposito tertinggi yang dijamin."
+  },
+  {
+   "id": "formula-1",
+   "scene": "formula",
+   "take": "take-formula-1",
+   "from": 1169,
+   "dur": 187,
+   "audio": null,
+   "display": "Jadi inget rumus ini, hasil bersih setelah pajak dan biaya dikurangi inflasi, itulah untung beneran.",
+   "spoken": "Jadi inget rumus ini, hasil bersih setelah pajak dan biaya dikurangi inflasi, itulah untung beneran."
+  },
+  {
+   "id": "formula-2",
+   "scene": "formula",
+   "take": "take-formula-2",
+   "from": 1375,
+   "dur": 164,
+   "audio": null,
+   "display": "Deposito hari ini 3,75%, setelah pajak tinggal 3%.",
+   "spoken": "Deposito hari ini tiga koma tujuh lima persen, setelah pajak tinggal tiga persen."
+  },
+  {
+   "id": "formula-3",
+   "scene": "formula",
+   "take": "take-formula-2",
+   "from": 1539,
+   "dur": 172,
+   "audio": null,
+   "display": "Inflasinya 3,28%, jadi malah minus 0,28%.",
+   "spoken": "Inflasinya tiga koma dua delapan persen, jadi malah minus nol koma dua delapan persen."
+  },
+  {
+   "id": "formula-4",
+   "scene": "formula",
+   "take": "take-formula-2",
+   "from": 1713,
+   "dur": 109,
+   "audio": null,
+   "display": "Saldonya kelihatan nambah, padahal nilainya sebenarnya turun.",
+   "spoken": "Saldonya kelihatan nambah, padahal nilainya sebenarnya turun."
+  },
+  {
+   "id": "lesson-1",
+   "scene": "lesson",
+   "take": "take-lesson-1",
+   "from": 1863,
+   "dur": 176,
+   "audio": null,
+   "display": "Sebelum naruh uang, cek dulu inflasi terbaru dari BPS, Badan Pusat Statistik.",
+   "spoken": "Sebelum naruh uang, cek dulu inflasi terbaru dari Be-Pe-Es, Badan Pusat Statistik."
+  },
+  {
+   "id": "lesson-2",
+   "scene": "lesson",
+   "take": "take-lesson-1",
+   "from": 2049,
+   "dur": 107,
+   "audio": null,
+   "display": "Hasil bersihnya harus di atas itu, baru uangmu beneran tumbuh.",
+   "spoken": "Hasil bersihnya harus di atas itu, baru uangmu beneran tumbuh."
+  },
+  {
+   "id": "outro-1",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-1",
+   "from": 2196,
+   "dur": 149,
+   "audio": null,
+   "display": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart.",
+   "spoken": "Hakabot punya banyak indikator racikan sendiri, tinggal klik langsung muncul di chart."
+  },
+  {
+   "id": "outro-2",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-2",
+   "from": 2365,
+   "dur": 111,
+   "audio": null,
+   "display": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya.",
+   "spoken": "Kelihatan broker mana yang nambah, keluar, sampai untung ruginya."
+  },
+  {
+   "id": "outro-3",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-3",
+   "from": 2496,
+   "dur": 77,
+   "audio": null,
+   "display": "Pemilik saham tiap perusahaan, tampil rapi.",
+   "spoken": "Pemilik saham tiap perusahaan, tampil rapi."
+  },
+  {
+   "id": "outro-4",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-4",
+   "from": 2593,
+   "dur": 87,
+   "audio": null,
+   "display": "Screener siap pakai, bantu nyaring saham yang jelek.",
+   "spoken": "Screener siap pakai, bantu nyaring saham yang jelek."
+  },
+  {
+   "id": "outro-5",
+   "scene": "hakabot-outro",
+   "take": "take-hakabot-outro-5",
+   "from": 2701,
+   "dur": 50,
+   "audio": null,
+   "display": "Cek di hakabot.com.",
+   "spoken": "Cek di hakabot dot com."
+  }
+ ],
+ "captions": [
+  {
+   "line": "hook-1",
+   "from": 10,
+   "to": 102,
+   "words": [
+    {
+     "text": "Rp 10 juta",
+     "from": 10,
+     "to": 39
+    },
+    {
+     "text": "di",
+     "from": 41,
+     "to": 44
+    },
+    {
+     "text": "lemari",
+     "from": 46,
+     "to": 56
+    },
+    {
+     "text": "sejak",
+     "from": 58,
+     "to": 66
+    },
+    {
+     "text": "2010,",
+     "from": 67,
+     "to": 90
+    }
+   ]
+  },
+  {
+   "line": "hook-2",
+   "from": 102,
+   "to": 189,
+   "words": [
+    {
+     "text": "sekarang",
+     "from": 102,
+     "to": 111
+    },
+    {
+     "text": "bisa",
+     "from": 113,
+     "to": 121
+    },
+    {
+     "text": "beli",
+     "from": 122,
+     "to": 130
+    },
+    {
+     "text": "apa?",
+     "from": 132,
+     "to": 164
+    }
+   ]
+  },
+  {
+   "line": "shrink-1",
+   "from": 189,
+   "to": 250,
+   "words": [
+    {
+     "text": "Inflasi",
+     "from": 189,
+     "to": 203
+    },
+    {
+     "text": "itu",
+     "from": 206,
+     "to": 213
+    },
+    {
+     "text": "harga-harga",
+     "from": 215,
+     "to": 234
+    },
+    {
+     "text": "yang",
+     "from": 235,
+     "to": 239
+    },
+    {
+     "text": "naik",
+     "from": 241,
+     "to": 249
+    }
+   ]
+  },
+  {
+   "line": "shrink-1",
+   "from": 250,
+   "to": 311,
+   "words": [
+    {
+     "text": "pelan-pelan",
+     "from": 250,
+     "to": 263
+    },
+    {
+     "text": "tiap",
+     "from": 265,
+     "to": 270
+    },
+    {
+     "text": "tahun.",
+     "from": 272,
+     "to": 285
+    }
+   ]
+  },
+  {
+   "line": "shrink-2",
+   "from": 311,
+   "to": 366,
+   "words": [
+    {
+     "text": "Belanjaan",
+     "from": 311,
+     "to": 323
+    },
+    {
+     "text": "yang",
+     "from": 324,
+     "to": 326
+    },
+    {
+     "text": "dulu",
+     "from": 327,
+     "to": 333
+    },
+    {
+     "text": "Rp 10 juta,",
+     "from": 334,
+     "to": 364
+    }
+   ]
+  },
+  {
+   "line": "shrink-2",
+   "from": 366,
+   "to": 439,
+   "words": [
+    {
+     "text": "sekarang",
+     "from": 366,
+     "to": 376
+    },
+    {
+     "text": "harganya",
+     "from": 377,
+     "to": 388
+    },
+    {
+     "text": "Rp 19 juta.",
+     "from": 389,
+     "to": 417
+    }
+   ]
+  },
+  {
+   "line": "shrink-3",
+   "from": 439,
+   "to": 522,
+   "words": [
+    {
+     "text": "Jadi",
+     "from": 439,
+     "to": 450
+    },
+    {
+     "text": "uangmu",
+     "from": 453,
+     "to": 462
+    },
+    {
+     "text": "tinggal",
+     "from": 463,
+     "to": 470
+    },
+    {
+     "text": "setara",
+     "from": 471,
+     "to": 484
+    },
+    {
+     "text": "Rp 5,3 juta",
+     "from": 486,
+     "to": 520
+    }
+   ]
+  },
+  {
+   "line": "shrink-3",
+   "from": 522,
+   "to": 555,
+   "words": [
+    {
+     "text": "zaman",
+     "from": 522,
+     "to": 530
+    },
+    {
+     "text": "dulu,",
+     "from": 531,
+     "to": 554
+    }
+   ]
+  },
+  {
+   "line": "shrink-3",
+   "from": 555,
+   "to": 597,
+   "words": [
+    {
+     "text": "hampir",
+     "from": 555,
+     "to": 568
+    },
+    {
+     "text": "setengahnya",
+     "from": 570,
+     "to": 582
+    },
+    {
+     "text": "hilang.",
+     "from": 584,
+     "to": 597
+    }
+   ]
+  },
+  {
+   "line": "bank-1",
+   "from": 632,
+   "to": 699,
+   "words": [
+    {
+     "text": "Terus",
+     "from": 632,
+     "to": 644
+    },
+    {
+     "text": "kalau",
+     "from": 646,
+     "to": 652
+    },
+    {
+     "text": "ditabung",
+     "from": 653,
+     "to": 661
+    },
+    {
+     "text": "di",
+     "from": 663,
+     "to": 666
+    },
+    {
+     "text": "bank?",
+     "from": 668,
+     "to": 676
+    }
+   ]
+  },
+  {
+   "line": "bank-2",
+   "from": 699,
+   "to": 781,
+   "words": [
+    {
+     "text": "Bunga",
+     "from": 699,
+     "to": 704
+    },
+    {
+     "text": "tabungan",
+     "from": 706,
+     "to": 721
+    },
+    {
+     "text": "dipotong",
+     "from": 723,
+     "to": 733
+    },
+    {
+     "text": "pajak",
+     "from": 736,
+     "to": 745
+    },
+    {
+     "text": "20%,",
+     "from": 747,
+     "to": 779
+    }
+   ]
+  },
+  {
+   "line": "bank-2",
+   "from": 781,
+   "to": 838,
+   "words": [
+    {
+     "text": "dan",
+     "from": 781,
+     "to": 788
+    },
+    {
+     "text": "nggak",
+     "from": 790,
+     "to": 796
+    },
+    {
+     "text": "pernah",
+     "from": 797,
+     "to": 808
+    },
+    {
+     "text": "sekali",
+     "from": 809,
+     "to": 820
+    },
+    {
+     "text": "pun",
+     "from": 821,
+     "to": 827
+    },
+    {
+     "text": "ngalahin",
+     "from": 828,
+     "to": 836
+    }
+   ]
+  },
+  {
+   "line": "bank-2",
+   "from": 838,
+   "to": 875,
+   "words": [
+    {
+     "text": "inflasi.",
+     "from": 838,
+     "to": 856
+    }
+   ]
+  },
+  {
+   "line": "bank-3",
+   "from": 875,
+   "to": 920,
+   "words": [
+    {
+     "text": "Deposito",
+     "from": 875,
+     "to": 889
+    },
+    {
+     "text": "lebih",
+     "from": 890,
+     "to": 896
+    },
+    {
+     "text": "mending,",
+     "from": 897,
+     "to": 918
+    }
+   ]
+  },
+  {
+   "line": "bank-3",
+   "from": 920,
+   "to": 961,
+   "words": [
+    {
+     "text": "tapi",
+     "from": 920,
+     "to": 930
+    },
+    {
+     "text": "cuma",
+     "from": 931,
+     "to": 937
+    },
+    {
+     "text": "menang",
+     "from": 938,
+     "to": 944
+    },
+    {
+     "text": "tipis,",
+     "from": 946,
+     "to": 959
+    }
+   ]
+  },
+  {
+   "line": "bank-3",
+   "from": 961,
+   "to": 1052,
+   "words": [
+    {
+     "text": "sekitar",
+     "from": 961,
+     "to": 978
+    },
+    {
+     "text": "0,7%",
+     "from": 981,
+     "to": 1016
+    },
+    {
+     "text": "setahun.",
+     "from": 1017,
+     "to": 1033
+    }
+   ]
+  },
+  {
+   "line": "bank-4",
+   "from": 1052,
+   "to": 1113,
+   "words": [
+    {
+     "text": "Itu",
+     "from": 1052,
+     "to": 1059
+    },
+    {
+     "text": "pun",
+     "from": 1061,
+     "to": 1064
+    },
+    {
+     "text": "pakai",
+     "from": 1066,
+     "to": 1074
+    },
+    {
+     "text": "bunga",
+     "from": 1075,
+     "to": 1081
+    },
+    {
+     "text": "deposito",
+     "from": 1082,
+     "to": 1095
+    },
+    {
+     "text": "tertinggi",
+     "from": 1097,
+     "to": 1112
+    }
+   ]
+  },
+  {
+   "line": "bank-4",
+   "from": 1113,
+   "to": 1134,
+   "words": [
+    {
+     "text": "yang",
+     "from": 1113,
+     "to": 1115
+    },
+    {
+     "text": "dijamin.",
+     "from": 1116,
+     "to": 1134
+    }
+   ]
+  },
+  {
+   "line": "formula-1",
+   "from": 1169,
+   "to": 1212,
+   "words": [
+    {
+     "text": "Jadi",
+     "from": 1169,
+     "to": 1174
+    },
+    {
+     "text": "inget",
+     "from": 1175,
+     "to": 1181
+    },
+    {
+     "text": "rumus",
+     "from": 1182,
+     "to": 1188
+    },
+    {
+     "text": "ini,",
+     "from": 1190,
+     "to": 1210
+    }
+   ]
+  },
+  {
+   "line": "formula-1",
+   "from": 1212,
+   "to": 1260,
+   "words": [
+    {
+     "text": "hasil",
+     "from": 1212,
+     "to": 1222
+    },
+    {
+     "text": "bersih",
+     "from": 1224,
+     "to": 1232
+    },
+    {
+     "text": "setelah",
+     "from": 1233,
+     "to": 1241
+    },
+    {
+     "text": "pajak",
+     "from": 1243,
+     "to": 1253
+    },
+    {
+     "text": "dan",
+     "from": 1254,
+     "to": 1258
+    }
+   ]
+  },
+  {
+   "line": "formula-1",
+   "from": 1260,
+   "to": 1317,
+   "words": [
+    {
+     "text": "biaya",
+     "from": 1260,
+     "to": 1272
+    },
+    {
+     "text": "dikurangi",
+     "from": 1275,
+     "to": 1289
+    },
+    {
+     "text": "inflasi,",
+     "from": 1291,
+     "to": 1316
+    }
+   ]
+  },
+  {
+   "line": "formula-1",
+   "from": 1317,
+   "to": 1375,
+   "words": [
+    {
+     "text": "itulah",
+     "from": 1317,
+     "to": 1330
+    },
+    {
+     "text": "untung",
+     "from": 1332,
+     "to": 1342
+    },
+    {
+     "text": "beneran.",
+     "from": 1343,
+     "to": 1356
+    }
+   ]
+  },
+  {
+   "line": "formula-2",
+   "from": 1375,
+   "to": 1465,
+   "words": [
+    {
+     "text": "Deposito",
+     "from": 1375,
+     "to": 1390
+    },
+    {
+     "text": "hari",
+     "from": 1391,
+     "to": 1397
+    },
+    {
+     "text": "ini",
+     "from": 1399,
+     "to": 1404
+    },
+    {
+     "text": "3,75%,",
+     "from": 1408,
+     "to": 1464
+    }
+   ]
+  },
+  {
+   "line": "formula-2",
+   "from": 1465,
+   "to": 1539,
+   "words": [
+    {
+     "text": "setelah",
+     "from": 1465,
+     "to": 1474
+    },
+    {
+     "text": "pajak",
+     "from": 1476,
+     "to": 1486
+    },
+    {
+     "text": "tinggal",
+     "from": 1487,
+     "to": 1495
+    },
+    {
+     "text": "3%.",
+     "from": 1498,
+     "to": 1539
+    }
+   ]
+  },
+  {
+   "line": "formula-3",
+   "from": 1539,
+   "to": 1614,
+   "words": [
+    {
+     "text": "Inflasinya",
+     "from": 1539,
+     "to": 1555
+    },
+    {
+     "text": "3,28%,",
+     "from": 1558,
+     "to": 1613
+    }
+   ]
+  },
+  {
+   "line": "formula-3",
+   "from": 1614,
+   "to": 1713,
+   "words": [
+    {
+     "text": "jadi",
+     "from": 1614,
+     "to": 1620
+    },
+    {
+     "text": "malah",
+     "from": 1621,
+     "to": 1627
+    },
+    {
+     "text": "minus",
+     "from": 1630,
+     "to": 1642
+    },
+    {
+     "text": "0,28%.",
+     "from": 1643,
+     "to": 1711
+    }
+   ]
+  },
+  {
+   "line": "formula-4",
+   "from": 1713,
+   "to": 1761,
+   "words": [
+    {
+     "text": "Saldonya",
+     "from": 1713,
+     "to": 1728
+    },
+    {
+     "text": "kelihatan",
+     "from": 1729,
+     "to": 1738
+    },
+    {
+     "text": "nambah,",
+     "from": 1739,
+     "to": 1759
+    }
+   ]
+  },
+  {
+   "line": "formula-4",
+   "from": 1761,
+   "to": 1822,
+   "words": [
+    {
+     "text": "padahal",
+     "from": 1761,
+     "to": 1771
+    },
+    {
+     "text": "nilainya",
+     "from": 1773,
+     "to": 1786
+    },
+    {
+     "text": "sebenarnya",
+     "from": 1788,
+     "to": 1803
+    },
+    {
+     "text": "turun.",
+     "from": 1805,
+     "to": 1822
+    }
+   ]
+  },
+  {
+   "line": "lesson-1",
+   "from": 1863,
+   "to": 1896,
+   "words": [
+    {
+     "text": "Sebelum",
+     "from": 1863,
+     "to": 1871
+    },
+    {
+     "text": "naruh",
+     "from": 1872,
+     "to": 1878
+    },
+    {
+     "text": "uang,",
+     "from": 1880,
+     "to": 1895
+    }
+   ]
+  },
+  {
+   "line": "lesson-1",
+   "from": 1896,
+   "to": 1988,
+   "words": [
+    {
+     "text": "cek",
+     "from": 1896,
+     "to": 1902
+    },
+    {
+     "text": "dulu",
+     "from": 1903,
+     "to": 1911
+    },
+    {
+     "text": "inflasi",
+     "from": 1913,
+     "to": 1926
+    },
+    {
+     "text": "terbaru",
+     "from": 1927,
+     "to": 1938
+    },
+    {
+     "text": "dari",
+     "from": 1939,
+     "to": 1943
+    },
+    {
+     "text": "BPS,",
+     "from": 1946,
+     "to": 1986
+    }
+   ]
+  },
+  {
+   "line": "lesson-1",
+   "from": 1988,
+   "to": 2049,
+   "words": [
+    {
+     "text": "Badan",
+     "from": 1988,
+     "to": 1998
+    },
+    {
+     "text": "Pusat",
+     "from": 1999,
+     "to": 2007
+    },
+    {
+     "text": "Statistik.",
+     "from": 2009,
+     "to": 2039
+    }
+   ]
+  },
+  {
+   "line": "lesson-2",
+   "from": 2049,
+   "to": 2113,
+   "words": [
+    {
+     "text": "Hasil",
+     "from": 2049,
+     "to": 2053
+    },
+    {
+     "text": "bersihnya",
+     "from": 2054,
+     "to": 2070
+    },
+    {
+     "text": "harus",
+     "from": 2072,
+     "to": 2082
+    },
+    {
+     "text": "di",
+     "from": 2083,
+     "to": 2087
+    },
+    {
+     "text": "atas",
+     "from": 2087,
+     "to": 2091
+    },
+    {
+     "text": "itu,",
+     "from": 2094,
+     "to": 2111
+    }
+   ]
+  },
+  {
+   "line": "lesson-2",
+   "from": 2113,
+   "to": 2156,
+   "words": [
+    {
+     "text": "baru",
+     "from": 2113,
+     "to": 2123
+    },
+    {
+     "text": "uangmu",
+     "from": 2124,
+     "to": 2132
+    },
+    {
+     "text": "beneran",
+     "from": 2133,
+     "to": 2144
+    },
+    {
+     "text": "tumbuh.",
+     "from": 2145,
+     "to": 2156
+    }
+   ]
+  },
+  {
+   "line": "outro-1",
+   "from": 2196,
+   "to": 2246,
+   "words": [
+    {
+     "text": "Hakabot",
+     "from": 2196,
+     "to": 2211
+    },
+    {
+     "text": "punya",
+     "from": 2212,
+     "to": 2218
+    },
+    {
+     "text": "banyak",
+     "from": 2220,
+     "to": 2230
+    },
+    {
+     "text": "indikator",
+     "from": 2231,
+     "to": 2244
+    }
+   ]
+  },
+  {
+   "line": "outro-1",
+   "from": 2246,
+   "to": 2284,
+   "words": [
+    {
+     "text": "racikan",
+     "from": 2246,
+     "to": 2259
+    },
+    {
+     "text": "sendiri,",
+     "from": 2260,
+     "to": 2283
+    }
+   ]
+  },
+  {
+   "line": "outro-1",
+   "from": 2284,
+   "to": 2365,
+   "words": [
+    {
+     "text": "tinggal",
+     "from": 2284,
+     "to": 2292
+    },
+    {
+     "text": "klik",
+     "from": 2294,
+     "to": 2302
+    },
+    {
+     "text": "langsung",
+     "from": 2309,
+     "to": 2316
+    },
+    {
+     "text": "muncul",
+     "from": 2317,
+     "to": 2328
+    },
+    {
+     "text": "di",
+     "from": 2330,
+     "to": 2333
+    },
+    {
+     "text": "chart.",
+     "from": 2335,
+     "to": 2345
+    }
+   ]
+  },
+  {
+   "line": "outro-2",
+   "from": 2365,
+   "to": 2419,
+   "words": [
+    {
+     "text": "Kelihatan",
+     "from": 2365,
+     "to": 2380
+    },
+    {
+     "text": "broker",
+     "from": 2381,
+     "to": 2389
+    },
+    {
+     "text": "mana",
+     "from": 2390,
+     "to": 2394
+    },
+    {
+     "text": "yang",
+     "from": 2395,
+     "to": 2399
+    },
+    {
+     "text": "nambah,",
+     "from": 2400,
+     "to": 2418
+    }
+   ]
+  },
+  {
+   "line": "outro-2",
+   "from": 2419,
+   "to": 2496,
+   "words": [
+    {
+     "text": "keluar,",
+     "from": 2419,
+     "to": 2437
+    },
+    {
+     "text": "sampai",
+     "from": 2439,
+     "to": 2452
+    },
+    {
+     "text": "untung",
+     "from": 2453,
+     "to": 2461
+    },
+    {
+     "text": "ruginya.",
+     "from": 2464,
+     "to": 2476
+    }
+   ]
+  },
+  {
+   "line": "outro-3",
+   "from": 2496,
+   "to": 2544,
+   "words": [
+    {
+     "text": "Pemilik",
+     "from": 2496,
+     "to": 2506
+    },
+    {
+     "text": "saham",
+     "from": 2507,
+     "to": 2515
+    },
+    {
+     "text": "tiap",
+     "from": 2516,
+     "to": 2520
+    },
+    {
+     "text": "perusahaan,",
+     "from": 2521,
+     "to": 2542
+    }
+   ]
+  },
+  {
+   "line": "outro-3",
+   "from": 2544,
+   "to": 2593,
+   "words": [
+    {
+     "text": "tampil",
+     "from": 2544,
+     "to": 2559
+    },
+    {
+     "text": "rapi.",
+     "from": 2560,
+     "to": 2573
+    }
+   ]
+  },
+  {
+   "line": "outro-4",
+   "from": 2593,
+   "to": 2630,
+   "words": [
+    {
+     "text": "Screener",
+     "from": 2593,
+     "to": 2605
+    },
+    {
+     "text": "siap",
+     "from": 2606,
+     "to": 2610
+    },
+    {
+     "text": "pakai,",
+     "from": 2612,
+     "to": 2629
+    }
+   ]
+  },
+  {
+   "line": "outro-4",
+   "from": 2630,
+   "to": 2701,
+   "words": [
+    {
+     "text": "bantu",
+     "from": 2630,
+     "to": 2644
+    },
+    {
+     "text": "nyaring",
+     "from": 2644,
+     "to": 2653
+    },
+    {
+     "text": "saham",
+     "from": 2655,
+     "to": 2663
+    },
+    {
+     "text": "yang",
+     "from": 2664,
+     "to": 2668
+    },
+    {
+     "text": "jelek.",
+     "from": 2668,
+     "to": 2680
+    }
+   ]
+  },
+  {
+   "line": "outro-5",
+   "from": 2701,
+   "to": 2751,
+   "words": [
+    {
+     "text": "Cek",
+     "from": 2701,
+     "to": 2708
+    },
+    {
+     "text": "di",
+     "from": 2709,
+     "to": 2713
+    },
+    {
+     "text": "hakabot.com.",
+     "from": 2714,
+     "to": 2751
+    }
+   ]
+  }
+ ]
+}
