@@ -1,6 +1,6 @@
 import React from 'react';
 import {AbsoluteFill, Sequence, interpolate, useCurrentFrame} from 'remotion';
-import {Sfx, VoiceTrack} from '../audio';
+import {MusicBed, Sfx, VoiceTrack} from '../audio';
 import {CLAMP} from '../components/ui';
 import {C, MONO, SANS} from '../theme';
 import {SceneProvider, TimingProvider, useScene, useTiming} from '../timing';
@@ -8,6 +8,7 @@ import {WIN, XF} from './layout';
 import {Backdrop, ChapterOverlay, PreviewBadge, Subtitles} from './Overlays';
 import {ease} from './plan';
 import {FootageBeatView, TutorialCtx} from './ScreenShot';
+import {tutPalette} from './sfxPalettes';
 import type {Beat, TutorialDef} from './types';
 
 /** Stand-in for scenes not edited yet: scene id + its voice lines, so the full timeline can still be reviewed. */
@@ -50,7 +51,7 @@ const isFull = (b: Beat | undefined) => b?.kind === 'custom' && b.full === true;
  * A long-form 16:9 tutorial edited from screen recordings: every scene of timing.json is a beat (footage or a
  * code-made card) inside one screen window on the navy backdrop (or over the whole frame for `full` custom beats:
  * intro, end card); chapter cards and the chapter label (top margin), burned-in subtitles (`subtitles`), the voice,
- * and the PREVIEW badge while timing is estimated. See docs/style-guide.md → Tutorials.
+ * the music bed (`music`, ducked under the voice), sparse auto SFX (`sfx`) and the PREVIEW badge while timing is estimated. See docs/style-guide.md → Tutorials.
  */
 export const TutorialComposition: React.FC<{def: TutorialDef; subtitles: boolean}> = ({def, subtitles}) => {
   const {timing, beats, chapters} = def;
@@ -60,6 +61,7 @@ export const TutorialComposition: React.FC<{def: TutorialDef; subtitles: boolean
     return cur;
   };
   const n = timing.scenes.length;
+  const pal = tutPalette(def.sfxPalette);
   return (
     <TutorialCtx.Provider value={def}>
       <TimingProvider value={timing}>
@@ -114,12 +116,14 @@ export const TutorialComposition: React.FC<{def: TutorialDef; subtitles: boolean
               const s = timing.scenes.find((x) => x.id === c.first);
               return s ? (
                 <Sequence key={c.n} from={s.from} layout="none">
-                  <Sfx name="b-rise" at={0} volume={0.3} />
+                  {/* The palette's chapter cue as the card rises in (the voice pauses here). */}
+                  <Sfx name={pal.chapter.name} at={pal.chapter.at} volume={pal.chapter.volume} />
                 </Sequence>
               ) : null;
             })}
           {subtitles && <Subtitles />}
           <VoiceTrack />
+          {def.music && <MusicBed src={def.music.src} level={def.music.level} />}
           {timing.estimated && <PreviewBadge />}
         </AbsoluteFill>
       </TimingProvider>

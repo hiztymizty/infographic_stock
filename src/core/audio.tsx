@@ -26,7 +26,9 @@ export type SfxName =
   | 'c-chatter-1'
   | 'c-chatter-2'
   | 'c-chatter-3'
-  | 'c-chatter-4'; // grid / counter fill steps: cycle through 1-4
+  | 'c-chatter-4' // grid / counter fill steps: cycle through 1-4
+  // Tutorial palettes T1-T4 (long-form only; picked per episode in core/tutorial/sfxPalettes.ts)
+  | `t${1 | 2 | 3 | 4}-${'click' | 'ring' | 'chapter' | 'logo' | 'pill'}`;
 
 /** One sound effect at a frame relative to the enclosing Sequence (usually the scene). */
 export const Sfx: React.FC<{name: SfxName; at?: number; volume?: number}> = ({name, at = 0, volume = 0.5}) => (

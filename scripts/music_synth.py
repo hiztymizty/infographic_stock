@@ -21,6 +21,9 @@ ep03 (ep03-inflasi-tabungan) has its own load_anchors_ep03() / score_ep03() / ma
 tape-stop it builds into the -0,28% reveal and stops dead 30 ms before it (the b-hit lands in silence), and its
 DBus declicks every note with 3 ms fades, and peak_guard() dips the score for a few 20 ms blocks where it would
 lift the voice's true peak (it decodes the VO takes, so rebuild after any re-voice). main() dispatches on the episode id.
+tut01 (tut01-hakabot-tutorial, 18 min) has load_anchors_tut() / score_tut() / main_tut(): a calm long-form bed that
+changes progression and texture every ~1 min, lifts into each chapter card and resolves on the end card. It writes
+public/music/tut01-hakabot-tutorial-score.wav (the full id), and its peak guard assumes music.level 0.2.
 """
 import json
 import sys
@@ -840,10 +843,233 @@ def main_ep03(ep: str):
     print(f"  dead stop   {cut_end - 0.02:7.2f} -> {cut_end:7.2f} s  build out; b-hit at {A['reveal']:.2f} s lands in silence")
 
 
+# ---------------------------------------------------------------------------------------------
+# tut01 score (tut01-hakabot-tutorial): an 18-minute screen-recording tutorial, 8 chapters
+# ---------------------------------------------------------------------------------------------
+# Not a story arc but a long, calm bed: the house instruments (felt piano, warm pad, soft pulse bass, plucks) in
+# low-key textures, a light lift into every chapter card (reversed-piano bloom + rolled chord + a small fader bump),
+# a new progression and texture every ~1 min (sections cut on scene starts) so 18 minutes never feel like a loop,
+# no drums, and a home cadence on D add9 for the end card. Harmonic rhythm is slow (one chord per 2 bars).
+
+TUT_CHAPTERS = ["dash-1", "watch-1", "stock-1", "idx-1", "comp-1", "scr-1", "hb-1", "akun-1"]
+TUT_FORCE_CUTS = ["fund-1"]  # the Fundamental tab gets its own colour inside the Stock chapter
+
+# Per chapter: target BPM (bars flex to land on the cuts) and the (progression, texture) of each of its sections,
+# cycled if a chapter has more sections. A chapter's first 4 bars are always "glow" (rolled chords: the lift).
+TUT_PLAN = {
+    "intro": (86, [(["Gmaj9", "D/F#", "Em9", "Asus4"], "intro")]),
+    "dash-1": (84, [(["D", "Gmaj9", "Bm", "Asus4"], "keys")]),
+    "watch-1": (86, [(["Gmaj9", "D/F#", "Em9", "A"], "flow"), (["Bm", "G", "D", "A"], "keys")]),
+    "stock-1": (84, [(["D", "A/C#", "Bm", "G"], "keys"), (["Gmaj7#11", "Dadd9", "Em9", "A"], "flow"),
+                     (["Bm", "Bm/A", "Gmaj9", "Asus4"], "air"), (["Em9", "D/F#", "Gmaj9", "A"], "pulse"),
+                     (["D", "Gmaj9", "Bm", "A"], "keys"), (["Gmaj9", "A", "Bm", "D/F#"], "flow")]),
+    "fund-1": (82, [(["Bm", "Bm/A", "Gmaj7#11", "F#sus"], "air"), (["Gmaj9", "D/F#", "Em9", "Asus4"], "keys")]),
+    "idx-1": (88, [(["D", "A", "Bm", "G"], "pulse"), (["Gmaj9", "D/F#", "Em9", "A"], "keys")]),
+    "comp-1": (84, [(["Em9", "Gmaj9", "Dadd9", "Asus4"], "flow"), (["Bm", "Gmaj7#11", "D", "A"], "keys")]),
+    "scr-1": (88, [(["Gmaj9", "A", "Bm", "D/F#"], "pulse")]),
+    "hb-1": (86, [(["Bm", "G", "D", "A"], "flow")]),
+    "akun-1": (84, [(["D", "Gmaj9", "Em9", "Asus4"], "keys")]),
+}
+
+_PIANO_CACHE: dict = {}
+
+
+def piano_c(f, hold=1.2, vel=0.5):
+    """piano() with a cache (a few thousand notes over 18 min; identical notes are reused)."""
+    key = (round(f, 3), round(hold, 2), round(vel, 3))
+    if key not in _PIANO_CACHE:
+        _PIANO_CACHE[key] = piano(f, hold, vel)
+    return _PIANO_CACHE[key]
+
+
+def load_anchors_tut(ep: str) -> dict:
+    t = json.loads((ROOT / "src" / "episodes" / ep / "timing.json").read_text(encoding="utf-8"))
+    if t.get("estimated"):
+        print("WARNING: timing.json is estimated; re-run after the real voiceover lands.")
+    fps = t["fps"]
+    sc = [(s["id"], s["from"] / fps) for s in t["scenes"]]
+    ids = dict(sc)
+    return {
+        "total": t["totalFrames"] / fps,
+        "scenes": sc,
+        "chapters": [(c, ids[c]) for c in TUT_CHAPTERS],
+        "cuts": [(c, ids[c]) for c in TUT_FORCE_CUTS],
+        "end": ids["end"],
+        "voiced": [(l["from"] / fps, (l["from"] + l["dur"]) / fps) for l in t["lines"]],
+    }
+
+
+def tut_sections(A: dict):
+    """(start, end, progression, texture, bpm, label, opens_chapter, closes_chapter) for the whole video."""
+    heads = sorted([("intro", 0.0)] + A["chapters"] + A["cuts"], key=lambda h: h[1])
+    bounds = [h[1] for h in heads] + [A["end"]]
+    out = []
+    for hi, (hid, a) in enumerate(heads):
+        b = bounds[hi + 1]
+        bpm, plan = TUT_PLAN[hid]
+        # Cut the chapter into ~1-min sections on scene starts (>= 55 s each, the last >= 35 s).
+        cuts, cur = [a], a
+        for _, s in A["scenes"]:
+            if a < s < b and s - cur >= 55 and b - s >= 35:
+                cuts.append(s)
+                cur = s
+        cuts.append(b)
+        chapter_end = hi + 1 == len(heads) or heads[hi + 1][0] not in TUT_FORCE_CUTS
+        for k in range(len(cuts) - 1):
+            prog, tex = plan[k % len(plan)]
+            last = k == len(cuts) - 2
+            opens = k == 0 and hid not in TUT_FORCE_CUTS and hid != "intro"
+            out.append((cuts[k], cuts[k + 1], prog, tex, bpm, f"{hid}#{k + 1}", opens, last and chapter_end))
+    return out
+
+
+def rolled(bus, ch, at, hold, vel, spread=0.07, rev=0.6):
+    root, _, arp = CH[ch]
+    f0 = root * 2 if root < 70 else root
+    for k, f in enumerate([f0] + arp[:3]):
+        bus.add(piano_c(f, hold=hold, vel=vel * (1.0 if k else 0.9)), at + k * spread, 1.0, -0.4 + 0.25 * k, rev)
+
+
+TUT_PAD = {"intro": (0.14, 820), "keys": (0.17, 900), "flow": (0.16, 900), "pulse": (0.18, 950), "glow": (0.19, 1050), "air": (0.15, 780)}
+
+
+def score_tut(A: dict):
+    total = A["total"]
+    bus = DBus(total)
+    sections = []
+    for si, (a, b, prog, tex, bpm, label, opens, closes) in enumerate(tut_sections(A)):
+        nb = max(2, int(round((b - a) / (240 / bpm))))
+        starts, bar = bars(a, b, nb)
+        beat = bar / 4
+        srng = np.random.default_rng(100 + si)  # per-section "breathing" (which notes rest)
+        # Two bars per chord; a closing section ends on the dominant (Asus4 / A) to lead into the next chapter card,
+        # the very last one on A, leading into the end card's D.
+        chords = [prog[(i // 2) % len(prog)] for i in range(nb)]
+        if closes:
+            final = b >= A["end"] - 0.01
+            if final:
+                chords[-1] = "A"
+            elif chords[-1] not in ("A", "Asus4"):
+                chords[-1] = "Asus4"
+        spans = []
+        for i, ch in enumerate(chords):
+            if spans and spans[-1][0] == ch and i - spans[-1][1] < 2:
+                spans[-1][2] += 1
+            else:
+                spans.append([ch, i, 1])
+        texs = ["glow" if opens and i < 4 else tex for i in range(nb)]
+        for ch, i0, n in spans:
+            s, sec = starts[i0], bar * n
+            tex = texs[i0]
+            pad_gain, cutoff = TUT_PAD[tex]
+            if tex == "intro" and i0 == 0:
+                continue  # the first bar is piano alone
+            chord_pad(bus, ch, s, sec, pad_gain, cutoff=cutoff, att=1.2 if tex in ("air", "intro") else 0.9, rel=2.0)
+            root = CH[ch][0]
+            if tex == "pulse":
+                if i0 > 0 and texs[i0 - 1] == "pulse":
+                    for j in range(n):
+                        bass_8ths(bus, root, s + j * bar, beat, 0.13)
+                rolled(bus, ch, s, sec * 0.6, 0.2)
+            elif tex == "intro":
+                if i0 >= 4:
+                    bus.add(bass(root, sec * 0.95, 0.24), s, 1.0, 0, 0.12)
+            else:
+                bus.add(bass(root, sec * 0.95, 0.2 if tex == "air" else 0.22), s, 1.0, 0, 0.12)
+            if tex == "glow":
+                rolled(bus, ch, s, sec * 0.7, 0.27 if i0 else 0.31)
+            if tex == "air":
+                arp = CH[ch][2]
+                bus.add(piano_c(root * 2 if root < 70 else root, hold=sec * 0.6, vel=0.3), s, 1.0, -0.2, 0.6)
+                bus.add(piano_c(arp[1], hold=beat * 2, vel=0.17), s + 2 * beat, 1.0, 0.25, 0.65)
+        for i, (s, ch) in enumerate(zip(starts, chords)):
+            arp = CH[ch][2]
+            tex = texs[i]
+            if tex == "intro":
+                for k, idx in enumerate([0, 2, 1, 3]):
+                    if k == 3 and i % 2 == 0:
+                        continue
+                    bus.add(piano_c(arp[idx], hold=beat * 1.6, vel=0.27 + 0.05 * (k == 0)), s + k * beat, 1.0, -0.25 + idx / 6, 0.55)
+            elif tex == "keys":
+                for k, idx in enumerate([0, 2, 1, 3] if i % 2 == 0 else [3, 1, 2, 0]):
+                    if k > 0 and srng.uniform() < 0.22:
+                        continue  # breathe
+                    bus.add(piano_c(arp[idx], hold=beat * 1.5, vel=0.23 + 0.04 * (k == 0)), s + k * beat, 1.0, -0.3 + idx / 5, 0.55)
+            elif tex == "flow":
+                for k, idx in enumerate([0, 1, 2, 3, 2, 1, 2, 3]):
+                    if (k == 7 and i % 2 == 1) or (k > 0 and srng.uniform() < 0.15):
+                        continue
+                    bus.add(piano_c(arp[idx], hold=beat * 0.9, vel=0.19 + 0.03 * (k % 4 == 0)), s + k * beat / 2, 1.0, -0.3 + 0.2 * idx, 0.5)
+            elif tex == "pulse" and i >= 1 and texs[i - 1] == "pulse":
+                pluck_8ths(bus, arp, s, beat, 0.085, accent=0.025)
+            elif tex == "glow":
+                hi_note = arp[3] * (2 if arp[3] < 700 else 1)
+                bus.add(piano_c(hi_note, hold=beat * 2, vel=0.12), s + 2 * beat, 1.0, 0.35, 0.7)
+        if opens:
+            # The lift into a chapter card: a reversed bloom of the chapter's first chord ending on its downbeat.
+            sw = min(bar * 0.75, 2.2)
+            bus.add(swell(CH[chords[0]][2], sw, 0.2), a - sw, 1.0, 0, 0.5)
+        what = ("glow> " if opens else "") + f"{texs[-1]:5s} " + " ".join(prog) + ("  (lift in)" if opens else "") + ("  -> dominant" if closes else "")
+        sections.append((label, a, b, 240 / bar, what))
+
+    # End card: home. D add9 (rolled piano + pad + low D) under the recap line, a plagal G colour, then D add9 again
+    # ringing out under the CTA.
+    e = A["end"]
+    ring = total - e
+    bus.add(swell(CH["Dadd9"][2], 1.6, 0.22), e - 1.6, 1.0, 0, 0.5)
+    t1, t2 = e + ring * 0.36, e + ring * 0.62
+    for ch, s0, s1, v in (("Dadd9", e, t1, 0.31), ("Gmaj9", t1, t2, 0.24), ("Dadd9", t2, total, 0.27)):
+        chord_pad(bus, ch, s0, s1 - s0 + (0.4 if s1 < total else 0), 0.21, cutoff=1000, att=0.15 if s0 == e else 0.8, rel=1.8)
+        bus.add(bass(CH[ch][0], s1 - s0, 0.28), s0, 1.0, 0, 0.2)
+        rolled(bus, ch, s0, s1 - s0, v, spread=0.06, rev=0.65)
+    sections.append(("end card", e, total, None, "Dadd9 -> Gmaj9 -> Dadd9: rolled piano + pad + low D, rings out"))
+    return bus, sections
+
+
+def main_tut(ep: str):
+    A = load_anchors_tut(ep)
+    bus, sections = score_tut(A)
+    n = int(round(A["total"] * SR))
+    tv = np.arange(n) / SR
+    mix = render(bus)[:, :n]
+
+    # Fader automation (dB): the intro creeps in, then a flat bed with a small bump into every chapter card (the
+    # voice pauses there) and a warm lift on the end card.
+    auto = [(0.0, -3.5), (A["chapters"][0][1] - 6, -1.0)]
+    for _, c in A["chapters"]:
+        auto += [(c - 2.5, 0.0), (c + 0.2, 2.0), (c + 5.0, 0.0)]
+    auto += [(A["end"] - 0.5, 0.0), (A["end"] + 0.4, 2.0), (A["total"], 1.0)]
+    at, db = zip(*auto)
+    mix *= 10 ** (np.interp(tv, at, db) / 20)
+
+    # Speech-band dip: 1-4 kHz down ~8 dB while the voice speaks.
+    band = sosfiltfilt(butter(2, [1000, 4000], btype="band", fs=SR, output="sos"), mix, axis=1)
+    mix = mix - 0.6 * band * smooth_mask(A["voiced"], n)
+
+    mix = hp(mix, 30)
+    mix *= np.clip(tv / 0.4, 0, 1) * np.clip((A["total"] - tv) / 1.2, 0, 1)
+    mix *= 10 ** ((TARGET_LUFS - integrated(mix)) / 20)
+    # After mastering. Assumes music.level 0.2 in index.tsx.
+    dip, hot = peak_guard(mix, voice_timeline(ep, n), A, level=0.2)
+    mix *= dip
+    if np.abs(mix).max() > 0.89:
+        mix = np.tanh(mix / 0.89) * 0.89
+    print(f"  peak guard: score dipped in {hot} x 20 ms blocks where it would lift the voice's true peak")
+
+    out = ROOT / "public" / "music" / f"{ep}-score.wav"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    wavfile.write(out, SR, (mix.T * 32767).astype(np.int16))
+    print(f"{out.relative_to(ROOT)}  {n / SR:.3f} s  {integrated(mix):.1f} LUFS  peak {20 * np.log10(np.abs(mix).max()):.1f} dBFS")
+    for name, a, b, bpm, what in sections:
+        print(f"  {name:11s} {a:7.2f} -> {b:7.2f} s  " + (f"{bpm:5.1f} BPM  " if bpm else "            ") + what)
+
+
 def main():
     ep = next((a for a in sys.argv[1:] if not a.startswith("-")), "ep01-ihsg-dca")
     if ep.startswith("ep03"):
         return main_ep03(ep)
+    if ep.startswith("tut01"):
+        return main_tut(ep)
     A = load_anchors(ep)
     early, late, sections = score(A)
     n = int(round(A["total"] * SR))

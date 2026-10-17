@@ -169,7 +169,7 @@ All take the episode id as their last argument, e.g. `npm run vo -- ep02-bbca-di
 | `npm run render -- <id> --stills scenes` | one still per scene → `qa/` (or `--stills 3.5 20` for seconds) |
 | `npm run render -- <id> --range 92 107` | quick preview video of a time range → `qa/preview-92-107.mp4` |
 | `npx remotion render hakabot-outro-preview episodes/_outro/preview.mp4 --concurrency=2` | the shared outro on its own (standard script, estimated timing) |
-| `npm run render -- <id>` | `out/final.mp4` (captions) + `out/clean.mp4` (no captions), audio brought toward −14 LUFS with a linear gain capped at −1.5 dBTP true peak; `--final`/`--clean` for one. Renders are memory-hungry: concurrency defaults to 3 (`RENDER_CONCURRENCY=2` when RAM is tight); run renders one at a time |
+| `npm run render -- <id>` | `out/final.mp4` (captions) + `out/clean.mp4` (no captions), audio brought toward −14 LUFS with a linear gain capped at −2 dBTP true peak (the AAC encode adds up to ~0,6 dB); `--final`/`--clean` for one. Renders are memory-hungry: concurrency defaults to 3 (`RENDER_CONCURRENCY=2` when RAM is tight); run renders one at a time |
 | `npm run srt -- <id>` | `out/captions.srt`, same chunks as the burned-in captions |
 | `npm run sheet -- <video> <out.jpg> [--every 3]` | contact sheet of a rendered video |
 | `python -I scripts/voices.py` | voices on the account; `--library` Indonesian library voices + free previews; `--add <id>` add one; `<id>` audition sample |
@@ -233,6 +233,12 @@ chart cards), then the end card. Five voice lines, approved 13 Okt, copied into 
 (`docs/hakabot.md`). The lines say in plain words what each page is for, not how it works; no explanatory labels
 on screen. Every ticker, logo, company/holder name, unused screener preset and the account name is blurred.
 
+**Tutorial sound (16 Okt).** For tutorials the user rejected palette B entirely ("the most common sound effects for
+video edit made with AI… make sure we are different") and picked **T3 "in key"** (muted kalimba click, marimba ring,
+singing-bowl chapter card, marimba arpeggio on the end card; `t3-*`, `src/core/tutorial/sfxPalettes.ts`). Avoid the
+generic synthesized-UI vocabulary (sine pings, noise whooshes, sub thumps, blips, pops) for new work; offer distinct
+options instead. The shorts' palette below predates this; ask the user before the next short whether it should change too.
+
 **Sound.** The SFX palette is **B (premium app) with C (terminal) where data moves**: `b-*` for anything touched
 (taps, clicks, transitions, thumps), `c-*` only for numbers locking in, fills, declines, the big crash and the alarm.
 The old whoosh/pop/tick/ding library and the musical, desk and tape palettes were rejected ("sounds like every AI
@@ -248,6 +254,13 @@ understand, a rule of thumb, a way to read the numbers, a habit. Never end on an
 (the user rejected ep02's "nggak ada yang bisa nebak kapan" ending: it hands the problem back to the viewer). Market
 stories are fine only if the ending gives a clear, honest takeaway the viewer can use, still without buy/sell calls.
 Educational topics are the priority for now.
+
+**Pronunciation (16 Okt).** The user caught ticker readings that `vo:check` can't hear: BBCA/BBRI/PTBA letter
+vowels read like "Bekasi" instead of "beda/pengamen/tega", ERAA spelled out instead of "Era", Avg RR as "Er-Er"
+instead of "average ratio". **House rule since then: spell letters with spaces and é** (`{BBCA|Bé Bé Cé A}`,
+`{BBRI|Bé Bé Ér I}`, never hyphens); the user picked it by ear from test clips. Rules and confirmed spellings: `docs/bahasa-guide.md` → Pronunciation rules. Every
+brief to the scriptwriter and voice-producer points there, and any new ticker/code gets a cheap test clip the user
+picks by ear before a full voice run.
 
 **Script.**
 - Captions show the rounded numbers the voice says; exact figures stay in the graphics (`facts.md` → Rounded forms).

@@ -30,6 +30,13 @@ take from ElevenLabs' character timestamps. Changing one line re-voices its whol
    absurdly long, the outro scene about 16–20 s with the end card ≥ 3 s.
 6. `npm run srt -- <id>`.
 
+## Pronunciation (read before every run)
+**Spell letter names with spaces and é, never hyphens**: `{BBCA|Bé Bé Cé A}`, `{BBRI|Bé Bé Ér I}`, `{PTBA|Pé Té Bé A}`
+(user's choice by ear, 16 Okt 2026). Follow `docs/bahasa-guide.md` → **Pronunciation rules** (letter-name vowels like "beda/pengamen/tega", ERAA = "Era",
+Avg RR = "average ratio", confirmed spellings list). `vo:check` can't hear vowel colour, so a passing check is not
+proof. Before a full run, list every ticker/code/acronym in the script that isn't in the confirmed list, voice a
+short 2–3 variant test of each, and give the producer the clips for the user to pick by ear.
+
 ## Rules
 - Model: `ELEVENLABS_MODEL_ID` in `.env` (currently `eleven_v3`, chosen by the user over v2 in an A/B). v3 has no
   request stitching (voiceover.py skips previous/next text for it) and only accepts stability 0.0, 0.5 or 1.0.

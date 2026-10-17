@@ -39,7 +39,7 @@ export const COPY = {
     community: 'Tanya-tanya di komunitas',
     telegram: 'Telegram',
     discord: 'Discord',
-    disclaimer: 'Bukan rekomendasi investasi · Hasil masa lalu tidak menjamin hasil ke depan',
+    disclaimer: 'Bukan rekomendasi investasi · Hasil masa lalu nggak menjamin hasil ke depan',
     source: 'Sumber: rekaman layar aplikasi Hakabot, 15 Okt 2026',
   },
 } as const;

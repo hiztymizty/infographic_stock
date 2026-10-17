@@ -1,4 +1,10 @@
 {
-  "_doc": "Clips of this chapter (owner: beats/idx.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
-  "clips": {}
+  "_doc": "Clips of chapter Index (owner: beats/idx.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each.",
+  "clips": {
+    "idx-a": {"rec": "n", "start": 460.8, "end": 476.8, "note": "Index page loaded 460.8 (skeleton 459.93-460.8 cut); Indicators menu opens 465.17; MA50 double-click 465.80 -> MA200 off 466.0; S/R, Tren, Cumulative off one by one 468.6-469.2; menu closes 469.45; chart zoomed in 470-473.5"},
+    "idx-b": {"rec": "n", "start": 478.6, "end": 492.4, "note": "S/R off 479.17, Tren on 479.55 (blue trendline); menu again 487.43, Tren off ~488.2, Cumulative on 488.83 (line + 'Cum. Foreign' tag 489.0); menu closes 489.97; zoomed out 490.47, stable to 492.0"},
+    "idx-c": {"rec": "n", "start": 497.6, "end": 509.6, "note": "scroll 498.4-498.63 (+600: footer at y 1403); scroll 498.97-499.27 (Sector panels, page 150 px lower than at 503); scroll 501.67-501.87; legend tooltips 503.4-505.93; Infrastructure double-click 506.75 -> only Infrastructure 506.8"},
+    "idx-d": {"rec": "n", "start": 509.4, "end": 524.0, "note": "scroll 510.77-511.03 (+750: Index Health y 776-1007); scroll back/forth 514.1-515.67; scroll to RRG 518.8-521.5, RRG static from 521.6"},
+    "idx-e": {"rec": "n", "start": 534.0, "end": 544.2, "note": "Finance chip double-click 534.87 + 535.03 -> only Finance; Finance in the sector filter row (x 1844-1936, y 350-390) hovered ~539.4, clicked 539.63; 'Loading RRG' 539.67-539.9 (cut); Finance stocks from 539.93"}
+  }
 }

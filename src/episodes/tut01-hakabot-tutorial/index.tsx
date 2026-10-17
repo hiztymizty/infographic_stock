@@ -20,6 +20,12 @@ export const tut01: TutorialDef = {
   clipDir: 'tutorial/tut01',
   beats: BEATS,
   chapters: CHAPTERS,
-  // Silent preview for the user's review (no voice yet); the sound designer turns this on later.
-  sfx: false,
+  // Sparse auto SFX (clicks, a few rings, chapter cards, end card). Palette T3 "in key" (kalimba click, marimba ring,
+  // singing bowl chapter): the user's pick 16 Okt after rejecting palette B as generic (qa/sfx-options.md).
+  sfx: true,
+  sfxPalette: 't3',
+  // Original score, composed in code for this tutorial: scripts/music_synth.py (npm run music -- tut01-hakabot-tutorial;
+  // rebuild after any re-voice). Mastered to -16 LUFS like the shorts' scores but set lower (0.2, shorts 0.3) so an
+  // 18-minute bed stays in the background.
+  music: {src: 'music/tut01-hakabot-tutorial-score.wav', level: 0.2},
 };

@@ -1,4 +1,10 @@
 {
-  "_doc": "Clips of this chapter (owner: beats/fund.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
-  "clips": {}
+  "_doc": "Clips of chapter Fundamental (owner: beats/fund.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each.",
+  "clips": {
+    "fund-a": {"rec": "n", "start": 381.8, "end": 389.0, "note": "Grafik tab; Fundamental tab click 383.17 (skeleton 383.2-383.57); scroll to Kualitas/Rentang Wajar 384.73-388.2"},
+    "fund-b": {"rec": "n", "start": 401.0, "end": 416.2, "note": "scroll B (content 150 px higher than at 390) from 401.03; Piotroski open 401.93-403.03; Profitabilitas open 403.57-404.67; scroll to key-stat chart 411.33-412.47 + 414.1-414.33; ROE chip off 415.10"},
+    "fund-c": {"rec": "n", "start": 420.4, "end": 425.0, "note": "statements (settled 420.6): Neraca 422.9, Arus Kas 424.17"},
+    "fund-d": {"rec": "n", "start": 439.4, "end": 452.0, "note": "+ Watchlist click 441.17 (list 441.33); 'Test' typed 447.87-448.63; + clicked 449.87; Test row checked 450.60; dropdown closes 451.87"},
+    "fund-e": {"rec": "n", "start": 454.2, "end": 456.7, "note": "Watchlist page loaded 454.4 (skeleton 454.03); Test group clicked 455.37 -> ERAA; Delete dialog from 456.77 (never shown)"}
+  }
 }

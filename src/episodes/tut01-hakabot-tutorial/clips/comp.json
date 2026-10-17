@@ -1,4 +1,14 @@
 {
-  "_doc": "Clips of this chapter (owner: beats/comp.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
-  "clips": {}
+  "_doc": "Clips of chapter Composition (owner: beats/comp.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
+  "clips": {
+    "comp-a": {"rec": "n", "start": 559.0, "end": 565.8, "note": "Index page; Composition nav click 560.5 (page 560.53, loaded 561.13, network settled ~562.2); ERAA hovered, lines lit 563.6-565.6"},
+    "comp-b": {"rec": "n", "start": 568.6, "end": 575.2, "note": "network nodes dragged 568.9-569.5; UBS AG LONDON clicked 572.23 -> radial view of its stocks, lines lit 572.5-574.5"},
+    "comp-c": {"rec": "n", "start": 575.4, "end": 587.6, "note": "page scrolled 150 px at 575.3; donut slice hovers 575.9-577.7; Local tab 579.27 (Perusahaan 56.5% tooltip 581.03-582.73); Foreign tab 585.03 (Bank 40.9% tooltip 585.53-586.8)"},
+    "comp-d": {"rec": "n", "start": 591.0, "end": 598.6, "note": "Composition Over Time (scroll settled 591.0); hover tooltips on Aug/Sep points ~593.4-597; chart Local tab clicked ~598.7"},
+    "comp-e": {"rec": "n", "start": 614.0, "end": 617.0, "note": "Float Composition by Investor Type, static 614.2-616.8 (scrolls again at 617.0)"},
+    "comp-f": {"rec": "n", "start": 630.8, "end": 643.8, "note": "Kepemilikan Signifikan + Perubahan Pemegang Saham static 630.8-637.5 (row hovers); JP Morgan clicked -> Per Investor 637.9 (loading), list 638.6; JP Morgan row clicked 640.8 -> card 641.17 (6 stocks)"},
+    "comp-g": {"rec": "n", "start": 648.0, "end": 656.1, "note": "all investors 647.93; PEP chip clicked 650.2 (loading 650.27-651.8); PEP list; tooltip on Garibaldi Thohir's PEP label 653.70-655.73"},
+    "comp-h": {"rec": "n", "start": 664.8, "end": 672.6, "note": "Konglo chip clicked ~665.73 (loading 665.8-669.0); Konglo list; tooltip 'Konglomerat / Tycoon' 670.63-672.43"},
+    "comp-i": {"rec": "n", "start": 676.8, "end": 689.6, "note": "Perubahan tab clicked 678.05 (loading 678.1-679.23); market-wide list, first row ENRG / CGS International Sekuritas Indonesia ADDED +719.0M, 7.39% -> 9.31%; cursor heads to the menu at 689.5"}
+  }
 }

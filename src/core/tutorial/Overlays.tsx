@@ -62,7 +62,10 @@ const splitRun = (ws: W[]): W[][] => {
     // Balanced halves, a strong preference for breaking after a comma, never leaving a 1–2 word stub.
     const comma = /[,;:]$/.test(ws[i - 1].text) ? -0.5 * total : 0;
     const stub = i < 3 || ws.length - i < 3 ? total : 0;
-    const score = Math.abs(left - right) + comma + stub;
+    // Keep number pairs together ("15 broker lawan 30"): never start a piece with a bare number, never end one on
+    // "lawan"/"vs" (QA round 1 #6).
+    const pair = /^[\d.,%]+[.,]?$/.test(ws[i].text) || /^(lawan|vs\.?|banding|dari)$/i.test(ws[i - 1].text) ? 2 * total : 0;
+    const score = Math.abs(left - right) + comma + stub + pair;
     if (score < bestScore) {
       bestScore = score;
       best = i;

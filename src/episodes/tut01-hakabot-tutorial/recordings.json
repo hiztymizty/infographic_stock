@@ -1,10 +1,44 @@
 {
-  "_doc": "Source recordings of tut01 (read by index.tsx and scripts/tutorial_clips.py). Coordinates everywhere (bounds, blur, beats) are pixels of the RAW file (New.mp4 is 3840x2160). bounds = the page viewport: the browser tab strip + URL bar (y < 132) and the Windows taskbar (y >= 2088) are outside it and never drawn. Clips are cut as crops of bounds, scaled to clipWidth (3840 = full 4K resolution, so text stays sharp up to ~2x zoom on the 1080p output). blur = always-on privacy blur (account name + avatar, top-right; the nav bar is sticky so it never moves). The OBS window shows in the first 0.3 s and from 13:51 (831 s): never use those.",
+  "_doc": "Source recordings of tut01 (read by index.tsx and scripts/tutorial_clips.py). Coordinates everywhere (bounds, blur, beats) are pixels of the RAW file (New.mp4 is 3840x2160). bounds = the page viewport: the browser tab strip + URL bar (y < 132) and the Windows taskbar (y >= 2088) are outside it and never drawn. Clips are cut as crops of bounds, scaled to clipWidth (3840 = full 4K resolution, so text stays sharp up to ~2x zoom on the 1080p output). blur = always-on privacy blur (account name + avatar, top-right; the nav bar is sticky so it never moves). The OBS window shows in the first 0.3 s and from 13:51 (831 s): never use those. The account blur is skipped while a panel is fullscreen (367.43-370.0, 374.47-379.567): the account isn't on screen then and the box would sit next to the exit icon.",
   "n": {
     "file": "temp/New.mp4",
-    "bounds": {"x": 0, "y": 132, "w": 3840, "h": 1956},
+    "bounds": {
+      "x": 0,
+      "y": 132,
+      "w": 3840,
+      "h": 1956
+    },
     "fill": "#1A1E26",
     "clipWidth": 3840,
-    "blur": [{"x": 3456, "y": 176, "w": 316, "h": 90, "sigma": 16, "tint": 0.35}]
+    "blur": [
+      {
+        "x": 3456,
+        "y": 176,
+        "w": 316,
+        "h": 90,
+        "sigma": 16,
+        "tint": 0.35,
+        "to": 367.43
+      },
+      {
+        "x": 3456,
+        "y": 176,
+        "w": 316,
+        "h": 90,
+        "sigma": 16,
+        "tint": 0.35,
+        "from": 370.0,
+        "to": 374.47
+      },
+      {
+        "x": 3456,
+        "y": 176,
+        "w": 316,
+        "h": 90,
+        "sigma": 16,
+        "tint": 0.35,
+        "from": 379.567
+      }
+    ]
   }
 }

@@ -23,6 +23,12 @@ friend who gets the market: casual, clear, honest. Never a press release, never 
 7. **`hakabot-outro`:** the standard outro lines from `docs/hakabot.md` (each line before the last starts a beat of the app tour, so keep their meaning; the last line is the URL).
    Connect `outro-1` to the topic when it fits.
 
+## Pronunciation
+**Spell letter names with spaces and é, never hyphens**: `{BBCA|Bé Bé Cé A}`, `{BBRI|Bé Bé Ér I}`, `{PTBA|Pé Té Bé A}`
+(user's choice by ear, 16 Okt 2026). Write the spoken half of every ticker/code per `docs/bahasa-guide.md` → **Pronunciation rules** (confirmed spellings,
+ERAA = "Era", Avg RR = "average ratio"). List any ticker/code you use that isn't confirmed there in your report, so
+the producer can have it tested before voicing.
+
 ## Rules
 - **Write for the ear** (`docs/bahasa-guide.md` → "Write for the ear"): each scene is voiced as one
   continuous take, so write it as a natural spoken paragraph. Punctuation sets the pauses and pitch: no colons,

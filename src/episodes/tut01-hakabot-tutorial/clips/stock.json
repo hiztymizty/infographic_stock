@@ -1,4 +1,23 @@
 {
-  "_doc": "Clips of this chapter (owner: beats/stock.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
-  "clips": {}
+  "_doc": "Clips of chapter Stock (owner: beats/stock.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each.",
+  "clips": {
+    "stock-a": {"rec": "n", "start": 89.4, "end": 103.0, "note": "Stock nav click 91.17 (PTBA page 91.7); search typed 96.4-97.3, ERAA picked 99.13 (page 99.47); ERAA page static to 103"},
+    "stock-b": {"rec": "n", "start": 102.8, "end": 117.0, "note": "Tech menu open 103.03; double-click MA200 105.33/105.53 (Tech 1); AVWAP on 109.87; IHSG on 112.57; menu closes 116.63"},
+    "stock-c": {"rec": "n", "start": 123.0, "end": 136.2, "note": "S/R on 124.03 (menu reopened 121.43, closes 125.9, chart nudged 126.7-128); menu 132.5, Tren on 133.73, closes 135.47; zoom-out starts 135.93"},
+    "stock-d": {"rec": "n", "start": 145.4, "end": 148.4, "note": "Breakout on 146.6 (menu opened 144.7, closes 147.5); zoom-out starts 148.1"},
+    "stock-e": {"rec": "n", "start": 175.6, "end": 190.4, "note": "page scrolled 300 px (171.2-171.9); Flow menu 175.83; Bandar 176.93, Retail 179.6, Foreign 182.07, SM Local 184.6 (off 186.67); Stats menu 187.87; HB Signals on 189.4 (REV chip), off ~190.2"},
+    "stock-f": {"rec": "n", "start": 190.2, "end": 201.6, "note": "Drivers clicked 193.47; candle 13 Jul 196.23, candle 14 Oct 199.03 -> Drivers panel; hover tooltip 201.53"},
+    "stock-g": {"rec": "n", "start": 202.8, "end": 211.2, "note": "Drivers panel static (AK 26% +80B TAKING PROFIT ... ); Stats menu reopened 211.4"},
+    "stock-h": {"rec": "n", "start": 217.2, "end": 229.7, "note": "Stats menu 217.73, Insider on 218.77, menu closes 219.77; drag back to 2025 220.93-227.2; hover 21 Mar '25 insider arrow (readout INSIDER ERALINK) ~228-233.9"},
+    "stock-i": {"rec": "n", "start": 242.4, "end": 256.8, "note": "scroll to Data Flows 242.97-243.5; Retail chip 246.53, Foreign 249.47, SM Local 252.2; scroll back 256.73"},
+    "stock-j": {"rec": "n", "start": 262.2, "end": 270.4, "note": "SM Local line on (Flow menu closes ~262.4); hover note 'Pola broker ritel tidak biasa: CP' 262.6-270.3"},
+    "stock-k": {"rec": "n", "start": 279.7, "end": 287.6, "note": "scroll to broker summary 280.0-281.6; tables static (both 10/14/2026)"},
+    "stock-l": {"rec": "n", "start": 295.1, "end": 307.6, "note": "START from picker 295.37, 13 Jul clicked 299.47; START to picker 300.33, 3 Sep clicked 302.13; END from picker 304.73, 4 Sep clicked 306.23; scroll 307.5"},
+    "stock-m": {"rec": "n", "start": 308.2, "end": 318.0, "note": "both ranges filled, TOP 1/3/5 + BROKER rows visible; scroll 317.93"},
+    "stock-n": {"rec": "n", "start": 326.2, "end": 339.3, "note": "scroll to POSITION 326.47-326.73; scroll to Huge Nego 336.1-336.9; scroll 339.2"},
+    "stock-o": {"rec": "n", "start": 339.0, "end": 354.1, "note": "scroll to Broker Activity 339.2-339.9; static 6M chart"},
+    "stock-p": {"rec": "n", "start": 359.6, "end": 370.8, "note": "AK double-clicked 360.73 (only AK); Broker Activity fullscreen 367.43, exit 370.0; scroll up 370.8"},
+    "stock-q": {"rec": "n", "start": 373.7, "end": 380.8, "note": "chart fullscreen 374.47; exit icon (x 3758-3806, y 160-208) clicked 379.567 -> windowed"},
+    "stock-r": {"rec": "n", "start": 153.1, "end": 161.2, "note": "zoomed-out chart; hand-drawn horizontal line at 425 placed 155.467 (deleted 167.73)"}
+  }
 }

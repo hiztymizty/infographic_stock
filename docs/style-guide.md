@@ -151,7 +151,8 @@ every AI video"); the round-1 musical palette (`bloom`, `swell`, `pluck*`, `step
 B/C slots `b-tick`, `b-buzz`, `c-scan`, `c-boot`, `c-blip`, `c-click`, `c-cash`, `c-charge`, `c-logo`, `c-chatter`
 (the single burst, replaced by the four step variants).
 
-Rebuild: `npm run sfx` regenerates everything and reproduces the B/C files bit for bit.
+Rebuild: `npm run sfx` regenerates everything and reproduces the B/C files bit for bit. The long-form tutorials have
+their own palettes `t1-*`…`t4-*` (B was rejected there too): Tutorials → Sound and music.
 
 ## Tutorials (16:9 long-form, `src/core/tutorial/`)
 
@@ -290,6 +291,42 @@ the whole 1920×1080 frame (tut01 intro and end card: `scenes/Intro.tsx`, `scene
 deep navy, one slow brand-blue glow, centred type, one idea per phase, small print in the bottom margin). Frame 0 of
 the intro is the composed cover.
 
+### Sound and music (tut01, 16 Okt)
+
+A tutorial is listened to for ~18 minutes, so it sits lower and sparser than a short. With `sfx: true` the cues are
+automatic (`ScreenShot.tsx` → `TUT_SFX`, `planCues`): the palette's **click** on every click ripple; its **ring**
+sound on a ring (labelled rings slightly louder) only when nothing sounded in the 1 s before it and no other ring
+sound within 4 s; no two cues closer than 0.5 s; nothing under the chapter card except its **chapter** cue
+(`TutorialComposition`); the end card plays the **logo** cue before the voice and the **pill** cue on the spoken
+"hakabot" (`scenes/EndCard.tsx`). No cue on every scene change, no impacts.
+
+**Tutorial SFX palettes (`src/core/tutorial/sfxPalettes.ts`, `sfxPalette` in the TutorialDef).** The user rejected
+palette B in tut01 (16 Okt: "the most common sound effects for video edit made with AI… make sure we are different"),
+so tutorials use their own palettes, each modelled on a physical source, with none of the synth-UI clichés (sine
+pings, swept-noise whooshes, sub thumps, square blips, pop/tick/ding, risers). Made by `palette_t1`…`palette_t4` in
+`scripts/sfx_synth.py` (`npm run sfx`, or `--tut` for just these; own random generator, so the other files stay
+bit-identical). Each role is loudness-matched (click/ring/pill −23, chapter −22, logo −16,5 LUFS momentary max, the B
+slots' scale), so volumes compare 1:1. `b` (the old B set) stays the default until the user picks one.
+
+| Palette | click | ring (label / plain) | chapter | logo | pill |
+|---|---|---|---|---|---|
+| `t1` Atelier: wood + felt piano | `t1-click` knuckle on hardwood 0.15 | `t1-ring` felt mallet on a hollow wooden box 0.13 / 0.10 | `t1-chapter` felt-piano dyad D4+A4 0.32 | `t1-logo` felt piano, rolled D add9 0.26 | `t1-pill` small wood knock 0.13 |
+| `t2` Mechanism: tactile hardware | `t2-click` tactile key switch (bump, bottom-out, release) 0.12 | `t2-ring` soft leaf shutter 0.12 / 0.10 | `t2-chapter` case latch snapping shut 0.26 (at frame 4) | `t2-logo` lid closing onto its latch 0.26 | `t2-pill` key switch, no release 0.13 |
+| `t3` In key (D major / B minor, the score's key) | `t3-click` muted kalimba tine A5 0.12 | `t3-ring` rosewood marimba F#5 with resonator 0.11 / 0.09 | `t3-chapter` struck singing bowl D5 (beating doublets) 0.30 | `t3-logo` marimba D–F#–A–E over a D4 bowl 0.26 | `t3-pill` marimba A5 0.12 |
+| `t4` Paper: near-silent | `t4-click` fingertip on paper 0.12 | `t4-ring` short pencil mark 0.11 / plain rings silent | `t4-chapter` page turn 0.30 | `t4-logo` notebook closing 0.24 | `t4-pill` pencil dot 0.11 |
+
+Chapter cues sit higher than the shorts' transition cue because the score lifts into every chapter card (≈ −28 LUFS
+momentary under it) while the voice pauses; they still land ≥ 10 dB under the voice. Compare palettes by rendering
+with the input prop: `SFX_PALETTE=t3 RENDER_CONCURRENCY=8 npm run render -- <id> --range a b` (writes
+`qa/preview-a-b-t3.mp4`; range previews aren't loudness-normalized). tut01's side-by-side files: `qa/sfx-options.md`.
+
+Music: `music: {src, level: 0.2}` in the def (`MusicBed`, ducked under speech as in the
+shorts; 0.2 instead of 0.3 keeps it background). The score (`main_tut()` in `music_synth.py`, written to
+`public/music/<full-id>-score.wav`) is a calm bed in the house instruments with no drums: one chord per 2 bars, a new
+progression and texture (keys / flow / air / pulse) every ~1 min cut on scene starts, a lift into each chapter card
+(reversed-piano bloom + 4 bars of rolled chords + a 2 dB bump), each chapter closing on the dominant, and a D add9
+cadence on the end card.
+
 ### Checking a chapter
 
 `npm run typecheck`, then stills at the moments that matter (`npm run render -- <id> --stills 52.4 61`) or a range
@@ -302,3 +339,6 @@ referral code), nothing under the subtitles, labels inside the window.
 - `npm run render -- <id> --stills scenes` renders one still per scene into `episodes/<id>/qa/`. Look at every one.
 - `npm run studio` lets you scrub motion live.
 - Look for overflow, overlaps, text in safe zones, and numbers that disagree with `facts.md`.
+
+
+**Tutorial captions (.srt):** `npm run srt` uses the shorts' 6-word chunks. For tutorials use `python -I scripts/tutorial_srt.py <id> episodes/<id>/out/captions.srt`, a port of the burned-in chunker in `src/core/tutorial/Overlays.tsx` (keep the two in sync).

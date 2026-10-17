@@ -1,4 +1,8 @@
 {
-  "_doc": "Clips of this chapter (owner: beats/akun.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
-  "clips": {}
+  "_doc": "Clips of chapter Akun (owner: beats/akun.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id. Never past 830.9 (OBS from 831).",
+  "clips": {
+    "akun-a": {"rec": "n", "start": 795.4, "end": 806.6, "note": "HB Center top; account menu opens 797.10 (shows the email: blurred), Profile clicked 799.43, Akun page 801.10; Salin clicked 804.50"},
+    "akun-b": {"rec": "n", "start": 806.2, "end": 821.8, "note": "scroll 806.6-808.9 (up 810 px); Ukuran tampilan hovered Kecil 812.5 -> Sangat Besar 814.4 (no change); Aktifkan notifikasi harian clicked 818.55; browser prompt 818.97-821.23, Allow 821.2"},
+    "akun-c": {"rec": "n", "start": 823.0, "end": 826.0, "note": "notification state switches to Matikan + Kirim notifikasi uji at 823.60; Keluar below; scroll back up starts 826.03"}
+  }
 }

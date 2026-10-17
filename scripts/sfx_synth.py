@@ -3,6 +3,7 @@
 Usage: python -I scripts/sfx_synth.py            (everything: legacy, round-1 palette, alt palettes A-D, chatter steps)
        python -I scripts/sfx_synth.py --palette  (everything except the legacy sounds)
        python -I scripts/sfx_synth.py --alts     (alt palettes A-D + c-chatter-1..4 only)
+       python -I scripts/sfx_synth.py --tut      (tutorial palettes T1-T4 only: t1-* ... t4-*)
 
 The live library is palette B (Premium UI) mixed with C (Terminal); see docs/style-guide.md (Sound).
 
@@ -858,6 +859,234 @@ def chatter_steps() -> None:
         save_slot(f"c-chatter-{k}", "step", tight(lowpass(mixdown(sec, *parts), 3500)))
 
 
+# =============================================================================================
+# Tutorial palettes T1-T4 (16 Okt). The user rejected palettes B/C in the 18-min tutorial as "the most common
+# sound effects for video edits made with AI", so these four avoid every synth-UI cliche (sine pings, swept-noise
+# whooshes, sub thumps, square blips, risers). Each one models a physical source. Roles: click (real UI click),
+# ring (a highlight ring / label appears), chapter (chapter card), logo (end card), pill (hakabot.com pill).
+# They draw from their own generator, so every file above stays bit-identical. Levels: docs/style-guide.md ->
+# Tutorials -> Sound; playback volumes: src/core/tutorial/sfxPalettes.ts.
+
+trng = np.random.default_rng(1616)
+
+TUT_TARGETS = {"click": -23.0, "ring": -23.0, "chapter": -22.0, "logo": -16.5, "pill": -23.0}
+
+
+def tmodes(spec: list, sec: float, attack: float = 0.0004) -> np.ndarray:
+    """Struck-object modes [(freq, amp, decay s), ...] with a raised-cosine attack."""
+    x = t(sec)
+    y = np.zeros_like(x)
+    for f, a, d in spec:
+        y += a * np.sin(2 * np.pi * f * x + trng.uniform(0, 2 * np.pi)) * np.exp(-x / d)
+    return y * soft_attack(len(x), attack)
+
+
+def tnoise(sec: float, decay: float, lo: float, hi: float, attack: float = 0.0003) -> np.ndarray:
+    x = t(sec)
+    return bandpass(trng.standard_normal(len(x)), lo, hi) * np.exp(-x / decay) * soft_attack(len(x), attack)
+
+
+def grains(sec: float, rate, lo: float, hi: float, shape=None) -> np.ndarray:
+    """Sparse random impulses (stick-slip, paper fibres, graphite), band-limited. `rate` may be per sample."""
+    n = int(SR * sec)
+    r = np.broadcast_to(np.asarray(rate, dtype=float), (n,))
+    y = np.zeros(n)
+    hits = trng.random(n) < r / SR
+    y[hits] = trng.uniform(0.3, 1.0, hits.sum()) * trng.choice([-1, 1], hits.sum())
+    y = bandpass(y, lo, hi)
+    return y * (1 if shape is None else shape)
+
+
+def save_tut(name: str, role: str, x: np.ndarray, tail: float = 0.012) -> None:
+    """Loudness-match to the role (same scale as the B slots, so <Sfx volume>s compare 1:1 with palette B)."""
+    target = TUT_TARGETS[role]
+    x = x / (np.abs(x).max() + 1e-9)
+    for _ in range(6):
+        g = 10 ** ((target - k_momentary_max(x)) / 20)
+        if np.abs(x * g).max() <= 0.9:
+            break
+        x = np.tanh(x * g / 0.9)
+    save_lufs(name, x, target, tail=tail)
+
+
+def felt_piano(freqs: list, sec: float, vel: float = 0.5, strum: float = 0.0, tau: float = 1.1) -> np.ndarray:
+    """Felted upright: inharmonic string partials (2 slightly detuned strings per note), felt-softened hammer
+    (dark, 7 ms attack), two-stage decay, a little felt noise and the key bottoming at the onset."""
+    x = t(sec)
+    y = np.zeros_like(x)
+    for i, f0 in enumerate(freqs):
+        v = np.zeros_like(x)
+        for k in range(1, 12):
+            fk = k * f0 * np.sqrt(1 + 0.00035 * k * k)
+            if fk > 6000:
+                break
+            amp = k ** -1.1 * np.exp(-fk / (900 + 1400 * vel))
+            tk = tau / (1 + 0.35 * (k - 1))
+            dec = 0.72 * np.exp(-x / tk) + 0.28 * np.exp(-x / (tk * 3.5))
+            for dc in (-0.7, 0.7):
+                v += amp * np.sin(2 * np.pi * fk * 2 ** (dc / 1200) * x + trng.uniform(0, 6.28)) * dec
+        felt = lowpass(trng.standard_normal(len(x)), 700) * np.exp(-x / 0.012) * 0.05
+        v = (v + felt) * soft_attack(len(x), 0.007)
+        d = int(SR * strum * i)
+        y[d:] += v[: len(x) - d]
+    key = tmodes([(165, 0.5, 0.012), (410, 0.35, 0.008)], sec, 0.002) * 0.25
+    return lowpass(y + key, 4200)
+
+
+def palette_t1() -> None:
+    """T1 · Atelier: a wooden desk and a felted upright piano. Knuckle-on-hardwood clicks, a soft felt mallet
+    on a hollow wooden box for rings, one felt-piano dyad per chapter, a rolled D add9 on the end card."""
+    def wood_room(x):
+        return room(x, 0.35, 0.12)
+
+    def knock(scale=1.0, sec=0.14):
+        body = tmodes([(540 * scale, 1.0, 0.016), (1230 * scale, 0.55, 0.009), (2110 * scale, 0.3, 0.005), (3480 * scale, 0.14, 0.0025)], sec, 0.0006)
+        contact = lowpass(tnoise(sec, 0.0014, 300, 5000), 3200) * 0.6
+        return body + contact
+
+    save_tut("t1-click", "click", wood_room(knock()))
+    save_tut("t1-pill", "pill", wood_room(knock(1.32)))
+
+    sec = 0.45
+    box = tmodes([(294, 1.0, 0.07), (664, 0.35, 0.03), (1190, 0.18, 0.014), (2030, 0.06, 0.006)], sec, 0.0035)
+    felt = lowpass(tnoise(sec, 0.004, 80, 2000, 0.002), 1100) * 0.5
+    save_tut("t1-ring", "ring", wood_room(box + felt), tail=0.08)
+
+    save_tut("t1-chapter", "chapter", room(felt_piano([hz("D4"), hz("A4")], 1.95, 0.45, 0.018), 0.9, 0.2), tail=0.5)
+    save_tut("t1-logo", "logo", room(felt_piano([hz("D3"), hz("A3"), hz("E4"), hz("F#4")], 1.95, 0.5, 0.045, 1.4), 1.0, 0.22), tail=0.5)
+
+
+def palette_t2() -> None:
+    """T2 · Mechanism: hardware you can feel. A tactile key switch (bump, bottom-out, release), a leaf shutter
+    for rings, a case latch for chapters, a lid closing onto its latch for the end card."""
+    def bench(x):
+        return room(x, 0.25, 0.07)
+
+    def switch(scale=1.0, release=True):
+        bump = tnoise(0.02, 0.0004, 2500, 9000) * 0.25
+        bottom = tmodes([(1080 * scale, 1.0, 0.006), (2480 * scale, 0.55, 0.003), (460 * scale, 0.5, 0.009), (3900 * scale, 0.2, 0.0015)], 0.08)
+        bottom += tnoise(0.08, 0.0018, 250, 4000) * 0.7
+        parts = [(bump, 0.0, 1.0), (bottom, 0.011, 1.0)]
+        if release:
+            up = tmodes([(1350 * scale, 1.0, 0.004), (2900 * scale, 0.4, 0.002)], 0.05) + tnoise(0.05, 0.001, 800, 6000) * 0.5
+            parts.append((up, 0.105, 0.32))
+        return mixdown(0.2, *parts)
+
+    save_tut("t2-click", "click", bench(lowpass(switch(), 7000)))
+    save_tut("t2-pill", "pill", bench(lowpass(switch(1.18, release=False), 7500)))
+
+    def blade(g=1.0):
+        return g * (tnoise(0.05, 0.0035, 1400, 7500) + tmodes([(3150, 0.5, 0.004), (4720, 0.3, 0.003), (1880, 0.25, 0.012)], 0.05))
+
+    save_tut("t2-ring", "ring", bench(lowpass(mixdown(0.14, (blade(), 0, 1.0), (blade(), 0.034, 0.7)), 6500)))
+
+    def latch(scale=1.0):
+        n = int(SR * 0.075)
+        travel = grains(0.075, 900 + 2500 * np.linspace(0, 1, n), 900, 4500, np.linspace(0.2, 1, n) ** 1.5) * 0.35
+        snap = tmodes([(2290 * scale, 1.0, 0.018), (3640 * scale, 0.6, 0.011), (5210 * scale, 0.3, 0.006), (1460 * scale, 0.25, 0.09)], 0.5)
+        snap += tnoise(0.5, 0.0025, 700, 7000) * 0.8
+        thunk = tmodes([(215 * scale, 1.0, 0.045), (430 * scale, 0.55, 0.025), (880 * scale, 0.2, 0.01)], 0.4, 0.001) * 0.9
+        return mixdown(0.62, (travel, 0, 1.0), (snap, 0.072, 1.0), (thunk, 0.073, 1.0))
+
+    save_tut("t2-chapter", "chapter", room(lowpass(latch(), 7500), 0.4, 0.12), tail=0.1)
+
+    lid = tmodes([(190, 1.0, 0.06), (395, 0.7, 0.04), (760, 0.35, 0.02), (1300, 0.12, 0.01)], 0.6, 0.0015)
+    lid += lowpass(tnoise(0.6, 0.02, 100, 1500, 0.002), 900) * 0.7
+    save_tut("t2-logo", "logo", room(lowpass(mixdown(0.95, (lid, 0, 1.0), (latch(0.9), 0.17, 0.55)), 7000), 0.5, 0.14), tail=0.12)
+
+
+def palette_t3() -> None:
+    """T3 · In key: small acoustic instruments tuned to the score (D major / B minor). A muted kalimba tine for
+    clicks, a rosewood marimba bar with its resonator for rings, a struck singing bowl for chapters."""
+    def hall(x, sec=0.9, mix=0.18):
+        return room(x, sec, mix)
+
+    def tine(f, tau=0.05, sec=0.3):
+        x = t(sec)
+        y = np.sin(2 * np.pi * f * x) * np.exp(-x / tau)
+        y += 0.22 * np.sin(2 * np.pi * f * 6.27 * x) * np.exp(-x / (tau * 0.18))  # clamped-bar overtones
+        y += 0.05 * np.sin(2 * np.pi * f * 17.55 * x) * np.exp(-x / (tau * 0.06))
+        buzz = bandpass(trng.standard_normal(len(x)), 2500, 6000) * (0.5 + 0.5 * np.sin(2 * np.pi * f * x)) * np.exp(-x / (tau * 0.4)) * 0.05
+        boxk = tmodes([(410, 0.35, 0.012), (960, 0.15, 0.006)], sec)  # the wooden box under the tine
+        return (y + buzz + boxk) * soft_attack(len(x), 0.0012)
+
+    def marimba(f, sec=0.9, tau=0.32, vel=0.6):
+        x = t(sec)
+        y = np.sin(2 * np.pi * f * x) * (0.6 * np.exp(-x / tau) + 0.4 * np.exp(-x / (tau * 2.2)))  # bar + resonator
+        y += 0.2 * vel * np.sin(2 * np.pi * f * 3.98 * x) * np.exp(-x / (tau * 0.22))  # tuned 2-octave overtone
+        y += 0.05 * vel * np.sin(2 * np.pi * f * 9.85 * x) * np.exp(-x / (tau * 0.07))
+        yarn = lowpass(trng.standard_normal(len(x)), 900) * np.exp(-x / 0.005) * 0.08
+        return (y + yarn) * soft_attack(len(x), 0.004)
+
+    def bowl(f, sec=1.95, tau=1.6):
+        x = t(sec)
+        y = np.zeros_like(x)
+        for r, a, d, beat in [(1.0, 1.0, 1.0, 0.9), (2.71, 0.5, 0.6, 1.7), (5.15, 0.18, 0.3, 2.6), (8.27, 0.06, 0.15, 3.3)]:
+            for s in (-0.5, 0.5):  # each mode is a split doublet: the slow beating of a real bowl
+                y += a * np.sin(2 * np.pi * (f * r + s * beat) * x + trng.uniform(0, 6.28)) * np.exp(-x / (tau * d))
+        strike = lowpass(trng.standard_normal(len(x)), 1800) * np.exp(-x / 0.006) * 0.15
+        return (y + strike) * soft_attack(len(x), 0.006)
+
+    save_tut("t3-click", "click", hall(tine(hz("A5")), 0.5, 0.1))
+    save_tut("t3-ring", "ring", hall(marimba(hz("F#5"))), tail=0.2)
+    save_tut("t3-pill", "pill", hall(marimba(hz("A5"), 0.8, 0.26)), tail=0.2)
+    save_tut("t3-chapter", "chapter", hall(bowl(hz("D5")), 1.2, 0.2), tail=0.6)
+    sec = 1.95
+    arp = mixdown(sec, (bowl(hz("D4"), sec, 1.4), 0, 0.55), (marimba(hz("D5"), 1.5, 0.4), 0.0, 0.8),
+                  (marimba(hz("F#5"), 1.4, 0.4), 0.075, 0.7), (marimba(hz("A5"), 1.3, 0.4), 0.15, 0.65),
+                  (marimba(hz("E6"), 1.2, 0.35), 0.225, 0.4))
+    save_tut("t3-logo", "logo", hall(arp, 1.2, 0.22), tail=0.6)
+
+
+def palette_t4() -> None:
+    """T4 · Paper (near-silent): a notebook on the desk. A fingertip on paper for clicks, a short pencil mark for
+    labelled rings, a page turn for chapters, a notebook closing for the end card. Played very low."""
+    def desk(x):
+        return room(x, 0.3, 0.08)
+
+    def touch(sec=0.09):
+        pad = lowpass(tnoise(sec, 0.0035, 120, 2200, 0.0012), 1500)
+        fibre = grains(sec, 3500, 2500, 9000, np.exp(-t(sec) / 0.01)) * 0.25
+        return pad + fibre
+
+    save_tut("t4-click", "click", desk(touch()))
+
+    def pencil(sec):
+        n = int(SR * sec)
+        e = np.sin(np.pi * np.linspace(0, 1, n)) ** 0.6
+        rate = 700 + 1600 * e
+        lead = grains(sec, rate, 1800, 7000, e) + 0.35 * grains(sec, rate * 0.5, 600, 2000, e)
+        paper = bandpass(trng.standard_normal(n), 500, 1800) * e * 0.08
+        return (lead + paper) * soft_attack(n, 0.004)
+
+    save_tut("t4-ring", "ring", desk(pencil(0.2)))
+    save_tut("t4-pill", "pill", desk(pencil(0.05)))
+
+    sec = 0.85
+    n = int(SR * sec)
+    x = t(sec)
+    lift = np.exp(-((x - 0.18) / 0.09) ** 2)  # the page edge lifts off the stack
+    flex = np.exp(-((x - 0.42) / 0.14) ** 2)  # the page bends over
+    crinkle = grains(sec, 400 + 5200 * (lift + flex), 1200, 8000, 0.45 * lift + 1.0 * flex)
+    body = lowpass(bandpass(trng.standard_normal(n), 150, 1400), 900) * flex * 0.12
+    settle = lowpass(tnoise(0.12, 0.012, 100, 1500, 0.003), 800)
+    save_tut("t4-chapter", "chapter", desk(mixdown(sec, (crinkle + body, 0, 1.0), (settle, 0.66, 0.55))), tail=0.08)
+
+    flap = grains(0.18, 2600, 1200, 7000, np.sin(np.pi * np.linspace(0, 1, int(SR * 0.18))) ** 1.5)
+    shut = lowpass(tnoise(0.4, 0.028, 80, 1600, 0.004), 1000) + tmodes([(205, 0.5, 0.03), (420, 0.25, 0.018)], 0.4, 0.004)
+    save_tut("t4-logo", "logo", desk(mixdown(0.7, (flap, 0, 0.6), (shut, 0.16, 1.0))), tail=0.1)
+
+
+TUT_PALETTES = {"t1": palette_t1, "t2": palette_t2, "t3": palette_t3, "t4": palette_t4}
+
+
+def tut_palettes() -> None:
+    global trng
+    trng = np.random.default_rng(1616)
+    for f in TUT_PALETTES.values():
+        f()
+
+
 ALT_PALETTES = {"a": palette_a, "b": palette_b, "c": palette_c, "d": palette_d, "chatter": chatter_steps}
 
 
@@ -865,7 +1094,9 @@ if __name__ == "__main__":
     import sys
 
     picked = [a[2:] for a in sys.argv[1:] if a.startswith("--") and a[2:] in ALT_PALETTES]
-    if picked or "--alts" in sys.argv:
+    if "--tut" in sys.argv:
+        tut_palettes()
+    elif picked or "--alts" in sys.argv:
         for k in picked or ALT_PALETTES:
             ALT_PALETTES[k]()
     else:
@@ -877,3 +1108,4 @@ if __name__ == "__main__":
         prng = np.random.default_rng(2026)
         for f in ALT_PALETTES.values():
             f()
+        tut_palettes()  # tutorial palettes T1-T4 (own generator, so the files above are unaffected)

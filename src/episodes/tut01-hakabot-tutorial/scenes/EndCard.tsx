@@ -1,6 +1,9 @@
 import React from 'react';
 import {AbsoluteFill, Img, staticFile} from 'remotion';
+import {Sfx} from '../../../core/audio';
 import {C, MONO, SANS} from '../../../core/theme';
+import {useTutorial} from '../../../core/tutorial/ScreenShot';
+import {tutPalette} from '../../../core/tutorial/sfxPalettes';
 import {useLine, useWordAt} from '../../../core/timing';
 import {COPY} from '../copy';
 import {FadeUp, SmallPrint, Stage, usePhase} from './Stage';
@@ -35,8 +38,13 @@ export const EndCard: React.FC = () => {
   const commAt = useWordAt('end-cta', 'Telegram');
   const a = usePhase(0, cta.from - 2, false);
   const b = usePhase(cta.from + 6, 1e9);
+  const {sfx, sfxPalette} = useTutorial();
+  const pal = tutPalette(sfxPalette);
   return (
     <Stage>
+      {/* Sound (the episode's tutorial palette): the logo cue as the card arrives (before the voice), the pill cue as hakabot.com lands. */}
+      {sfx && <Sfx name={pal.logo.name} at={pal.logo.at} volume={pal.logo.volume} />}
+      {sfx && <Sfx name={pal.pill.name} at={urlAt} volume={pal.pill.volume} />}
       <AbsoluteFill style={{alignItems: 'center', paddingTop: 196}}>
         <Img src={staticFile('brand/hakabot-lockup-white.png')} style={{height: 46, opacity: 0.95}} />
       </AbsoluteFill>

@@ -1,9 +1,13 @@
 import React, {createContext, useContext, useMemo} from 'react';
 import {AbsoluteFill, Easing, Freeze, OffthreadVideo, Sequence, interpolate, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {Sfx} from '../audio';
+import type {SfxName} from '../audio';
+import {TUT_PALETTES, tutPalette} from './sfxPalettes';
+import type {TutPalette} from './sfxPalettes';
 import {CLAMP} from '../components/ui';
 import {C, SANS} from '../theme';
 import {useScene, useTiming} from '../timing';
+import type {SceneTiming, Timing} from '../timing';
 import {SRC_FPS, WIN, XF} from './layout';
 import {
   FootagePlan,
@@ -256,6 +260,47 @@ const PathView: React.FC<{path: PlannedPath; f: number; view: View}> = ({path, f
 };
 
 // ---------------------------------------------------------------------------------------------
+// Auto SFX. A tutorial is listened to for ~18 min, so everything sits well under the voice and is sparse: every real
+// click gets the palette's click; a ring gets its ring sound only when nothing else just sounded (labelled rings first;
+// palettes may leave plain rings silent); no two cues closer than ~0,5 s; nothing under the chapter card except its
+// own cue (TutorialComposition). Sounds and volumes per palette: sfxPalettes.ts.
+
+export const TUT_SFX = {
+  /** Frames between any two cues. */
+  gap: 15,
+  /** A ring stays silent if any cue sounded this many frames before it (the click already marked it)… */
+  quietBefore: 30,
+  /** …or if another ring tap sounded within this many frames (4 s: keeps busy pages sparse). */
+  tapGap: 120,
+  /** Frames at the start of a chapter's first scene that belong to the chapter card. */
+  card: 54,
+};
+
+type Cue = {f: number; name: SfxName; volume: number; ring?: boolean};
+
+/** Picks the cues for one beat. `shots` gives each shot's start (scene frames), length and plan. */
+export const planCues = (shots: {from: number; dur: number; plan: ShotPlan}[], chapterStart: boolean, pal: TutPalette = TUT_PALETTES.b): Cue[] => {
+  const clicks: number[] = [];
+  const taps: {f: number; label: boolean}[] = [];
+  for (const {from, dur, plan} of shots) {
+    for (const c of plan.clicks) if (c.at >= 0 && c.at < dur) clicks.push(from + c.at);
+    for (const r of plan.rings) if (r.from >= 0 && r.from < dur) taps.push({f: from + r.from + 2, label: !!r.mark.label});
+    for (const p of plan.paths) if (p.ats[0] >= 0 && p.ats[0] < dur) taps.push({f: from + p.ats[0] + 2, label: false});
+  }
+  const kept: Cue[] = [];
+  const near = (f: number, before: number, after: number) => kept.some((k) => k.f >= f - before && k.f <= f + after);
+  for (const f of clicks.sort((a, b) => a - b)) if (!near(f, TUT_SFX.gap, TUT_SFX.gap)) kept.push({f, ...pal.click});
+  const okTap = (f: number) =>
+    !(chapterStart && f < TUT_SFX.card) &&
+    !near(f, TUT_SFX.quietBefore, TUT_SFX.gap) &&
+    !kept.some((k) => k.ring && Math.abs(k.f - f) < TUT_SFX.tapGap);
+  for (const t of taps.filter((x) => x.label).sort((a, b) => a.f - b.f)) if (okTap(t.f)) kept.push({f: t.f, ...pal.label, ring: true});
+  const plain = pal.ring;
+  if (plain) for (const t of taps.filter((x) => !x.label).sort((a, b) => a.f - b.f)) if (okTap(t.f)) kept.push({f: t.f, ...plain, ring: true});
+  return kept.sort((a, b) => a.f - b.f);
+};
+
+// ---------------------------------------------------------------------------------------------
 // One shot
 
 type ShotPlan = {
@@ -310,9 +355,38 @@ const ShotView: React.FC<{shot: Shot; plan: ShotPlan; dur: number; fadeIn: boole
   );
 };
 
+/** Lays out every shot of a footage beat on its scene (pure: also used by tools that count cues). */
+export const planShots = (beat: FootageBeat, timing: Timing, scene: SceneTiming, fps: number, def: TutorialDef) => {
+  const voiceAbs = (a: VoiceAnchor) => voiceFrame(a, timing, scene.from);
+  const starts = beat.shots.map((s, i) => (i === 0 || s.start === undefined ? 0 : voiceAbs(s.start) - scene.from));
+  return beat.shots.map((shot, i) => {
+    const from = starts[i];
+    const to = i + 1 < starts.length ? starts[i + 1] : scene.dur;
+    const dur = Math.max(1, to - from);
+    const voice = (a: VoiceAnchor) => voiceAbs(a) - scene.from - from;
+    const footage = planFootage(shot, dur, voice, def.clips, fps);
+    const at = (a: Anchor) => anchorFrame(a, voice, footage, fps);
+    const marks = shot.marks ?? [];
+    const plan: ShotPlan = {
+      footage,
+      rings: planRings(marks, dur, at),
+      paths: marks
+        .filter((m): m is Extract<Mark, {kind: 'path'}> => m.kind === 'path')
+        .map((m) => {
+          const ats: number[] = [];
+          m.at.forEach((a, k) => ats.push(Math.max(at(a), k > 0 ? ats[k - 1] + 8 : -1e9)));
+          return {rects: m.rects, ats, to: m.until === undefined ? dur : at(m.until)};
+        }),
+      clicks: marks.filter((m): m is Extract<Mark, {kind: 'click'}> => m.kind === 'click').map((m) => ({m, at: frameOfRec(footage, m.rec, fps)})),
+      camStart: shot.cam.at === undefined ? 0 : at(shot.cam.at),
+    };
+    return {shot, plan, from, dur};
+  });
+};
+
 /**
  * A beat made of screen footage: its shots laid out on the scene's timing (time-remapped pieces, one eased camera
- * move per shot, rings synced to the voice, click ripples on the real clicks, privacy blurs). Renders in window
+ * move per shot, rings synced to the voice, click ripples on the real clicks, privacy blurs, sparse auto SFX). Renders in window
  * coordinates (WIN.w × WIN.h).
  */
 export const FootageBeatView: React.FC<{beat: FootageBeat}> = ({beat}) => {
@@ -321,42 +395,21 @@ export const FootageBeatView: React.FC<{beat: FootageBeat}> = ({beat}) => {
   const {fps} = useVideoConfig();
   const def = useTutorial();
 
-  const shots = useMemo(() => {
-    const voiceAbs = (a: VoiceAnchor) => voiceFrame(a, timing, scene.from);
-    const starts = beat.shots.map((s, i) => (i === 0 || s.start === undefined ? 0 : voiceAbs(s.start) - scene.from));
-    return beat.shots.map((shot, i) => {
-      const from = starts[i];
-      const to = i + 1 < starts.length ? starts[i + 1] : scene.dur;
-      const dur = Math.max(1, to - from);
-      const voice = (a: VoiceAnchor) => voiceAbs(a) - scene.from - from;
-      const footage = planFootage(shot, dur, voice, def.clips, fps);
-      const at = (a: Anchor) => anchorFrame(a, voice, footage, fps);
-      const marks = shot.marks ?? [];
-      const plan: ShotPlan = {
-        footage,
-        rings: planRings(marks, dur, at),
-        paths: marks
-          .filter((m): m is Extract<Mark, {kind: 'path'}> => m.kind === 'path')
-          .map((m) => {
-            const ats: number[] = [];
-            m.at.forEach((a, k) => ats.push(Math.max(at(a), k > 0 ? ats[k - 1] + 8 : -1e9)));
-            return {rects: m.rects, ats, to: m.until === undefined ? dur : at(m.until)};
-          }),
-        clicks: marks.filter((m): m is Extract<Mark, {kind: 'click'}> => m.kind === 'click').map((m) => ({m, at: frameOfRec(footage, m.rec, fps)})),
-        camStart: shot.cam.at === undefined ? 0 : at(shot.cam.at),
-      };
-      return {shot, plan, from, dur};
-    });
-  }, [beat, timing, scene, fps, def]);
+  const shots = useMemo(() => planShots(beat, timing, scene, fps, def), [beat, timing, scene, fps, def]);
+  const cues = useMemo(
+    () => (def.sfx ? planCues(shots, def.chapters.some((c) => c.first === scene.id), tutPalette(def.sfxPalette)) : []),
+    [shots, def, scene.id],
+  );
 
   return (
     <AbsoluteFill>
       {shots.map(({shot, plan, from, dur}, i) => (
         <Sequence key={i} from={from} durationInFrames={dur + XF} name={`shot ${i}`}>
           <ShotView shot={shot} plan={plan} dur={dur} fadeIn={i > 0} />
-          {def.sfx && plan.clicks.map((c, k) => <Sfx key={`c${k}`} name="b-click" at={c.at} volume={0.24} />)}
-          {def.sfx && plan.rings.filter((r) => r.mark.label).map((r, k) => <Sfx key={`r${k}`} name="b-tap" at={r.from + 3} volume={0.22} />)}
         </Sequence>
+      ))}
+      {cues.map((c, k) => (
+        <Sfx key={`sfx${k}`} name={c.name} at={c.f} volume={c.volume} />
       ))}
     </AbsoluteFill>
   );

@@ -119,13 +119,38 @@ Write anything a TTS could misread as words:
 - Years: `{2026|dua ribu dua puluh enam}`
 - Index levels: `{6.043|enam ribu empat puluh tiga}`, or round it in speech: `{8.600-an|delapan ribu enam ratusan}`
 - Tickers: say them the way investors do. Most are spelled out with Indonesian letter names:
-  `{BBCA|Be-Be-Ce-A}`, `{IHSG|I-Ha-Es-Ge}`. Some are said as words: `{TLKM|Telkom}`, `{GOTO|Goto}`, `{ANTM|Antam}`.
-- Acronyms said as letters: `{PER|Pe-E-Er}`, `{PBV|Pe-Be-Fe}`, `{ROE|Er-O-E}`, `{EPS|E-Pe-Es}`, `{IPO|I-Pe-O}`.
+  `{BBCA|Bé Bé Cé A}` (spaces + é, see "Pronunciation rules" below), `{IHSG|I Ha És Gé}`. Some are said as words:
+  `{TLKM|Telkom}`, `{GOTO|Goto}`, `{ANTM|Antam}`, `{ERAA|Era}`.
+- Acronyms said as letters: `{PER|Pé É Ér}`, `{PBV|Pé Bé Fé}`, `{ROE|Ér O É}`, `{EPS|É Pé És}`, `{IPO|I Pé O}`.
   DCA is usually said in English letters, so leave it plain.
 - URL: `{hakabot.com|hakabot dot com}`
 
 Indonesian letter names: A a · B be · C ce · D de · E e · F ef · G ge · H ha · I i · J je · K ka ·
 L el · M em · N en · O o · P pe · Q ki · R er · S es · T te · U u · V fe · W we · X eks · Y ye · Z zet.
+
+### Pronunciation rules from the user (16 Okt 2026, tut01) — follow these every time
+
+The speech-to-text check can't hear vowel colour, so these errors pass `vo:check`. The user caught them by ear.
+
+- **Spell letters with SPACES and é (house rule, user's pick 16 Okt by ear).** Write spelled-out tickers and codes as
+  separate letter names with spaces, never hyphens, and write the letter names that contain e with **é**:
+  `{BBCA|Bé Bé Cé A}` · `{BBRI|Bé Bé Ér I}` · `{PTBA|Pé Té Bé A}` · `{IHSG|I Ha És Gé}`. Hyphens ("Be-Be-Ce-A") make
+  eleven_v3 pause on every letter and say "be" like *Bekasi*; spaces + é give the "be" of *beda*, "pe" of *pengamen*,
+  "te" of *tega* with an even rhythm. Reference clips the user approved: `episodes/tut01-hakabot-tutorial/qa/pron-test/`
+  `bbca-3-Be-Be-Ce-A-spaces.mp3`, `bbri-3-Be-Be-Er-I-spaces.mp3`. Use this for every new script, every ticker, broker
+  code and acronym. (Older takes with hyphens that the user heard as correct, e.g. tut01's BK, CP, PE, stay as they are;
+  don't re-voice them just for the rule.)
+  Letter names to use: A · Bé · Cé · Dé · É · Éf · Gé · Ha · I · Jé · Ka · Él · Ém · Én · O · Pé · Ki · Ér · És · Té · U ·
+  Fé · Wé · Éks · Yé · Zét.
+- **Say some tickers as words or names**, the way investors say them:
+  `{ERAA|Era}` (never E-Er-A-A) · `{PTBA|Bukit Asam}` when the letter version still sounds off.
+- **Avg RR** is read `{Avg RR|average ratio}`: "average" as the normal English word, RR as "ratio", never "Er-Er".
+- **Test before you spend.** For any ticker or code not yet listed here (or in an episode's `vo-cache.json` as
+  approved), voice a 2–3 variant test clip first and let the user pick by ear (`python -I scripts/voices.py` or a
+  tiny scratch episode); a test costs ~20 characters per variant, a re-voiced scene costs hundreds.
+- **Confirmed spellings** (update this list whenever the user approves one by ear):
+  BBCA `Bé Bé Cé A` · BBRI `Bé Bé Ér I` · PTBA `Pé Té Bé A` · ERAA `Era` · Avg RR `average ratio` · LQ45 `El Kiu empat lima` ·
+  TEBE `Tebe` · SM Local `Smart Money Local` · ANTM `Antam`. Test results: `episodes/tut01-hakabot-tutorial/qa/pron-test.md`.
 
 After the voiceover is generated, `npm run vo:check -- <id>` transcribes it and flags lines that
 were read wrong. Fix the spoken half and regenerate just those lines.

@@ -1,4 +1,8 @@
 {
-  "_doc": "Clips of this chapter (owner: beats/hb.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
-  "clips": {}
+  "_doc": "Clips of chapter HB Center (owner: beats/hb.ts). name -> recording, start/end seconds in the raw file (multiples of 1/30 s), <= ~16 s each. Prefix names with the chapter id.",
+  "clips": {
+    "hb-a": {"rec": "n", "start": 736.8, "end": 752.6, "note": "Stock page PTBA; HB Center pressed 739.2, page swaps 740.40 (loading skeleton 740.40-740.77, cut), loaded 740.80; static to 749.57; scroll 749.57-751.80 (content up 900 px) to Live + Active signals"},
+    "hb-b": {"rec": "n", "start": 762.4, "end": 768.2, "note": "scroll 763.20-763.93 (up 618 px) to Trade history page 1/26 (2026 trades, mostly red); Next 768.2"},
+    "hb-c": {"rec": "n", "start": 775.0, "end": 781.6, "note": "Trade history paging: page 5 (Jan 2026 / Dec 2025) 775.5, 6 at 777.3, 7 at 779.3 (Nov-Oct 2025)"}
+  }
 }

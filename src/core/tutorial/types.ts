@@ -137,6 +137,14 @@ export type TutorialDef = {
   clipDir: string;
   beats: Record<string, Beat>;
   chapters: Chapter[];
-  /** Auto SFX on clicks, rings and chapter cards (off for a silent preview; the sound designer tunes it). */
+  /**
+   * Auto SFX (kept sparse for long-form listening): the palette's click on click ripples, its ring sound on some rings
+   * (labelled ones first; none right after a click or within 4 s of another ring), its chapter cue on chapter cards,
+   * logo + pill on the end card. Off for a silent preview. Spacing: ScreenShot.tsx -> TUT_SFX.
+   */
   sfx?: boolean;
+  /** Which tutorial SFX palette (sfxPalettes.ts; default 'b'). A render's `sfxPalette` input prop overrides it. */
+  sfxPalette?: import('./sfxPalettes').TutPaletteId;
+  /** Music bed in public/music (the episode's synthesized score), ducked under the voice like the shorts. */
+  music?: {src: string; level?: number} | null;
 };
